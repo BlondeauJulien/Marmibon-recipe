@@ -5,14 +5,22 @@ const RecipeSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    name: {
+        type: String,
+        required: true
+    },
     serving: {
         type: Number,
         required: true
     },
-    prepTime: [{
+     prepTime: [{
         hours: Number,
         minutes: Number,
-    }],
+    }], 
+    price: {
+        type: String,
+        default: "cheap"
+    },
     date: {
         type: Date,
         default: Date.now,
@@ -20,10 +28,12 @@ const RecipeSchema = mongoose.Schema({
     },
     steps: {
         type: Array,
+        // Object: title - content
         required: true
     },
     ingredients: {
         type: Array,
+        // Object: Ingredient name - quantity
         required: true
     }
 })
