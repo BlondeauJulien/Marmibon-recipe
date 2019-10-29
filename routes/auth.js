@@ -40,7 +40,6 @@ router.post('/', [
 
     const { email, password } = req.body;
 
-    /////
     try {
         let user = await User.findOne( { email });
 
@@ -69,11 +68,6 @@ router.post('/', [
         console.error(err.message);
         res.status(500).send('Server Error')
     }
-
-
-
-
-    
 })
 
 

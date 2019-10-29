@@ -70,7 +70,62 @@ router.get('/user/:id',  async (req, res) => {
 
 });
 
+// @route   PUT api/recipes/recipeID
+// @desc    Update a recipe
+// @access  Private 
 
+router.put('/:id', auth, async (req, res) => {
+    let {name, serving, price, prepTime, steps, ingredients} = req.body;
+
+    const recipeFields = {};
+
+    if(name) recipeFields.name = name;
+    if(serving) recipeFields.serving = serving;
+    if(price) recipeFields.price = price;
+    if(prepTime) recipeFields.prepTime = prepTime;
+    if(steps) recipeFields.steps = steps;
+    if(ingredients) recipeFields.ingredients = ingredients;
+
+    try {
+        let recipe = await Recipe.findById(req.params.id);
+
+        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
+
+        if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: 'Not authorized to modify this recipe'});
+
+        recipe = await Recipe.findByIdAndUpdate(req.params.id, {$set: recipeFields }, { new: true });
+
+        res.json(recipe);
+
+    } catch (err) {
+        console.error(err.message);
+		res.status(500).send('Server error');
+    }
+})
+
+
+// @route   DELETE api/recipes/recipeID
+// @desc    Delete a recipe
+// @access  Private 
+
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        let recipe = await Recipe.findById(req.params.id);
+
+        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
+
+        if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: 'Not authorized to delete this recipe'});
+
+        await Recipe.findByIdAndRemove(req.params.id)
+
+        res.json({ msg: 'Contact Removed' })
+
+
+    } catch (err) {
+        console.error(err.message);
+		res.status(500).send('Server Error');
+    }
+})
 
 
 module.exports = router;
