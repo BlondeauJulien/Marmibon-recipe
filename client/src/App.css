@@ -1,0 +1,38 @@
+@import './css/variables.css';
+@import './css/resetDefault.css';
+@import './css/header.css';
+
+
+/* General */
+.brand-color-txt {
+  color: var(--brand-color)
+}
+
+.brand-color-bg {
+  background-color: var(--brand-color);
+}
+
+.text-color-white {
+  color: white;
+}
+
+/* Bottons Styling */
+
+.btn {
+  display: block;
+  border: solid 1px var(--brand-color);
+  border-radius: 25px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 900;
+}
+
+.btn-mid {
+  padding: 8px 20px;
+  font-size: 1rem;
+}
+
+.btn-brand:hover {
+  background-color: var(--brand-color-btn-hover);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
