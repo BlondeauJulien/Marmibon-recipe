@@ -1,0 +1,13 @@
+.recipes-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    position: relative;
+    color: var(--brand-color);
+    background-color: white;
+    padding-bottom: 50px;
+}

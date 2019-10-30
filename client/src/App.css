@@ -2,12 +2,14 @@
 @import './css/resetDefault.css';
 @import './css/header.css';
 @import './css/Home/homeSearch.css';
+@import './css/Home/recipesContainer.css';
+@import './css/Home/recipeItem.css';
 
 
 /* General */
 
 body {
-  color: #efefef;
+  background-color: #efefef;
 }
 
 .brand-color-txt {

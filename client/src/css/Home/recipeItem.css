@@ -1,0 +1,26 @@
+.RecipeItem {
+    width: 300px;
+    height: 500px;
+    border: solid 2px #efefef;
+    border-radius: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.recipe-item-img-bg {
+    height: 85%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-image: url("./background-home-search.jpg");
+}
+
+.recipe-item-name-container {
+    height: 15%;
+}
+
+.recipe-item-name-container h3 {
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    margin: 15px;
+}

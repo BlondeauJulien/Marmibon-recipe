@@ -1,7 +1,6 @@
 .home-search-bg-image {
-/*     position: relative; */
-
     background-image: url("./background-home-search.jpg");
+    background-repeat: no-repeat;
     filter: blur(4px);
 
     width: 100%;

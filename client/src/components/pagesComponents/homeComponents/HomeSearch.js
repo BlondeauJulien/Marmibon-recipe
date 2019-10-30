@@ -23,7 +23,7 @@ const HomeSearch = () => {
 					</div>
 				</div>
 				<div className="search-advanced">
-					<i class="fas fa-long-arrow-alt-right" />
+					<i className="fas fa-long-arrow-alt-right" />
 					<p>Recherche Avancée</p>
 				</div>
 			</div>
