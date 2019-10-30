@@ -11,7 +11,45 @@
     height: 85%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-image: url("./background-home-search.jpg");
+   /*  background-image: url("./recipe4saladenicoise.jpg"); */
+    background-repeat: no-repeat;
+    background-size: 330px;
+}
+
+.img1 {
+    background-image: url("./recipe1tomkakai.jpg");
+}
+
+.img2 {
+    background-image: url("./recipe2pizza.jpg");
+}
+
+.img3 {
+    background-image: url("./recipe3frites.jpg");
+}
+
+.img4 {
+    background-image: url("./recipe4saladenicoise.jpg");
+}
+
+.img5 {
+    background-image: url("./recipe5crepe.jpg");
+}
+
+.img6 {
+    background-image: url("./recipe6ramen.jpg");
+}
+
+.img7 {
+    background-image: url("./recipe7falafel.jpg");
+}
+
+.img8 {
+    background-image: url("./recipe8ratatouille.jpg");
+}
+
+.img9 {
+    background-image: url("./recipe9padthai.jpg");
 }
 
 .recipe-item-name-container {

@@ -1,11 +1,13 @@
 import React from 'react'
 
-const RecipeItem = () => {
+const RecipeItem = ({ img, name }) => {
+
+
     return (
         <div className="RecipeItem">
-            <div className="recipe-item-img-bg"></div>
+            <div className={`recipe-item-img-bg ${img}`} ></div>
             <div className="recipe-item-name-container">
-                <h3>Recipe name</h3>
+                <h3>{name}</h3>
             </div>
         </div>
     )
