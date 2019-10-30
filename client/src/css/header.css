@@ -16,6 +16,7 @@
 
     font-size: 25px;
     text-decoration: none;
+    color: var(--brand-color);
     margin: 0 20px;
 }
 
@@ -46,6 +47,7 @@
 
 .search-bar-container i {
     font-size: 15px;
+    color: var(--brand-color);
 }
 
 

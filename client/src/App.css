@@ -1,9 +1,15 @@
 @import './css/variables.css';
 @import './css/resetDefault.css';
 @import './css/header.css';
+@import './css/Home/homeSearch.css';
 
 
 /* General */
+
+body {
+  color: #efefef;
+}
+
 .brand-color-txt {
   color: var(--brand-color)
 }
@@ -14,6 +20,14 @@
 
 .text-color-white {
   color: white;
+}
+
+/* MAIN Container */
+
+main {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
 }
 
 /* Bottons Styling */
