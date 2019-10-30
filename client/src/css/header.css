@@ -1,6 +1,6 @@
 .header-top-container {
     display: grid;
-    grid-template-columns: 0.8fr 5fr 1fr;
+    grid-template-columns: 1fr 5fr 1.5fr;
     padding: 20px 0;
 }
 
@@ -16,6 +16,7 @@
 
     font-size: 25px;
     text-decoration: none;
+    margin: 0 20px;
 }
 
 .logo-container h1 {
