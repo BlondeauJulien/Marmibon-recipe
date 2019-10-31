@@ -5,7 +5,7 @@ const NavBar = () => {
 	return (
 		<header>
 			<div className="header-top-container">
-				<Link className="logo-container brand-color-txt">
+				<Link to="/" className="logo-container brand-color-txt">
 					<i className="fas fa-cookie-bite" />
 					<h1>marmibon</h1>
 				</Link>
@@ -14,7 +14,7 @@ const NavBar = () => {
 					<input type="search" placeholder="Je cherche une recette:" />
 				</div>
 				<div className="header-btn-container">
-					<Link className="btn btn-mid btn-brand brand-color-bg text-color-white">
+					<Link to="/login" className="btn btn-mid btn-brand brand-color-bg text-color-white">
 						<i className="fas fa-user" />
 						{` `}Connexion
 					</Link>

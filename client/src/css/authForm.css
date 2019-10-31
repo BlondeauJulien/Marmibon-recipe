@@ -1,4 +1,4 @@
-.login-form-container {
+.auth-form-container {
     margin-top: 25px;
     padding: 60px 0;
     border-top-left-radius: 12px;
@@ -48,7 +48,7 @@
     font-size: 16px;
 }
 
-.login-form-container a {
+.switch-auth-component {
     display: block;
     width: 458px;
     border: none;
@@ -60,4 +60,5 @@
     margin: auto;
     margin-bottom: 30px;
     cursor: pointer;
+    text-decoration: none;
 }
