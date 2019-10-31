@@ -6,6 +6,7 @@ const Register = () => {
         <div className="auth-form-container">
             <form className="auth-form">
                 <p>Créer votre compte Marmibon:</p>
+                <input type="text" name="userName" placeholder="Votre pseudo" required/>
                 <input type="email" name="email" placeholder="Votre email" required/>
                 <input type="password" name="password" placeholder="Votre mot de passe" minLength="6" required/>
                 <input type="password" name="passwordConfirm" placeholder="Confirmer votre mot de passe" minLength="6" required/>
