@@ -6,6 +6,7 @@
 @import './css/Home/recipeItem.css';
 @import './css/authForm.css';
 @import './css/recipe.css';
+@import './css/review.css';
 @import './css/footer.css';
 
 
@@ -25,6 +26,10 @@ body {
 
 .text-color-white {
   color: white;
+}
+
+.grey {
+  color: #dadada
 }
 
 /* MAIN Container */

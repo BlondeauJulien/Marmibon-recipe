@@ -1,0 +1,93 @@
+.review-container {
+    margin-top:30px;
+    padding: 20px 20px 50px 20px;
+    background-color: white;
+}
+
+.review-container h2 {
+    color: var(--brand-color);
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+.user-review-container {
+    background-color: #f6f6f6;
+    padding: 16px;
+}
+
+.user-review-container h3 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #393c6d;
+}
+
+.grid-columns-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 16px;
+
+    margin: 14px;
+    padding: 16px;
+}
+
+.user-stars-rating-cont {
+    background-color: white;
+    color: #5f5f5f;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.stars-rating {
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.stars-rating i {
+    margin-left: 2px;
+}
+
+.btn-review {
+    text-align: center;
+    color: white;
+    font-weight: 900;
+    background-color: var(--brand-color);
+    border-radius: 24px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+/* overall rating recipe container */
+
+.recipe-rating {
+    font-size: 20px;
+    font-weight: 900;
+    padding: 24px 16px;
+    margin-bottom: 16px;
+    border-bottom: solid 1px rgb(201, 201, 201);
+}
+
+.overall-stars-rating-text {
+    color: #393c6d; 
+}
+
+.overall-stars-rating-stars-cont {
+    display: inline-block;
+    color: var(--brand-color);
+    margin-left: 10px;
+}
+
+.nbr-review-text {
+    display: block;
+    color: #5f5f5f;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+/* reviews container */
+
+.reviews-container {
+    padding: 16px;
+}
