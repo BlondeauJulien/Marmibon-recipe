@@ -5,6 +5,7 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Recipe from './components/pages/Recipe';
+import User from './components/pages/User'
 import Footer from './components/layout/Footer';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/register" component={Register} />
 						<Route exact path="/recipe" component={Recipe} />
+						<Route exact path="/user" component={User} />
 					</Switch>
 				</main>
 				<Footer />
