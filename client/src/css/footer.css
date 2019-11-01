@@ -17,6 +17,7 @@ footer {
 }
 
 .arrow-back-top i {
+    color:white;
     font-size: 30px;
     line-height: 45px;
 }
@@ -35,8 +36,8 @@ footer {
     font-size: 30px;
 }
 
-.social-media-logo-container i {
-    cursor: pointer;
+.social-media-logo-container a {
+    color: white;
 }
 
 .footer-lists {

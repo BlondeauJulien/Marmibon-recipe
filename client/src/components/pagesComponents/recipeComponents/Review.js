@@ -1,4 +1,5 @@
 import React from 'react';
+import ReviewItem from './ReviewItem';
 
 const Review = () => {
 	return (
@@ -34,7 +35,11 @@ const Review = () => {
                 <span className="nbr-review-text">Avec 7 notes et avis</span>
 			</div>
             <div className="reviews-container">
-                
+                <ReviewItem />
+                <ReviewItem />
+                <ReviewItem />
+                <ReviewItem />
+
             </div>
 		</div>
 	);

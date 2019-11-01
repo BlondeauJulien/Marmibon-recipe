@@ -1,0 +1,57 @@
+.user-review-item {
+    border: solid 1px rgb(231, 231, 231);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.user-review-info-cont {
+    display: flex;
+    justify-items: center;
+}
+
+.user-review-logo {
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 35px;
+    line-height: 55px;
+    text-align: center;
+    background-color: var(--brand-color);
+    color: white;
+}
+
+.user-review-info {
+    display: inline-block;
+    padding: 5px;
+    margin-left: 6px;
+}
+
+.user-review-info * {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.user-review-name {
+    color:rgb(58, 58, 58);
+}
+
+.user-review-date {
+    color: rgb(190, 190, 190);
+}
+
+.user-rating{
+    display: inline;
+    color: var(--brand-color);
+    margin-right: 2px;
+}
+
+
+.review-text {
+    border-top: dashed 1px rgb(219, 219, 219);
+    margin-top: 5px;
+    padding-top: 20px;
+    color:rgb(83, 83, 83);
+    line-height: 20px;
+}
