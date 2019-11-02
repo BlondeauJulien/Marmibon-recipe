@@ -1,0 +1,7 @@
+.search-container {
+    margin-top: 25px;
+    padding: 25px 120px 40px 120px; 
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color: white;
+}
