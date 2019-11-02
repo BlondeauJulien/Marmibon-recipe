@@ -1,4 +1,5 @@
 import React from 'react';
+import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
 
 const User = () => {
 	return (
@@ -17,6 +18,13 @@ const User = () => {
 						<div className="btn-user-created-recipe">Mes recettes sauvegardées</div>
 					</div>
 				</div>
+                <div className="recipes-abstracts-container">
+                    <RecipeAbstractItem />
+                    <RecipeAbstractItem />
+                    <RecipeAbstractItem />
+                    <RecipeAbstractItem />
+                    <RecipeAbstractItem />
+                </div>
 			</div>
 		</div>
 	);
