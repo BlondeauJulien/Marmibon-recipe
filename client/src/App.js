@@ -7,6 +7,7 @@ import Register from './components/pages/Register';
 import Recipe from './components/pages/Recipe';
 import User from './components/pages/User';
 import Search from './components/pages/Search';
+import CreateRecipe from './components/pages/CreateRecipe'
 import Footer from './components/layout/Footer';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
 						<Route exact path="/recipe" component={Recipe} />
 						<Route exact path="/user" component={User} />
 						<Route exact path="/search" component={Search} />
+						<Route exact path="/create" component={CreateRecipe} />
 					</Switch>
 				</main>
 				<Footer />
