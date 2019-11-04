@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+    const authContext = useContext(AuthContext);
+
+    const { logUser, error, clearErrors, isAuthenticated } = authContext;
+
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -13,8 +18,15 @@ const Login = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log('login');
-        console.log(user);
+
+        if(email === "" || password === "") {
+            console.log("Empty input")
+        } else {
+            logUser({
+                email,
+                password
+            })
+        }
     }
 
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/layout/NavBar';
 import Home from './components/pages/Home';
@@ -12,6 +12,12 @@ import Footer from './components/layout/Footer';
 import './App.css';
 
 import AuthState from './context/auth/AuthState';
+import setAuthToken from './utils/setAuthToken';
+
+if(localStorage.token) {
+	setAuthToken(localStorage.token);
+
+  }
 
 function App() {
 	return (
