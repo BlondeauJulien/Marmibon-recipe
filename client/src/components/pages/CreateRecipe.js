@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
 
 const CreateRecipe = () => {
+	const authContext = useContext(AuthContext);
+
+	const { loadUser } = authContext;
+
+	useEffect(() => {
+		loadUser()
+		// eslint-disable-next-line
+    }, [])
+
 	return (
 		<div className="create-recipe-cont">
 			<h1>Créer une recette</h1>
@@ -25,10 +35,29 @@ const CreateRecipe = () => {
 					</div>
 				</div>
 
+				<div className="recipe-type-cont">
+					<span>Cette recette est:</span>
+					<div className="radiobtn-recipe-type-cont">
+						<div className="radiobtn-recipe-type">
+							<label>Une entrée</label>
+							<input type="radio" name="recipe-type" value="starter"/>
+						</div>
+						<div className="radiobtn-recipe-type">
+							<label>Un plat</label>
+							<input type="radio" name="recipe-type" value="main-course" />
+						</div>
+						<div className="radiobtn-recipe-type">
+							<label>Un déssert</label>
+							<input type="radio" name="recipe-type" value="dessert"/>
+						</div>
+					</div>
+				</div>
+
 				<div className="create-recipe-steps-ing-cont">
 					<div className="create-recipe-ingredient-cont">
 						<span>Ingredient:</span>
 						<div className="create-recipe-ingredient-item">
+						<div className="btn-delete-cont"><button className="btn-delete">&times;</button></div>
 							<label>Nom:</label>
 							<input type="text" />
 							<label>Quantité:</label>
@@ -44,13 +73,16 @@ const CreateRecipe = () => {
 								<option value="centilitre">Centilitre</option>
 							</select>
 						</div>
+						<button className="btn-add-item" title="ajouter un ingredient">+</button>
 					</div>
 					<div className="create-recipe-steps-cont">
-                    <span>Steps:</span>
+                    <span>Etapes:</span>
 						<div className="create-recipe-steps-item step-1">
-							<label>Step 1:</label>
+						<div className="btn-delete-cont"><button className="btn-delete">&times;</button></div>
+							<label>Etape 1:</label>
 							<textarea maxlength="400" classNAme="create-recipe step-1" />
 						</div>
+						<button className="btn-add-item" title="ajouter une étape">+</button>
 					</div>
 				</div>
 

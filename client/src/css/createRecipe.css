@@ -29,6 +29,20 @@
     margin-bottom: 30px;
 }
 
+.recipe-type-cont {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.recipe-type-cont span {
+    margin-bottom: 16px;
+}
+
+.radiobtn-recipe-type-cont {
+    display: flex;
+    justify-content: space-around;
+}
+
 .create-recipe-single-input-cont input,
 .create-recipe-steps-ing-cont input,
 .create-recipe-steps-ing-cont select,
