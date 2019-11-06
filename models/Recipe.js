@@ -13,22 +13,29 @@ const RecipeSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-     prepTime: [{
-        hours: Number,
-        minutes: Number,
-    }], 
+    prepTimeHours: {
+        type: Number,
+        default: 0
+    },
+    prepTimeMins: {
+        type: Number,
+        required: true
+    }, 
     price: {
         type: String,
-        default: "cheap"
+        required: true
+    },
+    recipeType: {
+        type: String,
+        required: true
     },
     date: {
         type: Date,
-        default: Date.now,
-        required: true
+        default: Date.now
     },
     steps: {
         type: Array,
-        // Object: title - content
+        // Object: step number - content
         required: true
     },
     ingredients: {

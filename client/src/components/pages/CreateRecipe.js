@@ -30,8 +30,21 @@ const CreateRecipe = () => {
                         <input type="number" placeholder="Minutes" min="1" max="60" className="pct-50"/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label>Price</label>
-						<input />
+						<label>prix:</label>
+						<div className="price-radio-cont">
+						<div className="radiobtn-recipe-price">
+							<label>Faible</label>
+							<input type="radio" name="recipe-price" value="low-price"/>
+						</div>
+						<div className="radiobtn-recipe-price">
+							<label>Moyen</label>
+							<input type="radio" name="recipe-price" value="mid-price"/>
+						</div>
+						<div className="radiobtn-recipe-price">
+							<label>Chère</label>
+							<input type="radio" name="recipe-price" value="high-price"/>
+						</div>
+						</div>
 					</div>
 				</div>
 
