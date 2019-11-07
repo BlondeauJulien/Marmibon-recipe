@@ -1,15 +1,30 @@
 import React, { useContext, useEffect } from 'react';
+import Ingredient from '../pagesComponents/createRecipeComponents/Ingredient';
+import Step from '../pagesComponents/createRecipeComponents/Step';
 import AuthContext from '../../context/auth/authContext';
+import RecipeContext from '../../context/recipe/recipeContext';
 
 const CreateRecipe = () => {
 	const authContext = useContext(AuthContext);
+	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser } = authContext;
+	const { ingredients, addIngredient, steps, addStep } = recipeContext;
 
 	useEffect(() => {
 		loadUser()
 		// eslint-disable-next-line
-    }, [])
+	}, []);
+
+	const handleAddIngredient = (e) => {
+		e.preventDefault();
+		addIngredient();
+	}
+
+	const handleAddStep = e => {
+		e.preventDefault();
+		addStep();
+	}
 
 	return (
 		<div className="create-recipe-cont">
@@ -30,18 +45,18 @@ const CreateRecipe = () => {
                         <input type="number" placeholder="Minutes" min="1" max="60" className="pct-50"/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label>prix:</label>
+						<label>Prix:</label>
 						<div className="price-radio-cont">
 						<div className="radiobtn-recipe-price">
-							<label>Faible</label>
+							<label>Faible:</label>
 							<input type="radio" name="recipe-price" value="low-price"/>
 						</div>
 						<div className="radiobtn-recipe-price">
-							<label>Moyen</label>
+							<label>Moyen:</label>
 							<input type="radio" name="recipe-price" value="mid-price"/>
 						</div>
 						<div className="radiobtn-recipe-price">
-							<label>Chère</label>
+							<label>Elevé:</label>
 							<input type="radio" name="recipe-price" value="high-price"/>
 						</div>
 						</div>
@@ -69,33 +84,20 @@ const CreateRecipe = () => {
 				<div className="create-recipe-steps-ing-cont">
 					<div className="create-recipe-ingredient-cont">
 						<span>Ingredient:</span>
-						<div className="create-recipe-ingredient-item">
-						<div className="btn-delete-cont"><button className="btn-delete">&times;</button></div>
-							<label>Nom:</label>
-							<input type="text" />
-							<label>Quantité:</label>
-							<input type="number" min="1" max="5000" />
-							<label>Mesure:</label>
-							<select name="measurement">
-								<option value="entier">Entier</option>
-								<option value="gram" selected>
-									Gramme
-								</option>
-								<option value="kilo">Kilo</option>
-								<option value="liter">litre</option>
-								<option value="centilitre">Centilitre</option>
-							</select>
-						</div>
-						<button className="btn-add-item" title="ajouter un ingredient">+</button>
+
+						{ingredients.map( ingredient => (
+							<Ingredient key={ingredient.id} ingredient={ingredient}/>
+						))}
+
+						<button className="btn-add-item" title="ajouter un ingredient" onClick={handleAddIngredient}>+</button>
 					</div>
 					<div className="create-recipe-steps-cont">
                     <span>Etapes:</span>
-						<div className="create-recipe-steps-item step-1">
-						<div className="btn-delete-cont"><button className="btn-delete">&times;</button></div>
-							<label>Etape 1:</label>
-							<textarea maxlength="400" classNAme="create-recipe step-1" />
-						</div>
-						<button className="btn-add-item" title="ajouter une étape">+</button>
+
+						{steps.map( step => (
+							<Step key={step.id} step={step} /> 
+						))}
+						<button className="btn-add-item" title="ajouter une étape" onClick={handleAddStep}>+</button>
 					</div>
 				</div>
 
