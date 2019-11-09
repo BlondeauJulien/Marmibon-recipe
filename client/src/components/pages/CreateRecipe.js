@@ -9,6 +9,9 @@ const CreateRecipe = () => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
 
+	const { loadUser } = authContext;
+	const { createRecipe } = recipeContext;
+
 	const [recipe, setRecipe] = useState({
 		recipeName: '',
         serving: 1,
@@ -30,20 +33,11 @@ const CreateRecipe = () => {
 		stepName: '',
 		stepContent: ''
 	}]);
-	
-
-	const { loadUser } = authContext;
-	const { } = recipeContext;
 
 	useEffect(() => {
 		loadUser()
 		// eslint-disable-next-line
 	}, []);
-
-	useEffect(() => {
-		console.log(recipe)
-		// eslint-disable-next-line
-	}, [recipe]);
 
 	const handleChangeRecipe = e => {
 		setRecipe({...recipe, [e.target.name]: e.target.value});
@@ -96,10 +90,26 @@ const CreateRecipe = () => {
 		setSteps([...steps, newStep])
 	}
 
+	/* Submit create Recipe */
+
+	const onSubmit = e => {
+		e.preventDefault();
+		
+		let recipeForm = {...recipe};
+		recipeForm.ingredients = [...ingredients];
+		recipeForm.steps = [...steps];
+		recipeForm.steps.map((step, index) => {
+			step.stepName = `Etape ${index + 1}`;
+			return step;
+		})
+
+		createRecipe(recipeForm);
+    }
+
 	return (
 		<div className="create-recipe-cont">
 			<h1>Créer une recette</h1>
-			<form>
+			<form onSubmit={onSubmit}>
 				<div className="create-recipe-single-input-cont">
 					<div className="create-recipe-input-cont">
 						<label htmlFor="recipeName">Nom de la recette:</label>

@@ -7,4 +7,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
-
+export const CREATE_RECIPE_SUCCESS = 'CREATE_RECIPE_SUCCESS';
+export const CREATE_RECIPE_FAIL = 'CREATE_RECIPE_FAIL';

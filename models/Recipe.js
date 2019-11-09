@@ -5,7 +5,7 @@ const RecipeSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    name: {
+    recipeName: {
         type: String,
         required: true
     },

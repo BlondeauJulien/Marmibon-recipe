@@ -11,7 +11,7 @@ const Recipe = require('../models/Recipe');
 // @access  Private 
 
 router.post('/', [auth, [
-    check('name', 'Please add a name to the recipe').not().isEmpty(),
+    check('recipeName', 'Please add a name to the recipe').not().isEmpty(),
     check('serving', 'Please add the number of serving').not().isEmpty()
 ]], async (req, res) => {
     const errors = validationResult(req);
@@ -19,14 +19,16 @@ router.post('/', [auth, [
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-    let {name, serving, price, prepTime, steps, ingredients} = req.body;
+    let {recipeName, prepTimeHours, prepTimeMins, serving, price, recipeType, steps, ingredients} = req.body;
     try {
         let newRecipe = new Recipe({
             user: req.user.id,
-            name,
+            recipeName,
+            prepTimeHours,
+            prepTimeMins,
             serving,
-            prepTime,
             price,
+            recipeType,
             steps,
             ingredients 
         });

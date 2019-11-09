@@ -8,7 +8,6 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 
 	useEffect(() => {
 		let stepNbr = { stepName: `Etape ${stepNumber}` };
-		handleStepChange(step.id, { ...step, ...stepNbr });
 		// eslint-disable-next-line
 	}, []);
 
@@ -28,7 +27,7 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 					&times;
 				</button>
 			</div>
-			<label htmlFor="stepContent">Etape {stepNumber}:</label>
+	<label htmlFor="stepContent">Etape {stepNumber}:</label>
 			<textarea
 				maxlength="400"
 				classNAme="create-recipe step-1"
