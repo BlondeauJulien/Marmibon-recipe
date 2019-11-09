@@ -11,7 +11,7 @@ const CreateRecipe = () => {
 
 	const [recipe, setRecipe] = useState({
 		recipeName: '',
-        serving: '',
+        serving: 1,
         prepTimeHours: '',
         prepTimeMins: '',
         price: '',
@@ -40,6 +40,24 @@ const CreateRecipe = () => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		console.log(recipe)
+		// eslint-disable-next-line
+	}, [recipe]);
+
+	const handleChangeRecipe = e => {
+		setRecipe({...recipe, [e.target.name]: e.target.value});
+	}
+
+	/* Ingredient state events */
+
+	const handleIngredientChange = (id, ingredient) => {
+		const newIngredients = [...ingredients];
+		const index = newIngredients.findIndex(i => i.id === id);
+		newIngredients[index] = ingredient;
+		setIngredients(newIngredients);
+	}
+
 	const addIngredient = (e) => {
 		e.preventDefault();
 		let newIng = {
@@ -53,6 +71,15 @@ const CreateRecipe = () => {
 
 	const deleteIngredient = (id) => {
 		setIngredients(ingredients.filter( ingredient => ingredient.id !== id))
+	}
+
+	/* Step state events */ 
+
+	const handleStepChange = (id, step) => {
+		const newSteps = [...steps];
+		const index = newSteps.findIndex(s => s.id === id);
+		newSteps[index] = step;
+		setSteps(newSteps);
 	}
 
 	const deleteStep = (id) => {
@@ -75,32 +102,32 @@ const CreateRecipe = () => {
 			<form>
 				<div className="create-recipe-single-input-cont">
 					<div className="create-recipe-input-cont">
-						<label>Nom de la recette:</label>
-						<input type="text"/>
+						<label htmlFor="recipeName">Nom de la recette:</label>
+						<input type="text" name="recipeName" id="recipeName" value={recipe.recipeName} onChange={handleChangeRecipe}/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label>Nombre de portion:</label>
-						<input type="number" min="1" max="10" />
+						<label htmlFor="serving">Nombre de portion:</label>
+						<input type="number" name="serving" id="serving" value={recipe.serving} onChange={handleChangeRecipe} min="1" max="10"/>
 					</div>
 					<div className="create-recipe-input-cont">
 						<label>Temps de préparation:</label>
-						<input type="number" placeholder="Heures" min="0" max="24" className="pct-50"/>
-                        <input type="number" placeholder="Minutes" min="1" max="60" className="pct-50"/>
+						<input type="number" name="prepTimeHours" value={recipe.prepTimeHours} onChange={handleChangeRecipe} placeholder="Heures" min="0" max="24" className="pct-50"/>
+                        <input type="number" name="prepTimeMins" value={recipe.prepTimeMins} onChange={handleChangeRecipe} placeholder="Minutes" min="1" max="60" className="pct-50"/>
 					</div>
 					<div className="create-recipe-input-cont">
 						<label>Prix:</label>
 						<div className="price-radio-cont">
 						<div className="radiobtn-recipe-price">
 							<label>Faible:</label>
-							<input type="radio" name="recipe-price" value="low-price"/>
+							<input type="radio" name="price" onClick={handleChangeRecipe} value="lowPrice"/>
 						</div>
 						<div className="radiobtn-recipe-price">
 							<label>Moyen:</label>
-							<input type="radio" name="recipe-price" value="mid-price"/>
+							<input type="radio" name="price" onClick={handleChangeRecipe} value="midPrice"/>
 						</div>
 						<div className="radiobtn-recipe-price">
 							<label>Elevé:</label>
-							<input type="radio" name="recipe-price" value="high-price"/>
+							<input type="radio" name="price" onClick={handleChangeRecipe} value="highPrice"/>
 						</div>
 						</div>
 					</div>
@@ -111,15 +138,15 @@ const CreateRecipe = () => {
 					<div className="radiobtn-recipe-type-cont">
 						<div className="radiobtn-recipe-type">
 							<label>Une entrée</label>
-							<input type="radio" name="recipe-type" value="starter"/>
+							<input type="radio" name="recipeType" onClick={handleChangeRecipe} value="starter"/>
 						</div>
 						<div className="radiobtn-recipe-type">
 							<label>Un plat</label>
-							<input type="radio" name="recipe-type" value="main-course" />
+							<input type="radio" name="recipeType" onClick={handleChangeRecipe} value="mainCourse" />
 						</div>
 						<div className="radiobtn-recipe-type">
 							<label>Un déssert</label>
-							<input type="radio" name="recipe-type" value="dessert"/>
+							<input type="radio" name="recipeType" onClick={handleChangeRecipe} value="dessert"/>
 						</div>
 					</div>
 				</div>
@@ -129,7 +156,7 @@ const CreateRecipe = () => {
 						<span>Ingredient:</span>
 
 						{ingredients.map( ingredient => (
-							<Ingredient key={ingredient.id} ingredient={ingredient} deleteIngredient={deleteIngredient} />
+							<Ingredient key={ingredient.id} ingredient={ingredient} deleteIngredient={deleteIngredient} handleIngredientChange={handleIngredientChange}/>
 						))}
 
 						<button className="btn-add-item" title="ajouter un ingredient" onClick={addIngredient}>+</button>
@@ -138,7 +165,7 @@ const CreateRecipe = () => {
                     <span>Etapes:</span>
 
 						{steps.map( step => (
-							<Step key={step.id} step={step} stepNumber={steps.indexOf(step) + 1} deleteStep={deleteStep} /> 
+							<Step key={step.id} step={step} stepNumber={steps.indexOf(step) + 1} deleteStep={deleteStep} handleStepChange={handleStepChange}/> 
 						))}
 						
 						<button className="btn-add-item" title="ajouter une étape" onClick={addStep}>+</button>
