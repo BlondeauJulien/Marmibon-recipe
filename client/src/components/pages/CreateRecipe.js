@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import uuidv4 from 'uuid/v4';
 import Ingredient from '../pagesComponents/createRecipeComponents/Ingredient';
 import Step from '../pagesComponents/createRecipeComponents/Step';
 import AuthContext from '../../context/auth/authContext';
@@ -8,22 +9,64 @@ const CreateRecipe = () => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
 
+	const [recipe, setRecipe] = useState({
+		recipeName: '',
+        serving: '',
+        prepTimeHours: '',
+        prepTimeMins: '',
+        price: '',
+        recipeType: ''
+	});
+
+	const [ingredients, setIngredients] = useState([{
+			id: uuidv4(),
+			ingredientName: '',
+			ingredientQuantity: '',
+			ingredientMesure: 'gram'
+	}]);
+	
+	const [steps, setSteps] = useState([{
+		id: uuidv4(),
+		stepName: '',
+		stepContent: ''
+	}]);
+	
+
 	const { loadUser } = authContext;
-	const { ingredients, addIngredient, steps, addStep } = recipeContext;
+	const { } = recipeContext;
 
 	useEffect(() => {
 		loadUser()
 		// eslint-disable-next-line
 	}, []);
 
-	const handleAddIngredient = (e) => {
+	const addIngredient = (e) => {
 		e.preventDefault();
-		addIngredient();
+		let newIng = {
+				id: uuidv4(),
+				ingredientName: '',
+				ingredientQuantity: '',
+				ingredientMesure: 'gram'
+		}
+		setIngredients([...ingredients, newIng])
 	}
 
-	const handleAddStep = e => {
+	const deleteIngredient = (id) => {
+		setIngredients(ingredients.filter( ingredient => ingredient.id !== id))
+	}
+
+	const deleteStep = (id) => {
+		setSteps(steps.filter( step => step.id !== id))
+	}
+
+	const addStep = (e) => {
 		e.preventDefault();
-		addStep();
+		let newStep = {
+			id: uuidv4(),
+			stepName: '',
+			stepContent: ''
+		}
+		setSteps([...steps, newStep])
 	}
 
 	return (
@@ -86,18 +129,19 @@ const CreateRecipe = () => {
 						<span>Ingredient:</span>
 
 						{ingredients.map( ingredient => (
-							<Ingredient key={ingredient.id} ingredient={ingredient}/>
+							<Ingredient key={ingredient.id} ingredient={ingredient} deleteIngredient={deleteIngredient} />
 						))}
 
-						<button className="btn-add-item" title="ajouter un ingredient" onClick={handleAddIngredient}>+</button>
+						<button className="btn-add-item" title="ajouter un ingredient" onClick={addIngredient}>+</button>
 					</div>
 					<div className="create-recipe-steps-cont">
                     <span>Etapes:</span>
 
 						{steps.map( step => (
-							<Step key={step.id} step={step} /> 
+							<Step key={step.id} step={step} stepNumber={steps.indexOf(step) + 1} deleteStep={deleteStep} /> 
 						))}
-						<button className="btn-add-item" title="ajouter une étape" onClick={handleAddStep}>+</button>
+						
+						<button className="btn-add-item" title="ajouter une étape" onClick={addStep}>+</button>
 					</div>
 				</div>
 
@@ -108,3 +152,4 @@ const CreateRecipe = () => {
 };
 
 export default CreateRecipe;
+

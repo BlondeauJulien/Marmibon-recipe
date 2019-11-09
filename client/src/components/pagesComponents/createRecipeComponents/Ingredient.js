@@ -2,23 +2,23 @@ import React, { useContext } from 'react';
 import RecipeContext from '../../../context/recipe/recipeContext';
 
 
-const Ingredient = ({ ingredient }) => {
+const Ingredient = ({ ingredient, deleteIngredient }) => {
 	const recipeContext = useContext(RecipeContext);
 
-    const { deleteIngredient } = recipeContext;
-    
-    const handleDeleteIngredient = e => {
-        e.preventDefault();
-        deleteIngredient(ingredient.id);
-    }
+    const {  } = recipeContext;
+
+	const handleDeleteIngredient = (e) => {
+		e.preventDefault();
+		deleteIngredient(ingredient.id);
+	}
 
 	return (
 		<div className="create-recipe-ingredient-item" key={ingredient.id}>
 			<div className="btn-delete-cont" onClick={handleDeleteIngredient}>
 				<button className="btn-delete">&times;</button>
 			</div>
-			<label>Nom:</label>
-			<input type="text" value={ingredient.ingredientName} />
+			<label htmlFor="ingredientName">Nom:</label>
+			<input type="text" name="ingredientName" id="ingredientName" value={ingredient.ingredientName} />
 			<label>Quantité:</label>
 			<input type="number" value={ingredient.ingredientQuantity} min="1" max="5000" />
 			<label>Mesure:</label>
