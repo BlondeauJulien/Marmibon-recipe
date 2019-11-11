@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/layout/NavBar';
 import Home from './components/pages/Home';
@@ -31,7 +31,7 @@ function App() {
 								<Route exact path="/" component={Home} />
 								<Route exact path="/login" component={Login} />
 								<Route exact path="/register" component={Register} />
-								<Route exact path="/recipe" component={Recipe} />
+								<Route exact path="/recipe/:recipeId" component={Recipe} />
 								<Route exact path="/user" component={User} />
 								<Route exact path="/search" component={Search} />
 								<Route exact path="/create" component={CreateRecipe} />

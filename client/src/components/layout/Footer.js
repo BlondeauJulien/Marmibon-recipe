@@ -4,13 +4,13 @@ const Footer = () => {
 	return (
 		<footer>
 			<div>
-				<div className="arrow-back-top"><a href="#"><i class="fas fa-long-arrow-alt-up"></i></a></div>
+				<div className="arrow-back-top"><a href="#"><i className="fas fa-long-arrow-alt-up"></i></a></div>
                 <div className="social-media-logo-container">
-                <a href="https://www.facebook.com/marmiton" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/marmiton_org/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/Marmiton_org" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.youtube.com/user/marmitonofficiel" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.pinterest.fr/marmiton/" target="_blank"><i class="fab fa-pinterest"></i></a>
+                <a href="https://www.facebook.com/marmiton" target="_blank"><i className="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/marmiton_org/" target="_blank"><i className="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/Marmiton_org" target="_blank"><i className="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/user/marmitonofficiel" target="_blank"><i className="fab fa-youtube"></i></a>
+                <a href="https://www.pinterest.fr/marmiton/" target="_blank"><i className="fab fa-pinterest"></i></a>
                 </div>
 				<div className="footer-lists">
                     <div>

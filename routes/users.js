@@ -60,4 +60,18 @@ router.post('/', [
 
 })
 
+// @route   GET api/users
+// @desc    Get single User Name
+// @access  Public
+
+router.get('/:userId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        res.json(user.userName)
+    } catch (err) {
+		console.error(err.message);
+		res.status(500).send('Server error');
+    }
+})
+
 module.exports = router;

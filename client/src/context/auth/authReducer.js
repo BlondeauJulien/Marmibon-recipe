@@ -4,7 +4,8 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_FAIL,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    CREATE_RECIPE_SUCCESS
 } from '../types';
 
 export default (state, action) => {

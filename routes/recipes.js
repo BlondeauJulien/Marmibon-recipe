@@ -58,6 +58,21 @@ router.get('/', async (req, res) => {
 });
 
 // @route   GET api/recipes
+// @desc    GET single recipe
+// @access  Public 
+
+router.get('/:recipeId', async (req, res) => {
+    try {
+        const recipe = await Recipe.findById(req.params.recipeId);
+        res.json(recipe)
+    } catch (err) {
+		console.error(err.message);
+		res.status(500).send('Server error');
+    }
+
+});
+
+// @route   GET api/recipes
 // @desc    GET all recipes from logged user
 // @access  Public 
 

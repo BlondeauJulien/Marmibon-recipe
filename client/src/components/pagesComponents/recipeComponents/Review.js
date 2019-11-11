@@ -11,11 +11,11 @@ const Review = () => {
 					<div className="user-stars-rating-cont">
 						<span>Noter cette recette:</span>
 						<div className="stars-rating">
-							<i class="fas fa-star grey" />
-							<i class="fas fa-star grey" />
-							<i class="fas fa-star grey" />
-							<i class="fas fa-star grey" />
-							<i class="fas fa-star grey" />
+							<i className="fas fa-star grey" />
+							<i className="fas fa-star grey" />
+							<i className="fas fa-star grey" />
+							<i className="fas fa-star grey" />
+							<i className="fas fa-star grey" />
 						</div>
 					</div>
 					<div className="btn-review">
@@ -25,12 +25,12 @@ const Review = () => {
 			</div>
 			<div className="recipe-rating">
 				<span className="overall-stars-rating-text">Cette recette a reçu:</span>
-				<div class="overall-stars-rating-stars-cont">
-					<i class="fas fa-star" />
-					<i class="fas fa-star" />
-					<i class="fas fa-star" />
-					<i class="fas fa-star" />
-					<i class="fas fa-star" />
+				<div className="overall-stars-rating-stars-cont">
+					<i className="fas fa-star" />
+					<i className="fas fa-star" />
+					<i className="fas fa-star" />
+					<i className="fas fa-star" />
+					<i className="fas fa-star" />
 				</div>
                 <span className="nbr-review-text">Avec 7 notes et avis</span>
 			</div>
