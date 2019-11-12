@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import SearchForm from '../pagesComponents/searchComponent/SearchForm';
-import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem'
+import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
+import AuthContext from '../../context/auth/authContext';
 
 
 const Search = () => {
+    const authContext = useContext(AuthContext);
+
+	const { loadUser } = authContext;
+
+    useEffect(() => {
+		loadUser();
+		// eslint-disable-next-line
+    }, []);
+    
     return (
         <div className="search-container">
             <SearchForm />

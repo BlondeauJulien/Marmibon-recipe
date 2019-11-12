@@ -42,13 +42,31 @@
 .stars-rating {
     display: inline-block;
     margin-left: 12px;
+    margin-bottom: 10px;
 }
 
 .stars-rating i {
     margin-left: 2px;
+    cursor: pointer;
+}
+
+.review-content-cont {
+    display: none; 
+}
+
+.review-content-cont textarea {
+    width: 99%;
+    height: 100px;
 }
 
 .btn-review {
+    display: inline-block;
+    width: 100%;
+}
+
+.btn-review span {
+    display: inline-block;
+    width: 100%;
     text-align: center;
     color: white;
     font-weight: 900;

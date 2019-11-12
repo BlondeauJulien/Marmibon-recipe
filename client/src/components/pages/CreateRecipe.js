@@ -9,8 +9,21 @@ const CreateRecipe = (props) => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
 
-	const { loadUser } = authContext;
+	const { loadUser, isAuthenticated } = authContext;
 	const { createRecipe, recipeInfo } = recipeContext;
+
+	useEffect(() => {
+		loadUser();
+		// eslint-disable-next-line
+	}, []);
+
+	useEffect(() => {
+        if(!isAuthenticated) {
+            props.history.push('/')
+        }
+        // eslint-disable-next-line
+
+    }, [isAuthenticated, props.history])
 
 	useEffect(() => {
         if(recipeInfo !== null) {
@@ -45,11 +58,6 @@ const CreateRecipe = (props) => {
 			stepContent: ''
 		}
 	]);
-
-	useEffect(() => {
-		loadUser();
-		// eslint-disable-next-line
-	}, []);
 
 	const handleChangeRecipe = (e) => {
 		setRecipe({ ...recipe, [e.target.name]: e.target.value });

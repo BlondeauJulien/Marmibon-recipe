@@ -99,3 +99,8 @@
     font-weight: 900;
     color: black;
 }
+
+.header-nav ul .create-recipe-nav a {
+    color: var(--brand-color);
+    font-weight: 900;
+}

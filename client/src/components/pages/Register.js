@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom';
 const Register = ( props) => {
     const authContext = useContext(AuthContext);
 
-    const { register, error, clearErrors, isAuthenticated } = authContext;
+    const { register, error, clearErrors, isAuthenticated, loadUser } = authContext;
+
+    useEffect(() => {
+		loadUser();
+		// eslint-disable-next-line
+	}, []);
 
     useEffect(() => {
         if(isAuthenticated) {

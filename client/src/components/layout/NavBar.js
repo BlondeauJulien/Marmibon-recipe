@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
 
 const NavBar = () => {
+	const authContext = useContext(AuthContext);
 
-	
+	const { isAuthenticated } = authContext;
 
 	return (
 		<header>
@@ -19,7 +21,7 @@ const NavBar = () => {
 				<div className="header-btn-container">
 					<Link to="/login" className="btn btn-mid btn-brand brand-color-bg text-color-white">
 						<i className="fas fa-user" />
-						{` `}Connexion
+						{isAuthenticated ? ` Mon Profil` : ` Connexion`}
 					</Link>
 				</div>
 			</div>
@@ -41,6 +43,11 @@ const NavBar = () => {
 					<li className="random-recipe">
 						<a href="#">Recette au hasard</a>
 					</li>
+					{isAuthenticated && (
+					<li className="create-recipe-nav">
+						<Link to="/create" href="#">Créer une recette</Link>
+					</li>)
+					}
 				</ul>
 			</nav>
 		</header>

@@ -42,6 +42,15 @@ const RecipeSchema = mongoose.Schema({
         type: Array,
         // Object: Ingredient name - quantity
         required: true
+    },
+    saved: {
+        type: Array,
+        default: []
+    },
+    reviews: {
+        type: Array,
+        // Object: authorReviewId, authorReviewName, reviewDate, rating, reviewContent
+        default: []
     }
 })
 

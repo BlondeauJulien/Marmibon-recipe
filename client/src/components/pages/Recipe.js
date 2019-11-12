@@ -1,16 +1,22 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import Review from '../pagesComponents/recipeComponents/Review';
+import AuthContext from '../../context/auth/authContext';
 
 import RecipeContext from '../../context/recipe/recipeContext';
 
 const Recipe = (props) => {
-	//console.log(props.match.params.recipeId)
 
 	const recipeContext = useContext(RecipeContext);
+	const authContext = useContext(AuthContext);
 
 	const { recipeInfo, recipeAuthor, loadRecipe } = recipeContext;
 
+    const { loadUser } = authContext;
 
+	useEffect(() => {
+		loadUser();
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		loadRecipe(props.match.params.recipeId);
@@ -115,7 +121,7 @@ const Recipe = (props) => {
 					</div>
 				</div>
 			</div>
-            <Review />
+            <Review recipeInfo={recipeInfo} />
 		</Fragment>
 	);
 };
