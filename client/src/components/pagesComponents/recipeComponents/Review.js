@@ -2,20 +2,26 @@ import React, { useState } from 'react';
 import ReviewItem from './ReviewItem';
 import uuidv4 from 'uuid/v4';
 
-const Review = ( { recipeInfo, createReview, isAuthenticated }) => {
+const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed }) => {
 	const [review, setReview] = useState({
 		reviewRating: 0,
 		reviewContent: ''
 	});
 
 	const displayReviewTextArea = () => {
-		document.querySelector('.review-content-cont').style.display = 'block';
+		if(!userHasReviewed) {
+			document.querySelector('.review-content-cont').style.display = 'block';
+		}
+
 	}
 
 	const hideReviewTextArea = e => {
-		if(review.reviewRating === 0 && review.reviewContent === '') {
-			document.querySelector('.review-content-cont').style.display = 'none';
+		if(!userHasReviewed) {
+			if(review.reviewRating === 0 && review.reviewContent === '') {
+				document.querySelector('.review-content-cont').style.display = 'none';
+			}
 		}
+
 
 	}
 
@@ -75,13 +81,17 @@ const Review = ( { recipeInfo, createReview, isAuthenticated }) => {
 
 	return (
 		<div className="review-container">
-			<h2>7 Avis sur cette recette</h2>
+			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
 			<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>
-				<div className="grid-columns-2">
+				{ userHasReviewed.userHasReviewed ? (
+					<span className="review-sent">{userHasReviewed.msg}</span>
+				) : (
+					<>
+					<div className="grid-columns-2">
 					<div className="user-stars-rating-cont">
 						<span>Noter cette recette:</span>
-						<div onMouseLeave={showStateRating} className="stars-rating">
+						<div onMouseLeave={showStateRating} className="stars-rating-pick">
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-0" className="fas fa-star grey sr" />
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-1" className="fas fa-star grey sr" />
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-2" className="fas fa-star grey sr" />
@@ -103,20 +113,23 @@ const Review = ( { recipeInfo, createReview, isAuthenticated }) => {
 						<span onClick={submitReview}>Ajouter un avis</span>
 					</div>
 				</div>
+				</>
+				)}
+
 			</div>
 			<div className="recipe-rating">
 				<span className="overall-stars-rating-text">Cette recette a reçu:</span>
 				<div className="overall-stars-rating-stars-cont">
-					{
-						
-					}
+					{averageRatingStarsClassName().map(el => {
+						return (<i className={el} />);
+					})}
+{/* 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
-					<i className="fas fa-star" />
-					<i className="fas fa-star" />
+					<i className="fas fa-star" /> */}
 				</div>
-                <span className="nbr-review-text">Avec {recipeInfo.reviews.length} notes et avis</span>
+                <span className="nbr-review-text">Avec {recipeInfo.reviews.length} {recipeInfo.reviews.length > 1 ? "notes et avis" : "note et avis"}</span>
 			</div>
             <div className="reviews-container">
 				{

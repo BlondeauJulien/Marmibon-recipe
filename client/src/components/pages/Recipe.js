@@ -9,7 +9,7 @@ const Recipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);
 
-	const { recipeInfo, recipeAuthor, loadRecipe, createReview } = recipeContext;
+	const { recipeInfo, recipeAuthor, loadRecipe, createReview, userHasReviewed } = recipeContext;
 
     const { loadUser, isAuthenticated } = authContext;
 
@@ -21,12 +21,34 @@ const Recipe = (props) => {
 	useEffect(() => {
 		loadRecipe(props.match.params.recipeId);
         // eslint-disable-next-line
-	}, [])
+	}, []);
 
 	if(recipeInfo === null || recipeAuthor === null) {
 		return (
 			<h1>Error</h1>
 		)
+	}
+
+	const averageRatingStarsClassName = () => {
+		let total = 0;
+
+		recipeInfo.reviews.forEach(r => {
+			total += r.reviewRating;
+		});
+
+		let averageRating = Math.round(total / recipeInfo.reviews.length);
+
+		let starsArr = [];
+
+		for(let i = 1; i<=5; i++) {
+			if(i <= averageRating ) {
+				starsArr.push("fas fa-star brand-color-txt")
+			} else {
+				starsArr.push("fas fa-star grey")
+			}
+		}
+
+		return starsArr
 	}
 	
 	return (
@@ -43,12 +65,11 @@ const Recipe = (props) => {
 					<div className="recipe-rating-container">
 						<div>
 							<div className="stars-rating">
-								<i className="fas fa-star" />
-								<i className="fas fa-star" />
-								<i className="fas fa-star" />
-								<i className="fas fa-star-half" />
+								{averageRatingStarsClassName().map(el => {
+									return (<i className={el} />);
+								})}
 							</div>
-							<a className="link-to-comments">7 commentaires</a>
+							<a className="link-to-comments">{recipeInfo.reviews.length} commentaire{recipeInfo.reviews.length > 1 && "s"}</a>
 						</div>
 						<div>
 							<i className="far fa-heart heart-saved" />
@@ -125,7 +146,12 @@ const Recipe = (props) => {
 					</div>
 				</div>
 			</div>
-            <Review recipeInfo={recipeInfo} createReview={createReview} isAuthenticated={isAuthenticated}/>
+			<Review recipeInfo={recipeInfo}
+				createReview={createReview}
+				isAuthenticated={isAuthenticated} 
+				averageRatingStarsClassName={averageRatingStarsClassName}
+				userHasReviewed={userHasReviewed}
+			/>
 		</Fragment>
 	);
 };

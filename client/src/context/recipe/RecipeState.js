@@ -6,13 +6,15 @@ import {
         CREATE_RECIPE_SUCCESS,
         CREATE_RECIPE_FAIL,
         LOAD_RECIPE,
-        LOAD_RECIPE_FAIL
+        LOAD_RECIPE_FAIL,
+        ADD_RECIPE_REVIEW
 } from '../types';
 
 const RecipeState = (props) => {
 	const initialState = {
                 recipeInfo: null,
-                recipeAuthor: null
+                recipeAuthor: null,
+                userHasReviewed: false
 	};
 
         const [ state, dispatch ] = useReducer(recipeReducer, initialState);
@@ -80,11 +82,12 @@ const RecipeState = (props) => {
 			}
 		}
 		try {
-                        await axios.put(`/api/recipes/${id}/addreview`, formData, config);
-/* 			dispatch({
-				type: ADD_RECIPE_REVIEW,
-				payload: res.data
-			}); */
+                        const res = await axios.put(`/api/recipes/${id}/addreview`, formData, config);
+                        console.log(res)
+ 			dispatch({
+                                type: ADD_RECIPE_REVIEW,
+                                payload: res.data
+			}); 
 
 		} catch (err) {
                         console.log('error')
@@ -102,9 +105,11 @@ const RecipeState = (props) => {
 			value={{
                 recipeInfo: state.recipeInfo,
                 recipeAuthor: state.recipeAuthor,
+                userHasReviewed: state.userHasReviewed,
                 createRecipe,
                 loadRecipe,
-                createReview
+                createReview,
+                
 		}}
 		>
 			{props.children}

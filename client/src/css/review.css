@@ -46,8 +46,18 @@
 }
 
 .stars-rating i {
+    margin-left: 2px; 
+}
+
+.stars-rating-pick {
+    display: inline-block;
+    margin-left: 12px;
+    margin-bottom: 10px;
+}
+
+.stars-rating-pick i {
     margin-left: 2px;
-    cursor: pointer;
+    cursor: pointer;  
 }
 
 .review-content-cont {
@@ -67,6 +77,12 @@
 .btn-review {
     display: inline-block;
     width: 100%;
+}
+
+.review-sent {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
 }
 
 .btn-review span {

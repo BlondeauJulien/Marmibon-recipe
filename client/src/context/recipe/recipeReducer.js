@@ -1,7 +1,8 @@
 import {
     CREATE_RECIPE_SUCCESS,
     CREATE_RECIPE_FAIL,
-    LOAD_RECIPE
+    LOAD_RECIPE,
+    ADD_RECIPE_REVIEW
 } from '../types';
 
 export default (state, action) => {
@@ -12,6 +13,12 @@ export default (state, action) => {
                 ...state,
                 recipeInfo: action.payload.recipeRes,
                 recipeAuthor: action.payload.recipeAuthorRes
+            };
+        case ADD_RECIPE_REVIEW:
+            console.log(state)
+            return {
+                ...state,
+                userHasReviewed: action.payload
             }
         default:
             return state;
