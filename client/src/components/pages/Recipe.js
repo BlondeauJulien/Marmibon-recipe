@@ -9,9 +9,9 @@ const Recipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);
 
-	const { recipeInfo, recipeAuthor, loadRecipe } = recipeContext;
+	const { recipeInfo, recipeAuthor, loadRecipe, createReview } = recipeContext;
 
-    const { loadUser } = authContext;
+    const { loadUser, isAuthenticated } = authContext;
 
 	useEffect(() => {
 		loadUser();
@@ -83,11 +83,15 @@ const Recipe = (props) => {
 							{ recipeInfo.price === "lowPrice" ?
 								(<i className="fas fa-dollar-sign recipe-info-value" />) :
 								recipeInfo.price === "midPrice" ? 
-								(<i className="fas fa-dollar-sign recipe-info-value" /> +
-								<i className="fas fa-dollar-sign recipe-info-value" />) :
-								(<i className="fas fa-dollar-sign recipe-info-value" /> +
-								<i className="fas fa-dollar-sign recipe-info-value" /> +
-								<i className="fas fa-dollar-sign recipe-info-value" />)
+								(<>
+								<i className="fas fa-dollar-sign recipe-info-value" /> 
+								<i className="fas fa-dollar-sign recipe-info-value" />
+								</>) :
+								(<>
+								<i className="fas fa-dollar-sign recipe-info-value" /> 
+								<i className="fas fa-dollar-sign recipe-info-value" /> 
+								<i className="fas fa-dollar-sign recipe-info-value" />
+								</>)
 							}
 
 						</div>
@@ -121,7 +125,7 @@ const Recipe = (props) => {
 					</div>
 				</div>
 			</div>
-            <Review recipeInfo={recipeInfo} />
+            <Review recipeInfo={recipeInfo} createReview={createReview} isAuthenticated={isAuthenticated}/>
 		</Fragment>
 	);
 };

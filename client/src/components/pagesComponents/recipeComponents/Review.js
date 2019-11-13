@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ReviewItem from './ReviewItem';
+import uuidv4 from 'uuid/v4';
 
-const Review = ( { recipeInfo }) => {
+const Review = ( { recipeInfo, createReview, isAuthenticated }) => {
 	const [review, setReview] = useState({
 		reviewRating: 0,
 		reviewContent: ''
@@ -45,12 +46,32 @@ const Review = ( { recipeInfo }) => {
 	}
 
 	const starsRatingPick = e => {
-		setReview({...review, reviewRating: Number(e.target.id.replace('sr-', '')) + 1} )
+		if(!isAuthenticated) {
+			alert('Vous devez etre connecter')
+		} else {
+			setReview({...review, reviewRating: Number(e.target.id.replace('sr-', '')) + 1} )
+		}
 	}
 
 	const onChangeReviewContent = e => {
-		setReview({...review, reviewContent: e.target.value} )
+		if(!isAuthenticated) {
+			alert('Vous devez etre connecter')
+		} else {
+			setReview({...review, reviewContent: e.target.value} )
+		}
 	}
+
+	const submitReview = () => {
+		if(review.reviewRating === 0 || review.reviewContent === '') {
+			alert('vous devez ajouter un commentaire ou une note')
+		} else {
+			let reviewForm = {...review};
+			reviewForm.id = uuidv4();
+			createReview(recipeInfo._id, reviewForm);
+		}
+		
+	}
+
 
 	return (
 		<div className="review-container">
@@ -68,6 +89,7 @@ const Review = ( { recipeInfo }) => {
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-4" className="fas fa-star grey sr" />
 						</div>
 						<div className="review-content-cont">
+							<span>Votre commentaire:</span>
 							<textarea
 								maxLength="400"
 								name="reviewContent"
@@ -78,26 +100,30 @@ const Review = ( { recipeInfo }) => {
 
 					</div>
 					<div className="btn-review">
-						<span>Ajouter un avis</span>
+						<span onClick={submitReview}>Ajouter un avis</span>
 					</div>
 				</div>
 			</div>
 			<div className="recipe-rating">
 				<span className="overall-stars-rating-text">Cette recette a reçu:</span>
 				<div className="overall-stars-rating-stars-cont">
+					{
+						
+					}
 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
 					<i className="fas fa-star" />
 				</div>
-                <span className="nbr-review-text">Avec 7 notes et avis</span>
+                <span className="nbr-review-text">Avec {recipeInfo.reviews.length} notes et avis</span>
 			</div>
             <div className="reviews-container">
-                <ReviewItem />
-                <ReviewItem />
-                <ReviewItem />
-                <ReviewItem />
+				{
+					recipeInfo.reviews.map(review => {
+						return <ReviewItem key={review.id} review={review} />
+					})
+				}
 
             </div>
 		</div>

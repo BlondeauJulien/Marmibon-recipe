@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth')
 
 const Recipe = require('../models/Recipe');
+const User = require('../models/User');
 
 
 // @route   POST api/recipes
@@ -113,6 +114,35 @@ router.put('/:id', auth, async (req, res) => {
         recipe = await Recipe.findByIdAndUpdate(req.params.id, {$set: recipeFields }, { new: true });
 
         res.json(recipe);
+
+    } catch (err) {
+        console.error(err.message);
+		res.status(500).send('Server error');
+    }
+})
+
+// @route   PUT api/recipes/recipeID/addreview
+// @desc    Add a review to a recipe
+// @access  Private 
+
+router.put('/:id/addreview', auth, async (req, res) => {
+
+        let review = {...req.body};
+        review.authorId = req.user.id;
+
+    try {
+        let recipe = await Recipe.findById(req.params.id);
+        let user = await User.findById(req.user.id);
+
+        review.authorReviewName = user.userName;
+
+        if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
+
+        let reviewArr = [...recipe.reviews, review]
+
+        recipe.reviews = reviewArr;
+
+        await Recipe.findByIdAndUpdate(req.params.id, {$set: recipe}, {new: true})
 
     } catch (err) {
         console.error(err.message);

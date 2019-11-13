@@ -59,6 +59,11 @@
     height: 100px;
 }
 
+.review-content-cont span {
+    display: block;
+    margin-bottom: 8px;
+}
+
 .btn-review {
     display: inline-block;
     width: 100%;

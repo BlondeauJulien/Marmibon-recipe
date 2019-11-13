@@ -49,7 +49,7 @@ const RecipeSchema = mongoose.Schema({
     },
     reviews: {
         type: Array,
-        // Object: authorReviewId, authorReviewName, reviewDate, rating, reviewContent
+        // Object: authorReviewId, authorReviewName, reviewDate, reviewRating, reviewContent
         default: []
     }
 })

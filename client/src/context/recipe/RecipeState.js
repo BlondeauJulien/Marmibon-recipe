@@ -48,7 +48,7 @@ const RecipeState = (props) => {
 
         // Get Recipe from DB
 
-        const loadRecipe = async (id) => {
+        const loadRecipe = async id => {
                 try {
                         const recipeRes = await axios.get(`/api/recipes/${id}`);
                         const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
@@ -70,6 +70,30 @@ const RecipeState = (props) => {
                         })
                 }
         }
+
+        // Create an user review
+
+        const createReview = async (id, formData) => {
+                const config = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+		try {
+                        await axios.put(`/api/recipes/${id}/addreview`, formData, config);
+/* 			dispatch({
+				type: ADD_RECIPE_REVIEW,
+				payload: res.data
+			}); */
+
+		} catch (err) {
+                        console.log('error')
+/* 			dispatch({
+				type: CONTACT_ERROR,
+				payload: err.response.msg
+			}); */
+		}
+        }
         
         
 
@@ -79,7 +103,8 @@ const RecipeState = (props) => {
                 recipeInfo: state.recipeInfo,
                 recipeAuthor: state.recipeAuthor,
                 createRecipe,
-                loadRecipe
+                loadRecipe,
+                createReview
 		}}
 		>
 			{props.children}
