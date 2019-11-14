@@ -11,6 +11,11 @@
     margin-bottom: 16px;
 }
 
+.link-to-comments {
+    color: inherit;
+    text-decoration: none;
+}
+
 .user-review-container {
     background-color: #f6f6f6;
     padding: 16px;

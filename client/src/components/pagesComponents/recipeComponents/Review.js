@@ -80,7 +80,7 @@ const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStars
 
 
 	return (
-		<div className="review-container">
+		<div id="review-section" className="review-container">
 			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
 			<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>
@@ -121,7 +121,7 @@ const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStars
 				<span className="overall-stars-rating-text">Cette recette a reçu:</span>
 				<div className="overall-stars-rating-stars-cont">
 					{averageRatingStarsClassName().map(el => {
-						return (<i className={el} />);
+						return (<i key={Math.random()} className={el} />);
 					})}
 {/* 					<i className="fas fa-star" />
 					<i className="fas fa-star" />

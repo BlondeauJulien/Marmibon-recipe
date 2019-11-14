@@ -9,7 +9,7 @@ const Recipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);
 
-	const { recipeInfo, recipeAuthor, loadRecipe, createReview, userHasReviewed } = recipeContext;
+	const { recipeInfo, recipeAuthor, loadRecipe, createReview, userHasReviewed, redirectToRecipe } = recipeContext;
 
     const { loadUser, isAuthenticated } = authContext;
 
@@ -20,6 +20,7 @@ const Recipe = (props) => {
 
 	useEffect(() => {
 		loadRecipe(props.match.params.recipeId);
+		redirectToRecipe(false)
         // eslint-disable-next-line
 	}, []);
 
@@ -65,11 +66,11 @@ const Recipe = (props) => {
 					<div className="recipe-rating-container">
 						<div>
 							<div className="stars-rating">
-								{averageRatingStarsClassName().map(el => {
-									return (<i className={el} />);
+								{averageRatingStarsClassName().map((el) => {
+									return (<i key={Math.random()} className={el} />);
 								})}
 							</div>
-							<a className="link-to-comments">{recipeInfo.reviews.length} commentaire{recipeInfo.reviews.length > 1 && "s"}</a>
+							<a href="#review-section" className="link-to-comments">{recipeInfo.reviews.length} commentaire{recipeInfo.reviews.length > 1 && "s"}</a>
 						</div>
 						<div>
 							<i className="far fa-heart heart-saved" />

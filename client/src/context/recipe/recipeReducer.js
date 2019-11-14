@@ -2,7 +2,8 @@ import {
     CREATE_RECIPE_SUCCESS,
     CREATE_RECIPE_FAIL,
     LOAD_RECIPE,
-    ADD_RECIPE_REVIEW
+    ADD_RECIPE_REVIEW,
+    REDIRECT_TO_RECIPE
 } from '../types';
 
 export default (state, action) => {
@@ -19,6 +20,11 @@ export default (state, action) => {
             return {
                 ...state,
                 userHasReviewed: action.payload
+            };
+        case REDIRECT_TO_RECIPE:
+            return {
+                ...state,
+                pushToCreatedRecipe: action.payload
             }
         default:
             return state;

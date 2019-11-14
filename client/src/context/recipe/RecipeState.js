@@ -7,17 +7,21 @@ import {
         CREATE_RECIPE_FAIL,
         LOAD_RECIPE,
         LOAD_RECIPE_FAIL,
-        ADD_RECIPE_REVIEW
+        ADD_RECIPE_REVIEW,
+        REDIRECT_TO_RECIPE
 } from '../types';
 
 const RecipeState = (props) => {
 	const initialState = {
                 recipeInfo: null,
                 recipeAuthor: null,
-                userHasReviewed: false
+                userHasReviewed: false,
+                pushToCreatedRecipe: false
 	};
 
         const [ state, dispatch ] = useReducer(recipeReducer, initialState);
+
+        // Create recipe
 
         const createRecipe = async formData => {
                 const config = {
@@ -97,6 +101,15 @@ const RecipeState = (props) => {
 			}); */
 		}
         }
+
+        // Redirect to recipe after creation
+
+        const redirectToRecipe = bool => {
+                dispatch({
+                        type: REDIRECT_TO_RECIPE,
+                        payload: bool
+                })
+        }
         
         
 
@@ -106,10 +119,11 @@ const RecipeState = (props) => {
                 recipeInfo: state.recipeInfo,
                 recipeAuthor: state.recipeAuthor,
                 userHasReviewed: state.userHasReviewed,
+                pushToCreatedRecipe: state.pushToCreatedRecipe,
                 createRecipe,
                 loadRecipe,
                 createReview,
-                
+                redirectToRecipe              
 		}}
 		>
 			{props.children}
