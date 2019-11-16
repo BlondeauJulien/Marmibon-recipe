@@ -9,9 +9,19 @@ const Recipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);
 
-	const { recipeInfo, recipeAuthor, loadRecipe, createReview, userHasReviewed, redirectToRecipe } = recipeContext;
+	const { 
+		recipeInfo, 
+		recipeAuthor, 
+		loadRecipe, 
+		createReview, 
+		userHasReviewed, 
+		redirectToRecipe, 
+		userSaveRecipe, 
+		userDeleteSaveRecipe,
+		loading 
+	} = recipeContext;
 
-    const { loadUser, isAuthenticated } = authContext;
+    const { loadUser, user, isAuthenticated } = authContext;
 
 	useEffect(() => {
 		loadUser();
@@ -29,6 +39,27 @@ const Recipe = (props) => {
 			<h1>Error</h1>
 		)
 	}
+
+	const saveRecipe = () => {
+		if(isAuthenticated) {
+			userSaveRecipe(recipeInfo._id)
+		} else { 
+			alert('cant save need loggin')
+		}
+	}
+
+	const deleteRecipeFromsave = () => {
+		userDeleteSaveRecipe(recipeInfo._id)
+	}
+
+	const btnSave = () => {
+		if(recipeInfo !== null && isAuthenticated) {
+			let isItSaved = recipeInfo.saved.filter(u => u === user._id);
+			return isItSaved
+		}
+	}
+
+
 
 	const averageRatingStarsClassName = () => {
 		let total = 0;
@@ -50,6 +81,36 @@ const Recipe = (props) => {
 		}
 
 		return starsArr
+	}
+
+	/* BTN SAVE RECIPE */
+	const saveBtn = () => {
+
+		if(loading.saveRecipeBtn) {
+			return (<p>Loading</p>)
+		} else {
+			if(!isAuthenticated) {
+				return (
+					<div onClick={saveRecipe} className="save-btn">
+						<i className="far fa-heart heart-save" />
+						<span>Je sauvegarde</span>
+					</div>	
+					)
+			} else if (btnSave().length === 0) {
+				return (
+					<div onClick={saveRecipe} className="save-btn">
+						<i className="far fa-heart heart-save" />
+						<span>Je sauvegarde</span>
+					</div>	
+				)
+			} else {
+				return (
+					<div onClick={deleteRecipeFromsave} className="save-btn">
+						<span>Supprimer ma sauvegarde</span>
+					</div>	
+				)
+			}
+		}
 	}
 	
 	return (
@@ -74,7 +135,7 @@ const Recipe = (props) => {
 						</div>
 						<div>
 							<i className="far fa-heart heart-saved" />
-							<span>57 fois sauvegardé</span>
+							<span>{recipeInfo.saved.length} fois sauvegardé</span>
 						</div>
 					</div>
 				</div>
@@ -117,10 +178,9 @@ const Recipe = (props) => {
 							}
 
 						</div>
-						<div className="save-btn">
-							<i className="far fa-heart heart-save" />
-							<span>Je sauvegarde</span>
-						</div>
+						{/* BTN SAVE  and delete from saved*/}
+						{saveBtn()}
+					
 					</div>
 				</div>
 

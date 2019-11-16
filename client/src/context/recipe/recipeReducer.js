@@ -3,7 +3,11 @@ import {
     CREATE_RECIPE_FAIL,
     LOAD_RECIPE,
     ADD_RECIPE_REVIEW,
-    REDIRECT_TO_RECIPE
+    REDIRECT_TO_RECIPE,
+    SET_LOADING,
+    STOP_LOADING,
+    USER_SAVE_RECIPE,
+    USER_UNSAVE_RECIPE
 } from '../types';
 
 export default (state, action) => {
@@ -16,7 +20,6 @@ export default (state, action) => {
                 recipeAuthor: action.payload.recipeAuthorRes
             };
         case ADD_RECIPE_REVIEW:
-            console.log(state)
             return {
                 ...state,
                 userHasReviewed: action.payload
@@ -25,6 +28,24 @@ export default (state, action) => {
             return {
                 ...state,
                 pushToCreatedRecipe: action.payload
+            };
+        case USER_SAVE_RECIPE:
+        case USER_UNSAVE_RECIPE:
+            return {
+                ...state,
+                recipeInfo : action.payload.recipe,
+                loading: { saveRecipeBtn: false},
+            };
+        case SET_LOADING: 
+            return {
+                ...state,
+                loading: { [action.payload]: true}
+            };
+        case STOP_LOADING:
+            console.log("test")
+            return {
+                ...state,
+                loading: { [action.payload]: false}
             }
         default:
             return state;

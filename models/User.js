@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
     registrationDate: {
         type: Date,
         default: Date.now
+    },
+    savedRecipe: {
+        type: Array,
+        default: []
     }
 })
 

@@ -136,7 +136,7 @@ router.put('/:id/addreview', auth, async (req, res) => {
 
         recipe.reviews.forEach(review => {
             if(req.user.id === review.authorId) {
-                res.json({
+                return res.json({
                     msg: "Vous avez déjà ajouté un avis par le passé",
                     userHasReviewed: true
                 })
@@ -145,7 +145,7 @@ router.put('/:id/addreview', auth, async (req, res) => {
 
         review.authorReviewName = user.userName;
 
-        if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
+        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
 
         let reviewArr = [...recipe.reviews, review]
 
@@ -164,6 +164,88 @@ router.put('/:id/addreview', auth, async (req, res) => {
     }
 })
 
+
+// @route   PUT /api/recipes/recipeId/saverecipe
+// @desc    Add a review to a recipe
+// @access  Private 
+
+router.put('/:id/saverecipe', auth, async (req, res) => {
+
+    try {
+        let recipe = await Recipe.findById(req.params.id);
+        let user = await User.findById(req.user.id);
+
+        if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
+        if(!user) return res.status(404).json({ msg: 'User not found'});
+
+        user.savedRecipe.forEach(recipeId => {
+            if(req.params.id === recipeId) {
+                console.log('already saved')
+                res.json({
+                    msg: "Vous avez déjà sauvegardé la recette"
+                }) 
+            }
+        });
+
+        //save user id in recipe DATA
+        let savedArr = [...recipe.saved, req.user.id]
+
+        recipe.saved = savedArr;
+
+        await Recipe.findByIdAndUpdate(req.params.id, {$set: recipe}, {new: true})
+        
+        // save recipe id in user data
+        let savedRecipeArr = [...user.savedRecipe, req.params.id]
+
+        user.savedRecipe = savedRecipeArr;
+
+        await User.findByIdAndUpdate(req.user.id, {$set: user}, {new: true});
+
+        res.json({
+            recipe: recipe
+        })
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+})
+
+// @route   PUT /api/recipes/recipeId/deletesaverecipe
+// @desc    Add a review to a recipe
+// @access  Private 
+router.put('/:id/deletesaverecipe', auth, async (req, res) => {
+
+    try {
+        let recipe = await Recipe.findById(req.params.id);
+        let user = await User.findById(req.user.id);
+
+        if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
+        if(!user) return res.status(404).json({ msg: 'User not found'});
+
+        //delete user id in recipe DATA
+        let savedArr = [...recipe.saved].filter(r => r !== req.user.id)
+
+        recipe.saved = savedArr;
+
+        await Recipe.findByIdAndUpdate(req.params.id, {$set: recipe}, {new: true})
+        
+        // delete recipe id in user data
+        let savedRecipeArr = [...user.savedRecipe].filter(u => u !== req.params.id)
+
+        user.savedRecipe = savedRecipeArr;
+
+        await User.findByIdAndUpdate(req.user.id, {$set: user}, {new: true});
+
+        res.json({
+            recipe: recipe
+        })
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+})
 
 // @route   DELETE api/recipes/recipeID
 // @desc    Delete a recipe

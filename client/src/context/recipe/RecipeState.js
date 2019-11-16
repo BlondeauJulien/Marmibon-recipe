@@ -8,7 +8,11 @@ import {
         LOAD_RECIPE,
         LOAD_RECIPE_FAIL,
         ADD_RECIPE_REVIEW,
-        REDIRECT_TO_RECIPE
+        REDIRECT_TO_RECIPE,
+        SET_LOADING,
+        STOP_LOADING,
+        USER_SAVE_RECIPE,
+        USER_UNSAVE_RECIPE
 } from '../types';
 
 const RecipeState = (props) => {
@@ -16,7 +20,10 @@ const RecipeState = (props) => {
                 recipeInfo: null,
                 recipeAuthor: null,
                 userHasReviewed: false,
-                pushToCreatedRecipe: false
+                pushToCreatedRecipe: false,
+                loading: {
+                        saveRecipeBtn: false
+                }
 	};
 
         const [ state, dispatch ] = useReducer(recipeReducer, initialState);
@@ -87,7 +94,6 @@ const RecipeState = (props) => {
 		}
 		try {
                         const res = await axios.put(`/api/recipes/${id}/addreview`, formData, config);
-                        console.log(res)
  			dispatch({
                                 type: ADD_RECIPE_REVIEW,
                                 payload: res.data
@@ -110,6 +116,46 @@ const RecipeState = (props) => {
                         payload: bool
                 })
         }
+
+        // save recipe Events
+
+        const userSaveRecipe = async id => {
+                try {
+                        setLoading("saveRecipeBtn");
+                        const res = await axios.put(`/api/recipes/${id}/saverecipe`);
+                        dispatch({
+                                type: USER_SAVE_RECIPE,
+                                payload: res.data
+                        })
+                } catch (err) {
+                        console.log(err)
+                }
+        }
+
+        const userDeleteSaveRecipe = async id => {
+                try {
+                        setLoading("saveRecipeBtn");
+                        const res = await axios.put(`/api/recipes/${id}/deletesaverecipe`);
+                         dispatch({
+                                type: USER_UNSAVE_RECIPE,
+                                payload: res.data
+                        })
+
+                } catch (err) {
+                        console.log(err)
+                }
+        }
+
+        // Set Loading
+        const setLoading = element => dispatch( {
+                type: SET_LOADING,
+                payload: element
+        } );
+
+        const stopLoading = element => dispatch( {
+                type: STOP_LOADING,
+                payload: element
+        } );
         
         
 
@@ -120,10 +166,13 @@ const RecipeState = (props) => {
                 recipeAuthor: state.recipeAuthor,
                 userHasReviewed: state.userHasReviewed,
                 pushToCreatedRecipe: state.pushToCreatedRecipe,
+                loading: state.loading,
                 createRecipe,
                 loadRecipe,
                 createReview,
-                redirectToRecipe              
+                userSaveRecipe,
+                redirectToRecipe,
+                userDeleteSaveRecipe            
 		}}
 		>
 			{props.children}
