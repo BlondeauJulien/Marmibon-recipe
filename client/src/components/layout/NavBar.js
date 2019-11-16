@@ -19,10 +19,17 @@ const NavBar = () => {
 					<input type="search" placeholder="Je cherche une recette:" />
 				</div>
 				<div className="header-btn-container">
-					<Link to="/login" className="btn btn-mid btn-brand brand-color-bg text-color-white">
-						<i className="fas fa-user" />
-						{isAuthenticated ? ` Mon Profil` : ` Connexion`}
-					</Link>
+					{isAuthenticated ? (
+						<Link to="/user" className="btn btn-mid btn-brand brand-color-bg text-color-white">
+							<i className="fas fa-user" />
+							{" "}Mon Profil
+						</Link>
+					) : (
+						<Link to="/login" className="btn btn-mid btn-brand brand-color-bg text-color-white">
+							<i className="fas fa-user" />
+							{" "}Connexion
+						</Link>
+					)}
 				</div>
 			</div>
 

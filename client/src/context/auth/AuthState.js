@@ -15,7 +15,8 @@ import {
 const AuthState = (props) => {
 	const initialState = {
 		token: localStorage.getItem('token'),
-		user: null,
+        user: null,
+        userRecipes: null,
 		isAuthenticated: null,
         error: null
 	};
@@ -32,7 +33,6 @@ const AuthState = (props) => {
 
         try {
             const res = await axios.get('/api/auth');
-
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
@@ -113,7 +113,8 @@ const AuthState = (props) => {
 		<AuthContext.Provider
 			value={{
 				token: state.token,
-				user: state.user,
+                user: state.user,
+                userRecipes: state.userRecipes,
 				isAuthenticated: state.isAuthenticated,
                 error: state.error,
                 register,

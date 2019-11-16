@@ -105,7 +105,7 @@ const Recipe = (props) => {
 				)
 			} else {
 				return (
-					<div onClick={deleteRecipeFromsave} className="save-btn">
+					<div onClick={deleteRecipeFromsave} className="unsave-btn">
 						<span>Supprimer ma sauvegarde</span>
 					</div>	
 				)

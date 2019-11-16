@@ -6,7 +6,8 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth')
 
-const User = require('../models/User')
+const User = require('../models/User');
+const Recipe = require('../models/Recipe');
 
 // @route   GET api/auth
 // @desc    Get logged in user
@@ -14,8 +15,12 @@ const User = require('../models/User')
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
+        const recipes = await Recipe.find( { user: user._id});
 
-        res.json(user)
+        res.json({
+            user,
+            recipes
+        })
     } catch (err) {
         console.error(err.message);
         res.status(500).json('Server error')

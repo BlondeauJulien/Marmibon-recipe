@@ -1,27 +1,65 @@
 import React from 'react';
 
-const RecipeAbstractItem = () => {
+const RecipeAbstractItem = ({recipe}) => {
+
+	const averageRating = () => {
+		let total = 0;
+
+		recipe.reviews.forEach(r => {
+			total += r.reviewRating;
+		});
+
+		let averageRating = Math.round(total / recipe.reviews.length);
+
+		return averageRating
+	}
+
+	const averageRatingStarsClassName = () => {
+		let average = averageRating();
+
+		let starsArr = [];
+
+		for(let i = 1; i<=5; i++) {
+			if(i <= average ) {
+				starsArr.push("fas fa-star brand-color-txt")
+			} else {
+				starsArr.push("fas fa-star grey")
+			}
+		}
+
+		return starsArr
+	}
+
 	return (
 		<div className="recipe-abstract-item">
 			<img src="https://feelgoodfoodie.net/wp-content/uploads/2019/07/Falafel-Recipe-19.jpg" height="175" />
 			<div className="recipe-abstract">
-				<h2>Falafels</h2>
+				<h2>{recipe.recipeName}</h2>
 				<div className="recipe-abstract-rating-cont">
 					<div className="recipe-abstract-stars-cont">
-						<i class="fas fa-star" />
-						<i class="fas fa-star" />
-						<i class="fas fa-star" />
-						<i class="fas fa-star" />
-						<i class="fas fa-star" />
+						{averageRatingStarsClassName().map((el, i) => {
+							return (<i key={i} className={el} />);
+						})}
+{/* 						<i className="fas fa-star" />
+						<i className="fas fa-star" />
+						<i className="fas fa-star" />
+						<i className="fas fa-star" />
+						<i className="fas fa-star" /> */}
 					</div>
-					<div className="recipe-abstract-rating-text">4.6 / 5 sur 7 avis</div>
+					<div className="recipe-abstract-rating-text">{averageRating()} / 5 sur {recipe.reviews.length === 0 ? "0 avis" : `${recipe.reviews.length} avis`} </div>
 				</div>
 				<div className="recipe-abstract-ingredients">
 					<span>Ingredients: </span>
-					<p>ingredient1, ingredient1, ingredient1, ingredient1, ingredient1, ingredient1, ingredient1</p>
+					<p>{recipe.ingredients.map((ing, i) => {
+						if(i === 9 || i === recipe.ingredients.length - 1) {
+							return (ing.ingredientName)
+						} else if (i < 10){
+							return (ing.ingredientName + ", ")
+						}
+					})}</p>
 				</div>
 				<div className="recipe-abstract-time">
-					<i class="far fa-clock"></i>{` `}1h20
+				<i className="far fa-clock"></i>{` `}{recipe.prepTimeHours}h{recipe.prepTimeMins < 10 ? ("0" + recipe.prepTimeMins.toString()) : (recipe.prepTimeMins)}
 				</div>
 			</div>
 		</div>
