@@ -22,6 +22,11 @@ body {
   background-color: #efefef;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .brand-color-txt {
   color: var(--brand-color)
 }

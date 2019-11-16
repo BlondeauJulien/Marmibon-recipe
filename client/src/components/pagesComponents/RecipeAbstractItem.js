@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const RecipeAbstractItem = ({recipe}) => {
 
@@ -34,7 +35,7 @@ const RecipeAbstractItem = ({recipe}) => {
 		<div className="recipe-abstract-item">
 			<img src="https://feelgoodfoodie.net/wp-content/uploads/2019/07/Falafel-Recipe-19.jpg" height="175" />
 			<div className="recipe-abstract">
-				<h2>{recipe.recipeName}</h2>
+				<h2><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></h2>
 				<div className="recipe-abstract-rating-cont">
 					<div className="recipe-abstract-stars-cont">
 						{averageRatingStarsClassName().map((el, i) => {

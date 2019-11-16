@@ -24,7 +24,8 @@
 }
 
 .recipe-abstract h2:hover {
-    color: var(--brand-color)
+    color: var(--brand-color);
+    cursor: pointer;
 }
 
 .recipe-abstract-rating-cont {
