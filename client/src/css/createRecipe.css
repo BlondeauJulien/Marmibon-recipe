@@ -32,12 +32,20 @@
 .price-radio-cont {
     display: flex;
     justify-content: space-around;
-    text-align: center;
+}
+
+.radiobtn-recipe-price {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .recipe-type-cont {
     text-align: center;
     margin-bottom: 24px;
+
 }
 
 .recipe-type-cont span {

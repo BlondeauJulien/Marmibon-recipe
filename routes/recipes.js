@@ -178,8 +178,8 @@ router.put('/:id/saverecipe', auth, async (req, res) => {
         if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
         if(!user) return res.status(404).json({ msg: 'User not found'});
 
-        user.savedRecipe.forEach(recipeId => {
-            if(req.params.id === recipeId) {
+        user.savedRecipe.forEach(recipe => {
+            if(req.params.id === recipe._id) {
                 console.log('already saved')
                 res.json({
                     msg: "Vous avez déjà sauvegardé la recette"
@@ -195,7 +195,7 @@ router.put('/:id/saverecipe', auth, async (req, res) => {
         await Recipe.findByIdAndUpdate(req.params.id, {$set: recipe}, {new: true})
         
         // save recipe id in user data
-        let savedRecipeArr = [...user.savedRecipe, req.params.id]
+        let savedRecipeArr = [...user.savedRecipe, recipe]
 
         user.savedRecipe = savedRecipeArr;
 
@@ -224,14 +224,14 @@ router.put('/:id/deletesaverecipe', auth, async (req, res) => {
         if(!user) return res.status(404).json({ msg: 'User not found'});
 
         //delete user id in recipe DATA
-        let savedArr = [...recipe.saved].filter(r => r !== req.user.id)
+        let savedArr = [...recipe.saved].filter(u => u !== req.user.id)
 
         recipe.saved = savedArr;
 
         await Recipe.findByIdAndUpdate(req.params.id, {$set: recipe}, {new: true})
         
-        // delete recipe id in user data
-        let savedRecipeArr = [...user.savedRecipe].filter(u => u !== req.params.id)
+        // delete recipe  in user data
+        let savedRecipeArr = [...user.savedRecipe].filter(r => r._id != req.params.id)
 
         user.savedRecipe = savedRecipeArr;
 

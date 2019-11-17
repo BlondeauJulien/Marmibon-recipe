@@ -7,9 +7,11 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
+    DISPLAYED_ON_PROFILE,
     AUTH_ERROR,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
 } from '../types';
 
 const AuthState = (props) => {
@@ -17,7 +19,8 @@ const AuthState = (props) => {
 		token: localStorage.getItem('token'),
         user: null,
         userRecipes: null,
-		isAuthenticated: null,
+        isAuthenticated: null,
+        displayedOnProfile: "createdRecipe",
         error: null
 	};
 
@@ -101,13 +104,25 @@ const AuthState = (props) => {
 
             })
         }
-
-
     }
 
     // Logout
+    const logout = () => {
+        dispatch({
+            type: LOGOUT
+        })
+    }
 
-	// Clear Errors
+    // Clear Errors
+    
+    // Handle what's displayed on user profile
+
+    const handleDisplayedOnProfile = (itemName) => {
+        dispatch({
+            type: DISPLAYED_ON_PROFILE,
+            payload: itemName
+        })
+    }
 
 	return (
 		<AuthContext.Provider
@@ -117,9 +132,12 @@ const AuthState = (props) => {
                 userRecipes: state.userRecipes,
 				isAuthenticated: state.isAuthenticated,
                 error: state.error,
+                displayedOnProfile: state.displayedOnProfile,
                 register,
                 loadUser,
-                logUser
+                logUser,
+                logout,
+                handleDisplayedOnProfile
 			}}
 		>
 			{props.children}

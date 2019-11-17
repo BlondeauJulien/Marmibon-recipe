@@ -69,6 +69,7 @@ const Recipe = (props) => {
 		});
 
 		let averageRating = Math.round(total / recipeInfo.reviews.length);
+		if(isNaN(averageRating)) averageRating = 0;
 
 		let starsArr = [];
 

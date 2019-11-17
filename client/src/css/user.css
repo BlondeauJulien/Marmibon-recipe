@@ -64,18 +64,25 @@
 
 .btn-user-saved-recipe, .btn-user-created-recipe {
     padding: 8px;
+    cursor: pointer;
+}
+
+.btn-user-created-recipe {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .btn-user-saved-recipe {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.btn-highlight {
     background-color: var(--brand-color);
     color: white;
 }
 
-.btn-user-created-recipe {
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+.btn-no-highlight {
     background-color: rgb(248, 248, 248);
     color: var(--brand-color);
 }
@@ -83,4 +90,16 @@
 .recipes-abstracts-container {
     padding: 0 40px;
     padding-bottom: 25px;
+}
+
+.user-info-cont {
+    padding-top: 12px;
+    font-size: 18px;
+    color: rgb(95, 95, 95);
+    margin:auto;
+    width: 80%;
+}
+
+.userInfo-item {
+    margin-bottom: 16px;
 }

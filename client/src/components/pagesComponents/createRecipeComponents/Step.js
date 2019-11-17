@@ -6,11 +6,6 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 
 	const {} = recipeContext;
 
-	useEffect(() => {
-		let stepNbr = { stepName: `Etape ${stepNumber}` };
-		// eslint-disable-next-line
-	}, []);
-
 	const handleChange = (change) => {
 		handleStepChange(step.id, { ...step, ...change });
 	};
@@ -29,8 +24,8 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 			</div>
 	<label htmlFor="stepContent">Etape {stepNumber}:</label>
 			<textarea
-				maxlength="400"
-				classNAme="create-recipe step-1"
+				maxLength="400"
+				className="create-recipe step-1"
 				name="stepContent"
 				value={step.stepContent}
 				onChange={(e) => handleChange({ stepContent: e.target.value })}

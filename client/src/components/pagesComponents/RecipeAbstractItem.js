@@ -12,6 +12,8 @@ const RecipeAbstractItem = ({recipe}) => {
 
 		let averageRating = Math.round(total / recipe.reviews.length);
 
+		if(isNaN(averageRating)) return 0
+
 		return averageRating
 	}
 
