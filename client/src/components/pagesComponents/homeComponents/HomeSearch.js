@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeSearch = () => {
 	const unBlur = () => {
@@ -24,7 +25,7 @@ const HomeSearch = () => {
 				</div>
 				<div className="search-advanced">
 					<i className="fas fa-long-arrow-alt-right" />
-					<p>Recherche Avancée</p>
+					<Link to="/search">Recherche Avancée</Link>
 				</div>
 			</div>
 		</Fragment>

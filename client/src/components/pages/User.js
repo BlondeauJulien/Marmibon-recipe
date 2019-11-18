@@ -10,7 +10,9 @@ const User = (props) => {
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
 
 	useEffect(() => {
-		loadUser();
+		if(localStorage.getItem('token') !== null) {
+            loadUser()
+        }
 
 	}, []);
 

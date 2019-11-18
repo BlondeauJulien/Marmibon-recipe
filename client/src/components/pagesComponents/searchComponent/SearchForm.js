@@ -11,7 +11,7 @@ const SearchForm = () => {
                         <input type="search" />
                     </div>
                     <div className="search-param-cont">
-                        <label>Ingredients:</label>
+                        <label>Ingredient:</label>
                         <input type="search" />
                     </div>
                     <div className="search-param-cont">

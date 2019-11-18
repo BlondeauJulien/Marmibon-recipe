@@ -75,7 +75,7 @@
     cursor: pointer;
 }
 
-.search-advanced p, .search-advanced i {
+.search-advanced a, .search-advanced i {
     color: black;
     display: inline-block;
     margin-left: 4px;

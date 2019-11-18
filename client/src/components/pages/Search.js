@@ -10,7 +10,9 @@ const Search = () => {
 	const { loadUser } = authContext;
 
     useEffect(() => {
-		loadUser();
+        if(localStorage.getItem('token') !== null) {
+            loadUser()
+        }
 		// eslint-disable-next-line
     }, []);
     
@@ -18,12 +20,12 @@ const Search = () => {
         <div className="search-container">
             <SearchForm />
             <div className="search-result-cont">
+{/*             <RecipeAbstractItem />
             <RecipeAbstractItem />
             <RecipeAbstractItem />
             <RecipeAbstractItem />
             <RecipeAbstractItem />
-            <RecipeAbstractItem />
-            <RecipeAbstractItem />
+            <RecipeAbstractItem /> */}
             </div>
         </div>
     )

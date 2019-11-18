@@ -216,7 +216,7 @@ const CreateRecipe = (props) => {
 
 				<div className="create-recipe-steps-ing-cont">
 					<div className="create-recipe-ingredient-cont">
-						<span>Ingredient:</span>
+						<span>Ingredients:</span>
 
 						{ingredients.map((ingredient) => (
 							<Ingredient
