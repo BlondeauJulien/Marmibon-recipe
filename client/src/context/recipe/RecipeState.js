@@ -7,12 +7,14 @@ import {
         CREATE_RECIPE_FAIL,
         LOAD_RECIPE,
         LOAD_RECIPE_FAIL,
+        GET_RANDOM_RECIPE,
         ADD_RECIPE_REVIEW,
         REDIRECT_TO_RECIPE,
         SET_LOADING,
         STOP_LOADING,
         USER_SAVE_RECIPE,
-        USER_UNSAVE_RECIPE
+        USER_UNSAVE_RECIPE,
+        RESET_REDIRECT
 } from '../types';
 
 const RecipeState = (props) => {
@@ -21,6 +23,9 @@ const RecipeState = (props) => {
                 recipeAuthor: null,
                 userHasReviewed: false,
                 pushToCreatedRecipe: false,
+                redirect: {
+                        recipeCont: false
+                },
                 loading: {
                         saveRecipeBtn: false
                 }
@@ -146,18 +151,35 @@ const RecipeState = (props) => {
                 }
         }
 
+        // Get random recipe
+
+        const getRandomRecipe = async () => {
+                try {
+                        const recipeRes = await axios.get(`/api/recipes/getrandom`);
+                        const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
+                        dispatch({
+                                type: GET_RANDOM_RECIPE,
+                                payload: {
+                                        recipeRes: recipeRes.data,
+                                        recipeAuthorRes: recipeAuthorRes.data
+                                }
+                        });
+                        resetRedirect()
+                } catch (err) {
+                        console.log(err)
+                }
+
+        }
+
         // Set Loading
         const setLoading = element => dispatch( {
                 type: SET_LOADING,
                 payload: element
         } );
+        
+        // Reset the redirection to recipe page
 
-        const stopLoading = element => dispatch( {
-                type: STOP_LOADING,
-                payload: element
-        } );
-        
-        
+        const resetRedirect = () => dispatch({type: RESET_REDIRECT})
 
 	return (
 		<RecipeContext.Provider
@@ -166,13 +188,16 @@ const RecipeState = (props) => {
                 recipeAuthor: state.recipeAuthor,
                 userHasReviewed: state.userHasReviewed,
                 pushToCreatedRecipe: state.pushToCreatedRecipe,
+                redirect: state.redirect,
                 loading: state.loading,
                 createRecipe,
                 loadRecipe,
                 createReview,
                 userSaveRecipe,
                 redirectToRecipe,
-                userDeleteSaveRecipe            
+                userDeleteSaveRecipe,
+                getRandomRecipe,
+                resetRedirect        
 		}}
 		>
 			{props.children}

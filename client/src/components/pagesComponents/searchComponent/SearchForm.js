@@ -15,7 +15,7 @@ const SearchForm = () => {
                         <input type="search" />
                     </div>
                     <div className="search-param-cont">
-                        <label>Temps de preparation (en minutes):</label>
+                        <label>Temps de preparation maximum (en minutes):</label>
                         <input type="number" min="1"/>
                     </div>
                     <div className="search-param-cont">

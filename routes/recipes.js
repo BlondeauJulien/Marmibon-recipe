@@ -47,7 +47,7 @@ router.post('/', [auth, [
 // @desc    GET all recipes
 // @access  Public 
 
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const recipes = await Recipe.find({});
         res.json(recipes)
@@ -57,6 +57,36 @@ router.get('/', async (req, res) => {
     }
 
 });
+
+
+
+// @route   GET /api/recipes/getrandom
+// @desc    Get single recipe randomly
+// @access  public 
+
+router.get('/getrandom', async (req, res) => {
+    try {
+        let recipes = await Recipe.find({});
+        let randomNum = Math.floor(Math.random() * recipes.length);
+        res.json(recipes[randomNum])
+    } catch (err) {
+        console.log(err)
+    }
+
+})
+
+// @route   GET /api/recipes/getbytype
+// @desc    Get all recipes for a certain type
+// @access  public 
+router.get('/getbytype/:type', async (req, res) => {
+    try {
+        let recipes = await Recipe.find({recipeType: req.params.type});
+        res.json(recipes);
+
+    } catch (err) {
+        console.log(err)
+    }
+})
 
 // @route   GET api/recipes
 // @desc    GET single recipe
@@ -269,6 +299,5 @@ router.delete('/:id', auth, async (req, res) => {
 		res.status(500).send('Server Error');
     }
 })
-
 
 module.exports = router;

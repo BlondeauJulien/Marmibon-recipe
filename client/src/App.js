@@ -13,6 +13,7 @@ import './App.css';
 
 import AuthState from './context/auth/AuthState';
 import RecipeState from './context/recipe/RecipeState';
+import SearchContext from './context/search/SearchState';
 import setAuthToken from './utils/setAuthToken';
 
 if (localStorage.token) {
@@ -23,23 +24,25 @@ function App() {
 	return (
 		<AuthState>
 			<RecipeState>
-				<Router>
-					<Fragment>
-						<NavBar />
-						<main>
-							<Switch>
-								<Route exact path="/" component={Home} />
-								<Route exact path="/login" component={Login} />
-								<Route exact path="/register" component={Register} />
-								<Route exact path="/recipe/:recipeId" component={Recipe} />
-								<Route exact path="/user" component={User} />
-								<Route exact path="/search" component={Search} />
-								<Route exact path="/create" component={CreateRecipe} />
-							</Switch>
-						</main>
-						<Footer />
-					</Fragment>
-				</Router>
+				<SearchContext>
+					<Router>
+						<Fragment>
+							<NavBar />
+							<main>
+								<Switch>
+									<Route exact path="/" component={Home} />
+									<Route exact path="/login" component={Login} />
+									<Route exact path="/register" component={Register} />
+									<Route exact path="/recipe/:recipeId" component={Recipe} />
+									<Route exact path="/user" component={User} />
+									<Route exact path="/search" component={Search} />
+									<Route exact path="/create" component={CreateRecipe} />
+								</Switch>
+							</main>
+							<Footer />
+						</Fragment>
+					</Router>
+				</SearchContext>
 			</RecipeState>
 		</AuthState>
 	);

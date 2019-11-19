@@ -2,12 +2,18 @@ import React, { useContext, useEffect } from 'react';
 import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
 
 import AuthContext from '../../context/auth/authContext';
+import RecipeContext from '../../context/recipe/recipeContext';
+
 
 const User = (props) => {
 
 	const authContext = useContext(AuthContext);
+    const recipeContext = useContext(RecipeContext);
+
 
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
+    const { recipeInfo, redirect} = recipeContext;
+
 
 	useEffect(() => {
 		if(localStorage.getItem('token') !== null) {
@@ -22,6 +28,12 @@ const User = (props) => {
 		}
 		// eslint-disable-next-line
 	}, [user]);
+
+	useEffect(() => {
+        if(redirect.recipeCont) {
+            props.history.push(`recipe/${recipeInfo._id}`)
+        }
+    }, [redirect])
 
 	if(user === null ) {
 		return (

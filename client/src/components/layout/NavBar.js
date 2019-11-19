@@ -1,11 +1,17 @@
 import React, { useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
+import RecipeContext from '../../context/recipe/recipeContext';
+import SearchContext from '../../context/search/searchContext';
 
 const NavBar = () => {
 	const authContext = useContext(AuthContext);
+	const recipeContext = useContext(RecipeContext);
+	const searchContext = useContext(SearchContext);
 
 	const { isAuthenticated } = authContext;
+	const { getRandomRecipe } = recipeContext;
+	const { getAllRecipes, getByRecipeType } = searchContext;
 
 	return (
 		<header>
@@ -36,19 +42,19 @@ const NavBar = () => {
 			<nav className="header-nav">
 				<ul>
 					<li>
-						<a href="#">Voir Tout</a>
+						<Link to="/search" onClick={getAllRecipes} href="#">Voir Tout</Link>
 					</li>
 					<li>
-						<a href="#">Entrées</a>
+						<Link to="/search" onClick={() => getByRecipeType('starter')} href="#">Entrées</Link>
 					</li>
 					<li>
-						<a href="#">Plats</a>
+						<Link to="/search" onClick={() => getByRecipeType('mainCourse')} href="#">Plats</Link>
 					</li>
 					<li>
-						<a href="#">Desserts</a>
+						<Link to="/search" onClick={() => getByRecipeType('dessert')} href="#">Desserts</Link>
 					</li>
 					<li className="random-recipe">
-						<a href="#">Recette au hasard</a>
+						<a onClick={getRandomRecipe} href="#">Recette au hasard</a>
 					</li>
 					{isAuthenticated && (
 					<li className="create-recipe-nav">
