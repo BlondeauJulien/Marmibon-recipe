@@ -14,7 +14,7 @@ const Search = (props) => {
 
     const { loadUser } = authContext;
     const { recipeInfo, redirect} = recipeContext;
-    const { searchResult } = searchContext
+    const { searchResult, getSearchQuery, searchQueryValue, setQueryValue } = searchContext
     
 
     useEffect(() => {
@@ -32,17 +32,11 @@ const Search = (props) => {
     
     return (
         <div className="search-container">
-            <SearchForm />
+            <SearchForm searchQueryValue={searchQueryValue} setQueryValue={setQueryValue} getSearchQuery={getSearchQuery}/>
             <div className="search-result-cont">
                 {searchResult !== null && searchResult.map(recipe => {
-                    return <RecipeAbstractItem key={recipe._id} recipe={recipe}/>
+                    return <RecipeAbstractItem key={recipe._id} recipe={recipe} />
                 })}
-{/*             <RecipeAbstractItem />
-
-            <RecipeAbstractItem />
-            <RecipeAbstractItem />
-            <RecipeAbstractItem />
-            <RecipeAbstractItem /> */}
             </div>
         </div>
     )

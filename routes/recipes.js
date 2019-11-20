@@ -43,6 +43,99 @@ router.post('/', [auth, [
     }
 })
 
+// @route   GET /api/recipes/getsearchqueryresult
+// @desc    Get recipes array matching the search query
+// @access  public 
+
+router.post('/getsearchqueryresult', async(req, res) => {
+    try {
+        let recipes = await Recipe.find({});
+        let users;
+        if(req.body.user.trim() !== '') {
+            users = await User.find({});
+        }
+        
+        let result;
+
+        if(req.body.name.trim() !== '') {
+            let nameFiltered = recipes.filter(recipe => {
+                if(recipe.recipeName.toLowerCase().includes(req.body.name.toLowerCase()) ) {
+                    return recipe
+                }
+            });
+            result = [...nameFiltered];
+        }
+
+        if(req.body.time.trim() !== '') {
+            let prevResult;
+            if(Array.isArray(result)) {
+                prevResult = [...result]
+            } else {
+                prevResult = [...recipes]
+            }
+
+            let timeFiltered = prevResult.filter(recipe => {
+                let recipeTimeInMin = Number(recipe.prepTimeHours * 60) + Number(recipe.prepTimeMins);
+                if(recipeTimeInMin <= req.body.time) {
+                    return recipe
+                }
+            });
+            result = [...timeFiltered];
+        }
+
+        if(req.body.ingredient.trim() !== '') {
+            let prevResult;
+            if(Array.isArray(result)) {
+                prevResult = [...result]
+            } else {
+                prevResult = [...recipes]
+            }
+
+            let ingredientsFiltered = prevResult.filter(recipe => {
+                let foundMatch = false;
+                for(let i = 0; i<recipe.ingredients.length; i++) {
+                    if(recipe.ingredients[i].ingredientName.toLowerCase().includes(req.body.ingredient.toLowerCase()) ) {
+                        foundMatch = true;
+                        break;
+                    }
+                }
+                if(foundMatch) return recipe;
+            });
+            result = [...ingredientsFiltered];
+        }
+
+        if(req.body.user.trim() !== '') {
+            let prevResult;
+            if(Array.isArray(result)) {
+                prevResult = [...result]
+            } else {
+                prevResult = [...recipes]
+            }
+
+            console.log(users)
+
+            let userFiltered = prevResult.filter(recipe => {
+
+                for(let i = 0; i< users.length; i++) {
+                    if(users[i].userName.toLowerCase() === req.body.user.toLowerCase()) {
+                        return recipe;
+                    }
+                }
+            });
+            result = [...userFiltered];
+        }
+
+        if(result === undefined) {
+            result = [];
+        }
+
+        res.json(result)
+
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 // @route   GET api/recipes
 // @desc    GET all recipes
 // @access  Public 

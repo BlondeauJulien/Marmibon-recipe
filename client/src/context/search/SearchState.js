@@ -4,7 +4,9 @@ import SearchContext from './searchContext';
 import searchReducer from './searchReducer';
 import {
 	GET_ALL_RECIPES,
-	GET_RECIPE_BY_TYPE
+	GET_RECIPE_BY_TYPE,
+	SET_QUERY_VALUE,
+	GET_SEARCH_QUERY_RESULT
 } from '../types';
 
 const SearchState = (props) => {
@@ -47,6 +49,35 @@ const SearchState = (props) => {
 		}
 	}
 
+	const setQueryValue = (change) => {
+		dispatch({
+			type: SET_QUERY_VALUE,
+			payload: change
+		})
+	}
+
+	const getSearchQuery = async () => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+		}
+
+		try {
+			const res = await axios.post('/api/recipes/getsearchqueryresult', state.searchQueryValue, config);
+
+             dispatch({
+                type: GET_SEARCH_QUERY_RESULT,
+                payload: res.data
+
+            }); 
+
+        } catch (err) {
+            console.log(err)
+
+        }
+	}
+
 	return (
 		<SearchContext.Provider
 			value={{
@@ -54,7 +85,9 @@ const SearchState = (props) => {
 				redirect: state.redirect,
 				searchResult: state.searchResult,
 				getAllRecipes,
-				getByRecipeType
+				getByRecipeType,
+				getSearchQuery,
+				setQueryValue
 			}}
 		>
 			{props.children}
