@@ -5,6 +5,7 @@ import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 
 const Recipe = (props) => {
+	console.log(props.history)
 
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);

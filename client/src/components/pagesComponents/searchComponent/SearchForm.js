@@ -3,14 +3,14 @@ import React from 'react'
 const SearchForm = ({searchQueryValue, setQueryValue, getSearchQuery}) => {
     const onChange = e => setQueryValue({...searchQueryValue, [e.target.name]: e.target.value});
 
-    const handleClickSearch = e => {
+    const handleSubmitSearch = e => {
         e.preventDefault();
         getSearchQuery();
     }
     return (
         <div className="search-form-container">
             <h1>Rechercher une recette</h1>
-            <form>
+            <form onSubmit={handleSubmitSearch}>
                 <div className="search-input-cont">
                     <div className="search-param-cont">
                         <label>Nom de recette:</label>
@@ -30,7 +30,7 @@ const SearchForm = ({searchQueryValue, setQueryValue, getSearchQuery}) => {
                         <input value={searchQueryValue.user} onChange={onChange} name="user" type="search" />
                     </div>
                 </div>
-                <button onClick={handleClickSearch} className="btn btn-search">Rechercher</button>
+                <button /* onClick={handleClickSearch} */ className="btn btn-search">Rechercher</button>
             </form>
         </div>
     )

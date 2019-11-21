@@ -1,17 +1,43 @@
 import React, { useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import SearchContext from '../../context/search/searchContext';
 
-const NavBar = () => {
+const NavBar = (props) => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
 	const searchContext = useContext(SearchContext);
 
 	const { isAuthenticated } = authContext;
 	const { getRandomRecipe } = recipeContext;
-	const { getAllRecipes, getByRecipeType } = searchContext;
+	const { 
+		getAllRecipes,
+		getByRecipeType, 
+		navSearchInput,
+		setNavQueryValue, 
+		redirectSearchCont,
+		redirectToSearchCont,
+		getSearchQueryFromNav,
+		resetNavSearchInput
+	} = searchContext;
+
+	useEffect(() => {
+		if(redirectSearchCont) {
+			resetNavSearchInput();
+			props.history.push(`search`)
+		}
+	}, [redirectSearchCont]);
+
+	const onChange = e => setNavQueryValue({navSearchInput, navSearchInput: e.target.value});
+
+	const handleSubmitSearch = e => {
+		e.preventDefault();
+		redirectToSearchCont();
+		getSearchQueryFromNav();
+
+    }
 
 	return (
 		<header>
@@ -20,10 +46,10 @@ const NavBar = () => {
 					<i className="fas fa-cookie-bite" />
 					<h1>marmibon</h1>
 				</Link>
-				<div className="search-bar-container">
+				<form onSubmit={handleSubmitSearch} className="search-bar-container">
 					<i className="fas fa-search brand-color-txt" />
-					<input type="search" placeholder="Je cherche une recette:" />
-				</div>
+					<input type="search" name="name" onChange={onChange} value={navSearchInput} placeholder="Je cherche une recette:" />
+				</form>
 				<div className="header-btn-container">
 					{isAuthenticated ? (
 						<Link to="/user" className="btn btn-mid btn-brand brand-color-bg text-color-white">
@@ -67,4 +93,4 @@ const NavBar = () => {
 	);
 };
 
-export default NavBar;
+export default withRouter(NavBar);

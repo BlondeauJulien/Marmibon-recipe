@@ -4,6 +4,7 @@ import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import SearchContext from '../../context/search/searchContext';
+import spinner from '../layout/spinner.gif';
 
 
 
@@ -14,7 +15,7 @@ const Search = (props) => {
 
     const { loadUser } = authContext;
     const { recipeInfo, redirect} = recipeContext;
-    const { searchResult, getSearchQuery, searchQueryValue, setQueryValue } = searchContext
+    const { searchResult, getSearchQuery, searchQueryValue, setQueryValue, searchLoading, resetSearchQueryValue, resetSearchResult } = searchContext
     
 
     useEffect(() => {
@@ -23,6 +24,11 @@ const Search = (props) => {
         }
 		// eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        resetSearchQueryValue();
+            resetSearchResult();
+    }, [props.history]);
 
     useEffect(() => {
         if(redirect.recipeCont) {
@@ -34,9 +40,15 @@ const Search = (props) => {
         <div className="search-container">
             <SearchForm searchQueryValue={searchQueryValue} setQueryValue={setQueryValue} getSearchQuery={getSearchQuery}/>
             <div className="search-result-cont">
-                {searchResult !== null && searchResult.map(recipe => {
+                {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
+
+                {searchResult !== null && searchResult.length > 0 && searchResult.map(recipe => {
                     return <RecipeAbstractItem key={recipe._id} recipe={recipe} />
                 })}
+
+                {searchResult !== null && searchResult.length === 0 && 
+                    (<p className="recipes-not-found">Aucune recette trouvé</p>)
+                }
             </div>
         </div>
     )
