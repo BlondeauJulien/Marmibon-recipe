@@ -8,6 +8,8 @@ import Recipe from './components/pages/Recipe';
 import User from './components/pages/User';
 import Search from './components/pages/Search';
 import CreateRecipe from './components/pages/CreateRecipe';
+import Contact from './components/pages/Contact';
+import About from './components/pages/About';
 import Footer from './components/layout/Footer';
 import './App.css';
 
@@ -37,6 +39,8 @@ function App() {
 									<Route exact path="/user" component={User} />
 									<Route exact path="/search" component={Search} />
 									<Route exact path="/create" component={CreateRecipe} />
+									<Route exact path="/contact" component={Contact} />
+									<Route exact path="/about" component={About} />
 								</Switch>
 							</main>
 							<Footer />

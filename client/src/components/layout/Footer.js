@@ -44,8 +44,8 @@ const Footer = () => {
                     <div>
                     <p className="list-header">Info</p>
                         <ul>
-                            <li>Contact</li>
-                            <li>About</li>
+                            <li><Link to="/contact">Contact</Link></li>
+                            <li><Link to="/about">About</Link></li>
 
                         </ul>
                     </div>
