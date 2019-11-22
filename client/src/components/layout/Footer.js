@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useContext} from 'react';
+import { Link } from 'react-router-dom';
+import RecipeContext from '../../context/recipe/recipeContext';
+import SearchContext from '../../context/search/searchContext';
 
 const Footer = () => {
+	const recipeContext = useContext(RecipeContext);
+	const searchContext = useContext(SearchContext);
+
+    const { getRandomRecipe } = recipeContext;
+	const { 
+		getAllRecipes,
+		getByRecipeType, 
+		navSearchInput,
+		setNavQueryValue, 
+		redirectSearchCont,
+		redirectToSearchCont,
+		getSearchQueryFromNav,
+		resetNavSearchInput
+	} = searchContext;
+
 	return (
 		<footer>
 			<div>
@@ -16,11 +34,11 @@ const Footer = () => {
                     <div>
                         <p className="list-header">Recettes</p>
                         <ul>
-                            <li>Voir tout</li>
-                            <li>Entrées</li>
-                            <li>Plats</li>
-                            <li>Dessert</li>
-                            <li>Recette au hasard</li>
+                            <li><Link to="/search" onClick={getAllRecipes} href="#">Voir tout</Link></li>
+                            <li><Link to="/search" onClick={() => getByRecipeType('starter')} href="#">Entrées</Link></li>
+                            <li><Link to="/search" onClick={() => getByRecipeType('mainCourse')} href="#">Plats</Link></li>
+                            <li><Link to="/search" onClick={() => getByRecipeType('dessert')} href="#">Dessert</Link></li>
+                            <li><a onClick={getRandomRecipe} href="#">Recette au hasard</a></li>
                         </ul>
                     </div>
                     <div>
