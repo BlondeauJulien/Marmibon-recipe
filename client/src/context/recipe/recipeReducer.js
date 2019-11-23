@@ -19,7 +19,8 @@ export default (state, action) => {
             return {
                 ...state,
                 recipeInfo: action.payload.recipeRes,
-                recipeAuthor: action.payload.recipeAuthorRes
+                recipeAuthor: action.payload.recipeAuthorRes,
+                loading: { recipePage: false},
             };
             case GET_RANDOM_RECIPE:
                 return {

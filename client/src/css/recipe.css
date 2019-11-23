@@ -6,6 +6,10 @@
     background-color: white;
 }
 
+.loading-recipe {
+    height: 100vh;
+}
+
 .recipe-container h1 {
     text-align: center;
     font-size: 28px;

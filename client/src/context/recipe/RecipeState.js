@@ -27,7 +27,9 @@ const RecipeState = (props) => {
                         recipeCont: false
                 },
                 loading: {
-                        saveRecipeBtn: false
+                        recipePage: false,
+                        saveRecipeBtn: false,
+
                 }
 	};
 
@@ -68,6 +70,7 @@ const RecipeState = (props) => {
 
         const loadRecipe = async id => {
                 try {
+                        setLoading("recipePage");
                         const recipeRes = await axios.get(`/api/recipes/${id}`);
                         const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
 
@@ -84,8 +87,8 @@ const RecipeState = (props) => {
                         dispatch({
                                 type: LOAD_RECIPE_FAIL,
                                 payload: err.response.data.msg
-                
                         })
+                        stopLoading("recipePage");
                 }
         }
 
@@ -171,11 +174,16 @@ const RecipeState = (props) => {
 
         }
 
-        // Set Loading
+        // Loading
         const setLoading = element => dispatch( {
                 type: SET_LOADING,
                 payload: element
         } );
+
+        const stopLoading = element => dispatch({
+                type: STOP_LOADING,
+                payload: element
+        });
         
         // Reset the redirection to recipe page
 

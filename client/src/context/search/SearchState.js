@@ -34,6 +34,7 @@ const SearchState = (props) => {
 
 	const getAllRecipes = async () => {
 		try {
+			resetSearchResult();
 			setLoading();
 			const res = await axios.get('/api/recipes/all');
 			dispatch({
@@ -47,6 +48,7 @@ const SearchState = (props) => {
 
 	const getByRecipeType = async (type) => {
 		try {
+			resetSearchResult();
 			setLoading();
 			const res = await axios.get(`/api/recipes/getbytype/${type}`);
 			dispatch({
@@ -80,6 +82,7 @@ const SearchState = (props) => {
 		}
 
 		try {
+			resetSearchResult();
 			setLoading();
 			const res = await axios.post('/api/recipes/getsearchqueryresult', state.searchQueryValue, config);
 
@@ -104,6 +107,7 @@ const SearchState = (props) => {
 		}
 
 		try {
+			resetSearchResult();
 			setLoading();
 			const res = await axios.post('/api/recipes/getsearchqueryresult', {
 				name: state.navSearchInput,

@@ -1,12 +1,11 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import Review from '../pagesComponents/recipeComponents/Review';
 import AuthContext from '../../context/auth/authContext';
+import spinner from '../layout/spinner.gif';
 
 import RecipeContext from '../../context/recipe/recipeContext';
 
 const Recipe = (props) => {
-	console.log(props.history)
-
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);
 
@@ -36,6 +35,14 @@ const Recipe = (props) => {
 		redirectToRecipe(false)
         // eslint-disable-next-line
 	}, []);
+
+	if(loading.recipePage) {
+		return (
+			<div className="recipe-container loading-recipe">
+				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
+			</div>
+		)
+	}
 
 	if(recipeInfo === null || recipeAuthor === null) {
 		return (
