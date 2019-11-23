@@ -43,6 +43,13 @@ a {
   color: #dadada;
 }
 
+.auth-loading {
+  display: block;
+  margin: auto;
+  width: 25px;
+  height: 25px;
+}
+
 /* MAIN Container */
 
 main {

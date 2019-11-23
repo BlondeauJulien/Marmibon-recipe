@@ -1,13 +1,14 @@
-import React, { useState , useContext, useEffect} from 'react';
+import React, { Fragment, useState , useContext, useEffect} from 'react';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import { Link } from 'react-router-dom';
+import spinner from '../layout/spinner.gif';
 
 const Register = ( props) => {
     const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
 
-    const { register, error, clearErrors, isAuthenticated, loadUser } = authContext;
+    const { register, error, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
     const { recipeInfo, redirect} = recipeContext;
 
     useEffect(() => {
@@ -67,10 +68,19 @@ const Register = ( props) => {
                 <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
                 <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
                 <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} placeholder="Confirmer votre mot de passe" minLength="6" required/>
-                <input type="submit" value="Créer un compte" />
+                {authLoading ? (
+                    <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}}/>
+                ) : (
+                    <input type="submit" value="Créer un compte" />
+                )}
             </form>
-            <p className="create-account-text">Déjà inscrit?</p>
-            <Link to="/login" className="switch-auth-component">Clickez ici pour vous connecter</Link>
+            {!authLoading && (
+                <Fragment>
+                    <p className="create-account-text">Déjà inscrit?</p>
+                    <Link to="/login" className="switch-auth-component">Clickez ici pour vous connecter</Link>
+                </Fragment>
+            )}
+
         </div>
     )
 }

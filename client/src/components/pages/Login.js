@@ -1,13 +1,14 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import { Link } from 'react-router-dom';
+import spinner from '../layout/spinner.gif'
 
 const Login = (props) => {
     const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
 
-    const { logUser, error, clearErrors, isAuthenticated, loadUser } = authContext;
+    const { logUser, error, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
     const { recipeInfo, redirect} = recipeContext;
 
     useEffect(() => {
@@ -54,15 +55,25 @@ const Login = (props) => {
 
 
     return (
+        
         <div className="auth-form-container">
             <form onSubmit={onSubmit} className="auth-form">
                 <p>Connectez-vous avec vos identifiants Marmibon:</p>
                 <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
                 <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
-                <input type="submit" value="Se connecter" />
+                {authLoading ? (
+                    <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}}/>
+                ) : (
+                    <input type="submit" value="Se connecter" />
+                )}
             </form>
-            <p className="create-account-text">Ou créer votre compte:</p>
-            <Link to="/register" className="switch-auth-component">Clickez ici pour créer un compte</Link>
+            {!authLoading && (
+                <Fragment>
+                <p className="create-account-text">Ou créer votre compte:</p>
+                <Link to="/register" className="switch-auth-component">Clickez ici pour créer un compte</Link>
+                </Fragment>
+            )}
+
         </div>
     )
 }

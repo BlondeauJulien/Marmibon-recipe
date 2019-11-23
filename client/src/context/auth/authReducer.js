@@ -6,6 +6,8 @@ import {
     AUTH_ERROR,
     LOGIN_FAIL,
     LOGIN_SUCCESS,
+    SET_AUTH_LOADING,
+    RESET_AUTH_LOADING,
     LOGOUT
 } from '../types';
 
@@ -48,6 +50,16 @@ export default (state, action) => {
                 user: null,
                 error: action.payload
             };
+        case SET_AUTH_LOADING:
+            return {
+                ...state,
+                authLoading: true
+            };
+        case RESET_AUTH_LOADING:
+            return {
+                ...state,
+                authLoading: false
+            }
         case DISPLAYED_ON_PROFILE:
             return {
                 ...state,

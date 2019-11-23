@@ -11,6 +11,8 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    SET_AUTH_LOADING,
+    RESET_AUTH_LOADING,
     LOGOUT
 } from '../types';
 
@@ -21,6 +23,7 @@ const AuthState = (props) => {
         userRecipes: null,
         isAuthenticated: null,
         displayedOnProfile: "createdRecipe",
+        authLoading: false,
         error: null
 	};
 
@@ -33,7 +36,7 @@ const AuthState = (props) => {
         if(localStorage.token) {
             setAuthToken(localStorage.token)
           }
-
+          
         try {
             const res = await axios.get('/api/auth');
             dispatch({
@@ -87,6 +90,7 @@ const AuthState = (props) => {
         }
 
         try {
+            setAuthLoading();
             const res = await axios.post('/api/auth', formData, config);
 
             dispatch({
@@ -95,6 +99,7 @@ const AuthState = (props) => {
 
             });
             loadUser();
+            resetAuthLoading();
             
         } catch (err) {
             console.log(err)
@@ -103,6 +108,7 @@ const AuthState = (props) => {
                 payload: err.response.data.msg
 
             })
+            resetAuthLoading();
         }
     }
 
@@ -110,6 +116,20 @@ const AuthState = (props) => {
     const logout = () => {
         dispatch({
             type: LOGOUT
+        })
+    }
+
+    // Loading
+
+    const setAuthLoading = () => {
+        dispatch({
+            type: SET_AUTH_LOADING
+        })
+    }
+
+    const resetAuthLoading = () => {
+        dispatch({
+            type: RESET_AUTH_LOADING
         })
     }
 
@@ -132,6 +152,7 @@ const AuthState = (props) => {
                 userRecipes: state.userRecipes,
 				isAuthenticated: state.isAuthenticated,
                 error: state.error,
+                authLoading: state.authLoading,
                 displayedOnProfile: state.displayedOnProfile,
                 register,
                 loadUser,
