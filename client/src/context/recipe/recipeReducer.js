@@ -27,6 +27,7 @@ export default (state, action) => {
                     ...state,
                     recipeInfo: action.payload.recipeRes,
                     recipeAuthor: action.payload.recipeAuthorRes,
+                    loading: { recipePage: false},
                     redirect: {recipeCont: true}
                 };
         case ADD_RECIPE_REVIEW:

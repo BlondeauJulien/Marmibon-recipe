@@ -270,12 +270,6 @@ router.put('/:id/addreview', auth, async (req, res) => {
 
         review.authorReviewName = user.userName;
 
-
-
-/*         let reviewArr = [...recipe.reviews, review]
-
-        recipe.reviews = reviewArr; */
-
         await Recipe.findByIdAndUpdate(req.params.id, {$push: { reviews: review }})
 
         res.json({

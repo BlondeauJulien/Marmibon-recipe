@@ -158,6 +158,7 @@ const RecipeState = (props) => {
 
         const getRandomRecipe = async () => {
                 try {
+                        setLoading("recipePage");
                         const recipeRes = await axios.get(`/api/recipes/getrandom`);
                         const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
                         dispatch({

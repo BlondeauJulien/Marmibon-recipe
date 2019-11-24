@@ -123,11 +123,6 @@ const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStars
 					{averageRatingStarsClassName().map(el => {
 						return (<i key={Math.random()} className={el} />);
 					})}
-{/* 					<i className="fas fa-star" />
-					<i className="fas fa-star" />
-					<i className="fas fa-star" />
-					<i className="fas fa-star" />
-					<i className="fas fa-star" /> */}
 				</div>
                 <span className="nbr-review-text">Avec {recipeInfo.reviews.length} {recipeInfo.reviews.length > 1 ? "notes et avis" : "note et avis"}</span>
 			</div>
