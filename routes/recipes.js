@@ -257,6 +257,8 @@ router.put('/:id/addreview', auth, async (req, res) => {
         let recipe = await Recipe.findById(req.params.id);
         let user = await User.findById(req.user.id);
 
+        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
+
         recipe.reviews.forEach(review => {
             if(req.user.id === review.authorId) {
                 return res.json({
@@ -268,13 +270,13 @@ router.put('/:id/addreview', auth, async (req, res) => {
 
         review.authorReviewName = user.userName;
 
-        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
 
-        let reviewArr = [...recipe.reviews, review]
 
-        recipe.reviews = reviewArr;
+/*         let reviewArr = [...recipe.reviews, review]
 
-        await Recipe.findByIdAndUpdate(req.params.id, {$set: recipe}, {new: true})
+        recipe.reviews = reviewArr; */
+
+        await Recipe.findByIdAndUpdate(req.params.id, {$push: { reviews: review }})
 
         res.json({
             msg: "Votre avis a été ajouté",

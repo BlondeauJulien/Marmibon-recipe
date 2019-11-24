@@ -98,7 +98,11 @@ const Recipe = (props) => {
 	const saveBtn = () => {
 
 		if(loading.saveRecipeBtn) {
-			return (<p>Loading</p>)
+			return (			
+				<div style={{width: '250px', margin: 'auto', display: 'block'}}>
+					<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
+				</div>
+			)
 		} else {
 			if(!isAuthenticated) {
 				return (
