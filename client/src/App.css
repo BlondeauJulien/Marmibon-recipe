@@ -118,3 +118,22 @@ main {
   background-color: rgb(27, 180, 27);
   cursor: pointer;
 }
+
+.btn-mini {
+  margin-left: 5px;
+  border: none;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 900;
+  color: white;
+  padding: 3px 4px;
+  cursor: pointer;
+}
+
+.btn-mini-delete {
+  background-color: rgb(255, 0, 0);
+}
+
+.btn-mini-edit {
+  background-color: rgb(22, 129, 0);
+}

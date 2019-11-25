@@ -13,7 +13,7 @@ const Search = (props) => {
     const recipeContext = useContext(RecipeContext);
     const searchContext =useContext(SearchContext);
 
-    const { loadUser } = authContext;
+    const { loadUser, user, isAuthenticated } = authContext;
     const { recipeInfo, redirect} = recipeContext;
     const { searchResult, getSearchQuery, searchQueryValue, setQueryValue, searchLoading, resetSearchQueryValue, resetSearchResult } = searchContext
     
@@ -43,7 +43,7 @@ const Search = (props) => {
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
                 {searchResult !== null && searchResult.length > 0 && searchResult.map(recipe => {
-                    return <RecipeAbstractItem key={recipe._id} recipe={recipe} />
+                    return <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated}/>
                 })}
 
                 {searchResult !== null && searchResult.length === 0 && 

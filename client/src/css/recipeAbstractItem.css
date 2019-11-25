@@ -1,7 +1,14 @@
 .recipe-abstract-item {
+    position: relative;
     display: flex;
     padding: 16px 40px;
     border-bottom: solid 1px rgb(199, 199, 199);
+}
+
+.btn-recipe-abstract-cont {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
 }
 
 .recipe-abstract-item:last-child {

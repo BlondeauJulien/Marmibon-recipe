@@ -34,6 +34,7 @@ const Recipe = (props) => {
 	useEffect(() => {
 		loadRecipe(props.match.params.recipeId);
 		redirectToRecipe(false)
+		window.scrollTo(0, 0);
         // eslint-disable-next-line
 	}, []);
 

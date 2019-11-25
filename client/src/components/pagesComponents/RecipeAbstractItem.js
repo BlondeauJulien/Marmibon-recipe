@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const RecipeAbstractItem = ({recipe}) => {
+const RecipeAbstractItem = ({recipe, user, isAuthenticated}) => {
+	console.log(recipe)
+	console.log(user)
 
 	const averageRating = () => {
 		let total = 0;
@@ -35,6 +37,12 @@ const RecipeAbstractItem = ({recipe}) => {
 
 	return (
 		<div className="recipe-abstract-item">
+			{	isAuthenticated && recipe.user === user._id &&
+				(<div className="btn-recipe-abstract-cont">
+					<button className="btn-mini btn-mini-edit">Editer</button>
+					<button className="btn-mini btn-mini-delete">Supprimer</button>
+				</div>)
+			}
 			<img src="https://feelgoodfoodie.net/wp-content/uploads/2019/07/Falafel-Recipe-19.jpg" height="175" />
 			<div className="recipe-abstract">
 				<h2><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></h2>
@@ -43,11 +51,6 @@ const RecipeAbstractItem = ({recipe}) => {
 						{averageRatingStarsClassName().map((el, i) => {
 							return (<i key={i} className={el} />);
 						})}
-{/* 						<i className="fas fa-star" />
-						<i className="fas fa-star" />
-						<i className="fas fa-star" />
-						<i className="fas fa-star" />
-						<i className="fas fa-star" /> */}
 					</div>
 					<div className="recipe-abstract-rating-text">{averageRating()} / 5 sur {recipe.reviews.length === 0 ? "0 avis" : `${recipe.reviews.length} avis`} </div>
 				</div>
