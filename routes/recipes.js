@@ -163,7 +163,8 @@ router.get('/getrandom', async (req, res) => {
         let randomNum = Math.floor(Math.random() * recipes.length);
         res.json(recipes[randomNum])
     } catch (err) {
-        console.log(err)
+        console.log(err.message);
+        res.status(500).send('Server error');
     }
 
 })

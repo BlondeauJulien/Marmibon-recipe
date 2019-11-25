@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import Review from '../pagesComponents/recipeComponents/Review';
+import Error404 from '../errorsPages/Recipe404Error';
 import AuthContext from '../../context/auth/authContext';
 import spinner from '../layout/spinner.gif';
 
@@ -46,7 +47,7 @@ const Recipe = (props) => {
 
 	if(recipeInfo === null || recipeAuthor === null) {
 		return (
-			<h1>Error</h1>
+			<Error404 />
 		)
 	}
 

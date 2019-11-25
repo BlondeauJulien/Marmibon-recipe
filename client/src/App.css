@@ -50,6 +50,15 @@ a {
   height: 25px;
 }
 
+.error-response-title {
+  margin: 24px auto;
+  text-align: center;
+  color: #393c6d;
+  font-size: 26px;
+  font-weight: 900;
+
+}
+
 /* MAIN Container */
 
 main {
