@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
+import spinner from '../layout/spinner.gif';
 
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
@@ -12,15 +13,20 @@ const User = (props) => {
 
 
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
-    const { recipeInfo, redirect, deleteRecipe} = recipeContext;
+    const { recipeInfo, redirect, deleteRecipe, loading} = recipeContext;
 
 
 	useEffect(() => {
 		if(localStorage.getItem('token') !== null) {
             loadUser()
         }
-
 	}, []);
+
+	useEffect(() => {
+		if(localStorage.getItem('token') !== null) {
+            loadUser()
+        }
+	}, [loading]);
 
 	useEffect(() => {
 		if(!isAuthenticated) {
@@ -70,7 +76,9 @@ const User = (props) => {
 					</div>
 				</div>
 
-				{displayedOnProfile === "createdRecipe" ? (
+				{loading.deleteRecipeInUser ? (
+					<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
+				) : displayedOnProfile === "createdRecipe" ? (
 					<div className="recipes-abstracts-container">
 						{ userRecipes.length === 0 ? (
 							<h3>Vous n'avez pas encore créée de recette</h3>

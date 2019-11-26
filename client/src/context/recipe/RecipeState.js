@@ -29,6 +29,7 @@ const RecipeState = (props) => {
                 loading: {
                         recipePage: false,
                         saveRecipeBtn: false,
+                        deleteRecipeInUser: false
 
                 }
 	};
@@ -179,7 +180,9 @@ const RecipeState = (props) => {
 
         const deleteRecipe = async (recipeId) => {
                 try {
+                        setLoading('deleteRecipeInUser');
                         const res = await axios.delete(`/api/recipes/${recipeId}`);
+                        stopLoading('deleteRecipeInUser')
                 } catch (err) {
                         console.log(err)
                 }
