@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const RecipeAbstractItem = ({recipe, user, isAuthenticated}) => {
-	console.log(recipe)
-	console.log(user)
+const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe }) => {
 
 	const averageRating = () => {
 		let total = 0;
@@ -35,13 +33,33 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated}) => {
 		return starsArr
 	}
 
+	const displayConfirmDeleteCont = () => {
+		document.getElementById(`btn-recipe-abstract-cont-${recipe._id}`).style.display = "none";
+		document.getElementById(`confirm-delete-cont-${recipe._id}`).style.display = "block";
+	}
+
+	const hideConfirmDeleteCont = () => {
+		document.getElementById(`confirm-delete-cont-${recipe._id}`).style.display = "none";
+		document.getElementById(`btn-recipe-abstract-cont-${recipe._id}`).style.display = "block";
+	}
+
 	return (
 		<div className="recipe-abstract-item">
-			{	isAuthenticated && recipe.user === user._id &&
-				(<div className="btn-recipe-abstract-cont">
+			{	isAuthenticated && recipe.user === user._id && (
+				<>
+				<div id={"btn-recipe-abstract-cont-" + recipe._id} className="btn-recipe-abstract-cont">
 					<button className="btn-mini btn-mini-edit">Editer</button>
-					<button className="btn-mini btn-mini-delete">Supprimer</button>
-				</div>)
+					<button className="btn-mini btn-mini-delete" onClick={displayConfirmDeleteCont}>Supprimer</button>
+
+				</div>
+				<div id={"confirm-delete-cont-" + recipe._id} className="confirm-delete-cont">
+					<span>Confirmer la suppression de: {recipe.recipeName}</span>
+					<div style={{textAlign: "right", margin: "5px 0"}}>
+						<button className="btn-mini btn-mini-delete" onClick={() => deleteRecipe(recipe._id)}>Supprimer</button>
+						<button className="btn-mini btn-mini-back" onClick={hideConfirmDeleteCont}>Annuler</button>
+					</div>
+				</div>
+				</>)
 			}
 			<img src="https://feelgoodfoodie.net/wp-content/uploads/2019/07/Falafel-Recipe-19.jpg" height="175" />
 			<div className="recipe-abstract">

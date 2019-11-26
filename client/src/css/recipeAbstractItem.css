@@ -5,14 +5,23 @@
     border-bottom: solid 1px rgb(199, 199, 199);
 }
 
+.recipe-abstract-item:last-child {
+    border: none;
+}
+
 .btn-recipe-abstract-cont {
     position: absolute;
     right: 0;
     margin-right: 10px;
 }
 
-.recipe-abstract-item:last-child {
-    border: none;
+.confirm-delete-cont {
+    display: none;
+    background-color: rgb(255, 255, 255, 0.85);
+    position: absolute;
+    right: 0;
+    padding-left: 10px;
+    margin-right: 10px;
 }
 
 .recipe-abstract {

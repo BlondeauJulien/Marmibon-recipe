@@ -43,7 +43,7 @@ const Search = (props) => {
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
                 {searchResult !== null && searchResult.length > 0 && searchResult.map(recipe => {
-                    return <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated}/>
+                    return <RecipeAbstractItem key={recipe._id} recipe={recipe}/>
                 })}
 
                 {searchResult !== null && searchResult.length === 0 && 

@@ -12,7 +12,7 @@ const User = (props) => {
 
 
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
-    const { recipeInfo, redirect} = recipeContext;
+    const { recipeInfo, redirect, deleteRecipe} = recipeContext;
 
 
 	useEffect(() => {
@@ -75,14 +75,14 @@ const User = (props) => {
 						{ userRecipes.length === 0 ? (
 							<h3>Vous n'avez pas encore créée de recette</h3>
 						) : 
-						userRecipes.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} />)}
+						userRecipes.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : displayedOnProfile === "savedRecipe" ? (
 					<div className="recipes-abstracts-container">
 						{ user.savedRecipe.length === 0 ? (
 							<h3>Vous n'avez pas encore sauvegardé de recette</h3>
 						) : 
-						user.savedRecipe.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} />)}
+						user.savedRecipe.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : (
 					<div className="user-info-cont">

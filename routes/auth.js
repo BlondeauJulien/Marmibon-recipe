@@ -16,6 +16,9 @@ router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         const recipes = await Recipe.find( { user: user._id});
+        const savedRecipe = await Recipe.find({ saved: user._id.toString()});
+
+        user.savedRecipe = savedRecipe;
 
         res.json({
             user,

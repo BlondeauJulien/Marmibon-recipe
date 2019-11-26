@@ -31,7 +31,6 @@
 .recipe-user-info {
     display: block;
     margin-bottom: 25px;
-    cursor: pointer;
 }
 
 .recipe-author-logo {
@@ -86,6 +85,7 @@
 
 .recipe-img-container img {
     border-radius: 10px;
+    filter: blur(8px);
 }
 
 .recipe-text-info-cont {

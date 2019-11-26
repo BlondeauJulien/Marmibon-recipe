@@ -112,8 +112,6 @@ router.post('/getsearchqueryresult', async(req, res) => {
                 prevResult = [...recipes]
             }
 
-            console.log(users)
-
             let userFiltered = prevResult.filter(recipe => {
 
                 for(let i = 0; i< users.length; i++) {
@@ -381,7 +379,7 @@ router.delete('/:id', auth, async (req, res) => {
 
         await Recipe.findByIdAndRemove(req.params.id)
 
-        res.json({ msg: 'Contact Removed' })
+        res.json({ msg: 'La recette a bien été supprimer' })
 
 
     } catch (err) {

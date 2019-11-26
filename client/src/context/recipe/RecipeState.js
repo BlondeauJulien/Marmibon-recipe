@@ -175,6 +175,16 @@ const RecipeState = (props) => {
 
         }
 
+        // Delete a recipe
+
+        const deleteRecipe = async (recipeId) => {
+                try {
+                        const res = await axios.delete(`/api/recipes/${recipeId}`);
+                } catch (err) {
+                        console.log(err)
+                }
+        }
+
         // Loading
         const setLoading = element => dispatch( {
                 type: SET_LOADING,
@@ -201,6 +211,7 @@ const RecipeState = (props) => {
                 loading: state.loading,
                 createRecipe,
                 loadRecipe,
+                deleteRecipe,
                 createReview,
                 userSaveRecipe,
                 redirectToRecipe,
