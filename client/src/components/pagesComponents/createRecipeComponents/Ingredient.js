@@ -27,6 +27,7 @@ const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) =>
 				id="ingredientName"
 				value={ingredient.ingredientName}
 				onChange={(e) => handleChange({ ingredientName: e.target.value })}
+				required
 			/>
 			<label htmlFor="ingredientQuantity">Quantité:</label>
 			<input
@@ -36,6 +37,7 @@ const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) =>
 				min="1"
 				max="5000"
 				onChange={(e) => handleChange({ ingredientQuantity: e.target.value })}
+				required
 			/>
 			<label htmlFor="ingredientMesure">Mesure:</label>
 			<select

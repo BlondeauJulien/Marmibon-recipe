@@ -146,6 +146,7 @@ const CreateRecipe = (props) => {
 							id="recipeName"
 							value={recipe.recipeName}
 							onChange={handleChangeRecipe}
+							required
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
@@ -158,6 +159,7 @@ const CreateRecipe = (props) => {
 							onChange={handleChangeRecipe}
 							min="1"
 							max="10"
+							required
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
@@ -171,6 +173,7 @@ const CreateRecipe = (props) => {
 							min="0"
 							max="24"
 							className="pct-50"
+							required
 						/>
 						<input
 							type="number"
@@ -181,6 +184,7 @@ const CreateRecipe = (props) => {
 							min="1"
 							max="60"
 							className="pct-50"
+							required
 						/>
 					</div>
 					<div className="create-recipe-input-cont">

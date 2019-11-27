@@ -29,6 +29,7 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 				name="stepContent"
 				value={step.stepContent}
 				onChange={(e) => handleChange({ stepContent: e.target.value })}
+				required
 			/>
 		</div>
 	);
