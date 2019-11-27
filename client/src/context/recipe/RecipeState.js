@@ -8,6 +8,7 @@ import {
         LOAD_RECIPE,
         LOAD_RECIPE_FAIL,
         GET_RANDOM_RECIPE,
+        SET_RECIPE_TO_UPDATE,
         ADD_RECIPE_REVIEW,
         REDIRECT_TO_RECIPE,
         SET_LOADING,
@@ -21,6 +22,7 @@ const RecipeState = (props) => {
 	const initialState = {
                 recipeInfo: null,
                 recipeAuthor: null,
+                recipeToUpdate: null,
                 userHasReviewed: false,
                 pushToCreatedRecipe: false,
                 redirect: {
@@ -29,6 +31,7 @@ const RecipeState = (props) => {
                 loading: {
                         recipePage: false,
                         saveRecipeBtn: false,
+                        updateRecipe: false,
                         deleteRecipeInUser: false
 
                 }
@@ -176,6 +179,17 @@ const RecipeState = (props) => {
 
         }
 
+        // Update recipe
+
+        const setRecipeToUpdate = (recipe) => {
+                setLoading('updateRecipe');
+                dispatch({
+                        type: SET_RECIPE_TO_UPDATE,
+                        payload: recipe
+                })
+                stopLoading('updateRecipe');
+        }
+
         // Delete a recipe
 
         const deleteRecipe = async (recipeId) => {
@@ -208,12 +222,14 @@ const RecipeState = (props) => {
 			value={{
                 recipeInfo: state.recipeInfo,
                 recipeAuthor: state.recipeAuthor,
+                recipeToUpdate: state.recipeToUpdate,
                 userHasReviewed: state.userHasReviewed,
                 pushToCreatedRecipe: state.pushToCreatedRecipe,
                 redirect: state.redirect,
                 loading: state.loading,
                 createRecipe,
                 loadRecipe,
+                setRecipeToUpdate,
                 deleteRecipe,
                 createReview,
                 userSaveRecipe,

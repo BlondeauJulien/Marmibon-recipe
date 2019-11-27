@@ -9,7 +9,8 @@ import {
     STOP_LOADING,
     USER_SAVE_RECIPE,
     USER_UNSAVE_RECIPE,
-    RESET_REDIRECT
+    RESET_REDIRECT,
+    SET_RECIPE_TO_UPDATE
 } from '../types';
 
 export default (state, action) => {
@@ -30,6 +31,11 @@ export default (state, action) => {
                     loading: { recipePage: false},
                     redirect: {recipeCont: true}
                 };
+        case SET_RECIPE_TO_UPDATE:
+            return {
+                ...state,
+                recipeToUpdate: action.payload
+            };
         case ADD_RECIPE_REVIEW:
             return {
                 ...state,

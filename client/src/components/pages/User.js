@@ -13,7 +13,7 @@ const User = (props) => {
 
 
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
-    const { recipeInfo, redirect, deleteRecipe, loading} = recipeContext;
+    const { recipeInfo, redirect, deleteRecipe, loading, setRecipeToUpdate, recipeToUpdate} = recipeContext;
 
 
 	useEffect(() => {
@@ -25,8 +25,14 @@ const User = (props) => {
 	useEffect(() => {
 		if(localStorage.getItem('token') !== null) {
             loadUser()
-        }
+		}
 	}, [loading]);
+
+	useEffect(() => {
+		if(recipeToUpdate !== null) {
+			props.history.push("edit");
+		}
+	}, [recipeToUpdate])
 
 	useEffect(() => {
 		if(!isAuthenticated) {
@@ -83,14 +89,14 @@ const User = (props) => {
 						{ userRecipes.length === 0 ? (
 							<h3>Vous n'avez pas encore créée de recette</h3>
 						) : 
-						userRecipes.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} deleteRecipe={deleteRecipe}/>)}
+						userRecipes.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : displayedOnProfile === "savedRecipe" ? (
 					<div className="recipes-abstracts-container">
 						{ user.savedRecipe.length === 0 ? (
 							<h3>Vous n'avez pas encore sauvegardé de recette</h3>
 						) : 
-						user.savedRecipe.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} deleteRecipe={deleteRecipe}/>)}
+						user.savedRecipe.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : (
 					<div className="user-info-cont">

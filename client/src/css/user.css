@@ -92,6 +92,13 @@
     padding-bottom: 25px;
 }
 
+.recipes-abstracts-container h3 {
+    text-align: center;
+    color: rgb(71, 71, 71);
+    font-size: 18px;
+    font-weight: 900;
+}
+
 .user-info-cont {
     padding-top: 12px;
     font-size: 18px;

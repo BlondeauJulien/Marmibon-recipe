@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe }) => {
+const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRecipeToUpdate }) => {
 
 	const averageRating = () => {
 		let total = 0;
@@ -48,7 +48,7 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe }) => {
 			{	isAuthenticated && recipe.user === user._id && (
 				<>
 				<div id={"btn-recipe-abstract-cont-" + recipe._id} className="btn-recipe-abstract-cont">
-					<button className="btn-mini btn-mini-edit">Editer</button>
+					<button className="btn-mini btn-mini-edit" onClick={() => setRecipeToUpdate({...recipe})}>Editer</button>
 					<button className="btn-mini btn-mini-delete" onClick={displayConfirmDeleteCont}>Supprimer</button>
 
 				</div>
