@@ -11,7 +11,7 @@ const CreateRecipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { recipeInfo, pushToCreatedRecipe, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit } = recipeContext;
+	const { recipeInfo, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit } = recipeContext;
 
 	useEffect(() => {
 		loadUser();
@@ -22,16 +22,9 @@ const CreateRecipe = (props) => {
 	useEffect(() => {
         if(!isAuthenticated) {
             props.history.push('/')
-        }
+		}
         // eslint-disable-next-line
     }, [isAuthenticated, props.history])
-
-	useEffect(() => {
-        if(recipeInfo !== null && pushToCreatedRecipe) {
-            props.history.push(`/recipe/${recipeInfo._id}`)
-        }
-        // eslint-disable-next-line
-	}, [recipeInfo, props.history]);
 	
 	useEffect(() => {
         if(redirect.recipeCont) {
@@ -46,17 +39,17 @@ const CreateRecipe = (props) => {
 	}, [loading])
 
 	const [ recipe, setRecipe ] = useState({
-		recipeName: recipeToUpdate.recipeName,
-		serving: recipeToUpdate.serving,
-		prepTimeHours: recipeToUpdate.prepTimeHours,
-		prepTimeMins: recipeToUpdate.prepTimeMins,
-		price: recipeToUpdate.price,
-		recipeType: recipeToUpdate.recipeType
+		recipeName: recipeToUpdate !== null ? recipeToUpdate.recipeName : '',
+		serving: recipeToUpdate !== null ? recipeToUpdate.serving : '',
+		prepTimeHours: recipeToUpdate !== null ? recipeToUpdate.prepTimeHours : '',
+		prepTimeMins: recipeToUpdate !== null ? recipeToUpdate.prepTimeMins : '',
+		price: recipeToUpdate !== null ? recipeToUpdate.price : '',
+		recipeType: recipeToUpdate !== null ? recipeToUpdate.recipeType : ''
 	});
 
-	const [ ingredients, setIngredients ] = useState([...recipeToUpdate.ingredients]);
+	const [ ingredients, setIngredients ] = useState(recipeToUpdate !== null ? [...recipeToUpdate.ingredients] : []);
 
-	const [ steps, setSteps ] = useState([...recipeToUpdate.steps]);
+	const [ steps, setSteps ] = useState(recipeToUpdate !== null ? [...recipeToUpdate.steps] : []);
 
 	const handleChangeRecipe = (e) => {
 		setRecipe({ ...recipe, [e.target.name]: e.target.value });
