@@ -13,13 +13,14 @@ const User = (props) => {
 
 
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
-    const { recipeInfo, redirect, deleteRecipe, loading, setRecipeToUpdate, recipeToUpdate} = recipeContext;
+    const { recipeInfo, redirect, deleteRecipe, loading, setRecipeToUpdate, recipeToUpdate, pushToEditRecipe} = recipeContext;
 
 
 	useEffect(() => {
 		if(localStorage.getItem('token') !== null) {
             loadUser()
-        }
+		}
+	// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -29,7 +30,7 @@ const User = (props) => {
 	}, [loading]);
 
 	useEffect(() => {
-		if(recipeToUpdate !== null) {
+		if(recipeToUpdate !== null && pushToEditRecipe) {
 			props.history.push("edit");
 		}
 	}, [recipeToUpdate])

@@ -9,8 +9,11 @@ import {
         LOAD_RECIPE_FAIL,
         GET_RANDOM_RECIPE,
         SET_RECIPE_TO_UPDATE,
+        RESET_SET_RECIPE_TO_UPDATE,
+        EDIT_RECIPE_SUCCESS,
         ADD_RECIPE_REVIEW,
         REDIRECT_TO_RECIPE,
+        REDIRECT_TO_EDIT,
         SET_LOADING,
         STOP_LOADING,
         USER_SAVE_RECIPE,
@@ -25,6 +28,7 @@ const RecipeState = (props) => {
                 recipeToUpdate: null,
                 userHasReviewed: false,
                 pushToCreatedRecipe: false,
+                pushToEditRecipe: false,
                 redirect: {
                         recipeCont: false
                 },
@@ -129,6 +133,15 @@ const RecipeState = (props) => {
                 })
         }
 
+        // Redirect to Edit component
+
+        const redirectToEdit = bool => {
+                dispatch({
+                        type: REDIRECT_TO_EDIT,
+                        payload: bool
+                })
+        }
+
         // save recipe Events
 
         const userSaveRecipe = async id => {
@@ -190,6 +203,37 @@ const RecipeState = (props) => {
                 stopLoading('updateRecipe');
         }
 
+        const resetRecipeToUpdate = () => dispatch({type: RESET_SET_RECIPE_TO_UPDATE})
+
+        const updateRecipe = async (id, formData) => {
+                const config = {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                }
+
+                try {
+                        const recipeRes = await axios.put(`/api/recipes/edit/${id}`, formData, config);
+                        const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
+            
+                        dispatch({
+                            type: EDIT_RECIPE_SUCCESS,
+                            payload: {
+                                recipeRes: recipeRes.data,
+                                recipeAuthorRes: recipeAuthorRes.data
+                            }
+            
+                        });      
+            
+                } catch (err) {
+                        console.log(err)
+                        dispatch({
+                                type: CREATE_RECIPE_FAIL,
+                                payload: err.response.data.msg
+                        })
+                }
+        }
+
         // Delete a recipe
 
         const deleteRecipe = async (recipeId) => {
@@ -225,15 +269,19 @@ const RecipeState = (props) => {
                 recipeToUpdate: state.recipeToUpdate,
                 userHasReviewed: state.userHasReviewed,
                 pushToCreatedRecipe: state.pushToCreatedRecipe,
+                pushToEditRecipe: state.pushToEditRecipe,
                 redirect: state.redirect,
                 loading: state.loading,
                 createRecipe,
                 loadRecipe,
                 setRecipeToUpdate,
+                resetRecipeToUpdate,
+                updateRecipe,
                 deleteRecipe,
                 createReview,
                 userSaveRecipe,
                 redirectToRecipe,
+                redirectToEdit,
                 userDeleteSaveRecipe,
                 getRandomRecipe,
                 resetRedirect        

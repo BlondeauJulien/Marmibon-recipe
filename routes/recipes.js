@@ -210,22 +210,11 @@ router.get('/user/:id',  async (req, res) => {
 
 });
 
-// @route   PUT api/recipes/recipeID
+// @route   PUT api/recipes/edit/:id
 // @desc    Update a recipe
 // @access  Private 
 
-router.put('/:id', auth, async (req, res) => {
-    let {name, serving, price, prepTime, steps, ingredients} = req.body;
-
-    const recipeFields = {};
-
-    if(name) recipeFields.name = name;
-    if(serving) recipeFields.serving = serving;
-    if(price) recipeFields.price = price;
-    if(prepTime) recipeFields.prepTime = prepTime;
-    if(steps) recipeFields.steps = steps;
-    if(ingredients) recipeFields.ingredients = ingredients;
-
+router.put('/edit/:id', auth, async (req, res) => {
     try {
         let recipe = await Recipe.findById(req.params.id);
 
@@ -233,7 +222,7 @@ router.put('/:id', auth, async (req, res) => {
 
         if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: 'Not authorized to modify this recipe'});
 
-        recipe = await Recipe.findByIdAndUpdate(req.params.id, {$set: recipeFields }, { new: true });
+        recipe = await Recipe.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
 
         res.json(recipe);
 

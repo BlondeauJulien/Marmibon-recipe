@@ -11,10 +11,11 @@ const CreateRecipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { createRecipe, recipeInfo, pushToCreatedRecipe, redirectToRecipe, redirect, loading, recipeToUpdate } = recipeContext;
+	const { recipeInfo, pushToCreatedRecipe, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit } = recipeContext;
 
 	useEffect(() => {
 		loadUser();
+		redirectToEdit(false);
 		// eslint-disable-next-line
 	}, []);
 
@@ -23,7 +24,6 @@ const CreateRecipe = (props) => {
             props.history.push('/')
         }
         // eslint-disable-next-line
-
     }, [isAuthenticated, props.history])
 
 	useEffect(() => {
@@ -31,7 +31,6 @@ const CreateRecipe = (props) => {
             props.history.push(`/recipe/${recipeInfo._id}`)
         }
         // eslint-disable-next-line
-
 	}, [recipeInfo, props.history]);
 	
 	useEffect(() => {
@@ -44,7 +43,7 @@ const CreateRecipe = (props) => {
         if(loading.updateRecipe) {
             return (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>)
         }
-    }, [loading])
+	}, [loading])
 
 	const [ recipe, setRecipe ] = useState({
 		recipeName: recipeToUpdate.recipeName,
@@ -123,14 +122,14 @@ const CreateRecipe = (props) => {
 			return step;
 		});
 
-		createRecipe(recipeForm);
+		updateRecipe(recipeToUpdate._id , recipeForm);
 		redirectToRecipe(true)
 	};
 
 
 	return (
 		<div className="create-recipe-cont">
-			<h1>Créer une recette</h1>
+			<h1>Editer votre recette</h1>
 			<form onSubmit={onSubmit}>
 				<div className="create-recipe-single-input-cont">
 					<div className="create-recipe-input-cont">
@@ -251,7 +250,7 @@ const CreateRecipe = (props) => {
 					</div>
 				</div>
 
-				<input type="submit" value="Poster ma recette" className="btn btn-mid btn-submit-recipe" />
+				<input type="submit" value="Editer ma recette" className="btn btn-mid btn-submit-recipe" />
 			</form>
 		</div>
 	);
