@@ -11,7 +11,7 @@ const CreateRecipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { recipeInfo, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit } = recipeContext;
+	const { recipeInfo, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit, pushToCreatedRecipe} = recipeContext;
 
 	useEffect(() => {
 		loadUser();
@@ -24,7 +24,15 @@ const CreateRecipe = (props) => {
             props.history.push('/')
 		}
         // eslint-disable-next-line
-    }, [isAuthenticated, props.history])
+	}, [isAuthenticated, props.history])
+	
+	useEffect(() => {
+        if(recipeInfo !== null && pushToCreatedRecipe) {
+            props.history.push(`/recipe/${recipeInfo._id}`)
+        }
+        // eslint-disable-next-line
+
+	}, [recipeInfo, props.history]);
 	
 	useEffect(() => {
         if(redirect.recipeCont) {
