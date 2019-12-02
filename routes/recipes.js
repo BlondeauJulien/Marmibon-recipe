@@ -12,8 +12,10 @@ const User = require('../models/User');
 // @access  Private 
 
 router.post('/', [auth, [
-    check('recipeName', 'Please add a name to the recipe').not().isEmpty(),
-    check('serving', 'Please add the number of serving').not().isEmpty()
+    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}),
+    check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
+    check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
+    check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
 ]], async (req, res) => {
     const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -214,7 +216,17 @@ router.get('/user/:id',  async (req, res) => {
 // @desc    Update a recipe
 // @access  Private 
 
-router.put('/edit/:id', auth, async (req, res) => {
+router.put('/edit/:id', [auth, [
+    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}),
+    check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
+    check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
+    check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
+]], async (req, res) => {
+    const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+    }
+    
     try {
         let recipe = await Recipe.findById(req.params.id);
 

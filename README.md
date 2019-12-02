@@ -1,7 +1,7 @@
 To Do:
-[X] = done
-[-] = working on it
-[] = to do
+[X] = done \newline
+[-] = working on it \newline
+[] = to do \newline
 
 Global:
 
@@ -21,13 +21,16 @@ Contact Page:
 
 Create Recipe and Edit Pages:
 
-[] Max size for title (front and back);
-[] Max size for ingredient name
-[] max length of a word in preparation section
+[X] Max size for title (front and back); \newline
+[X] Max for serving size (front and back) \newline
+[X] Max for prep hours and minutes (front and back) \newline
+[] Custom validation for recipeType, price, ingredientArray and StepArray
+[] Max size for ingredient name \newline
+[] max length of a word in preparation section \newline
 
 Home:
 
-[] Link recipe presented/card to appropriate recipe page
+[] Link recipe presented/card to appropriate recipe page 
 
 Login Register:
 
@@ -35,26 +38,26 @@ Login Register:
 
 Recipe page:
 
-[] max length of a word in review section
-[] block recipe Author to rate and comment own recipe
-[] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear).
-[] maybe redo the send comment response with loading and dont show the write comment section if user had reviewed before.
-[] change the alert for empty input on send comment for a element inside the component
-[] prevent user to save a recipe he created
+[] max length of a word in review section \newline
+[] block recipe Author to rate and comment own recipe \newline
+[] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). \newline
+[] maybe redo the send comment response with loading and dont show the write comment section if user had reviewed before. \newline
+[] change the alert for empty input on send comment for a element inside the component \newline
+[] prevent user to save a recipe he created \newline
 
 Search:
 
 User:
 
 Context All:
-[] check the error response
-[] check that loading and other element appear or desapear appropriately if a catch error is used.
+[] check the error response \newline
+[] check that loading and other element appear or desapear appropriately if a catch error is used. \newline
 
 ---- Backend ----
 
-[] check the error sending for all route.
+[] check the error sending for all route. \newline
 
-[] check the validation for edit and create recipe
+[] check the validation for edit and create recipe \newline
 
-[] move the mongodb to atlas for production
+[] move the mongodb to atlas for production \newline
 

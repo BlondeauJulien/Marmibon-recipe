@@ -146,6 +146,8 @@ const CreateRecipe = (props) => {
 							id="recipeName"
 							value={recipe.recipeName}
 							onChange={handleChangeRecipe}
+							minLength="4"
+							maxLength="30"
 							required
 						/>
 					</div>
@@ -182,7 +184,7 @@ const CreateRecipe = (props) => {
 							onChange={handleChangeRecipe}
 							placeholder="Minutes"
 							min="1"
-							max="60"
+							max="59"
 							className="pct-50"
 							required
 						/>
