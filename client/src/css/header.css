@@ -104,3 +104,18 @@
     color: var(--brand-color);
     font-weight: 900;
 }
+
+@media (max-width: 1340px) {
+    .search-bar-container input {
+        width: 90%;
+        border: none;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-top-container {
+        grid-template-columns: 1fr 5fr 2.4fr;
+    }
+}
