@@ -35,7 +35,7 @@ Home:
 Recipe page:
 
 [] max length of a word in review section \newline
-[] block recipe Author to rate and comment own recipe \newline
+[-] block recipe Author to rate and comment own recipe \newline
 [X] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). \newline
 [X] Clean the userHasReviewedState 
 [] maybe redo the send comment response with loading and dont show the write comment section if user had reviewed before. \newline

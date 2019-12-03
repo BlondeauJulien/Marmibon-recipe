@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReviewItem from './ReviewItem';
 import uuidv4 from 'uuid/v4';
 
-const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed }) => {
+const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed }) => {
 
 
 	const [review, setReview] = useState({
@@ -14,7 +14,6 @@ const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStars
 		if(!userHasReviewed) {
 			document.querySelector('.review-content-cont').style.display = 'block';
 		}
-
 	}
 
 	const hideReviewTextArea = e => {
@@ -23,8 +22,23 @@ const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStars
 				document.querySelector('.review-content-cont').style.display = 'none';
 			}
 		}
+	}
 
+	const displayReviewRating = () => {
+		let display = {};
+		if(isAuthenticated) {
+			for(let i = 0; i<recipeInfo.reviews.length; i++) {
+				if(user._id === recipeInfo.reviews[i].authorId || user._id == recipeInfo.user) {
+					display.display = "none";
+					break;
+				}
+			}
+			if(user._id == recipeInfo.user) {
+				display.display = "none";
+			}
+		}
 
+		return display;
 	}
 
 	const previewRating = e => {
@@ -84,7 +98,7 @@ const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStars
 	return (
 		<div id="review-section" className="review-container">
 			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
-			<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} className="user-review-container">
+			<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} style={displayReviewRating()} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>
 				{ userHasReviewed.userHasReviewed ? (
 					<span className="review-sent">{userHasReviewed.msg}</span>

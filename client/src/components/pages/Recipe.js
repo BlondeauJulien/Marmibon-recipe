@@ -227,6 +227,7 @@ const Recipe = (props) => {
 				</div>
 			</div>
 			<Review 
+				user={user}
 				recipeInfo={recipeInfo}
 				createReview={createReview}
 				isAuthenticated={isAuthenticated} 
