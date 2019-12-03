@@ -101,6 +101,12 @@ const Recipe = (props) => {
 	/* BTN SAVE RECIPE */
 	const saveBtn = () => {
 
+		if(isAuthenticated) {
+			if(user._id == recipeInfo.user) {
+				return
+			}
+		}
+
 		if(loading.saveRecipeBtn) {
 			return (			
 				<div style={{width: '250px', margin: 'auto', display: 'block'}}>
