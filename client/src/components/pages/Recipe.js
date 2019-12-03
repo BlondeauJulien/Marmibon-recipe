@@ -15,6 +15,7 @@ const Recipe = (props) => {
 		recipeAuthor, 
 		loadRecipe, 
 		createReview, 
+		resetUserHasReviewed,
 		userHasReviewed, 
 		redirectToRecipe, 
 		userSaveRecipe, 
@@ -27,7 +28,8 @@ const Recipe = (props) => {
 	useEffect(() => {
         if(localStorage.getItem('token') !== null) {
             loadUser()
-        }
+		}
+		resetUserHasReviewed();
 		// eslint-disable-next-line
 	}, []);
 
@@ -224,7 +226,8 @@ const Recipe = (props) => {
 					</div>
 				</div>
 			</div>
-			<Review recipeInfo={recipeInfo}
+			<Review 
+				recipeInfo={recipeInfo}
 				createReview={createReview}
 				isAuthenticated={isAuthenticated} 
 				averageRatingStarsClassName={averageRatingStarsClassName}

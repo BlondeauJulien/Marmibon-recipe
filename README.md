@@ -32,15 +32,12 @@ Home:
 
 [] Link recipe presented/card to appropriate recipe page 
 
-Login Register:
-
-[] Reminder that this is a learning app.
-
 Recipe page:
 
 [] max length of a word in review section \newline
 [] block recipe Author to rate and comment own recipe \newline
-[] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). \newline
+[X] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). \newline
+[X] Clean the userHasReviewedState 
 [] maybe redo the send comment response with loading and dont show the write comment section if user had reviewed before. \newline
 [] change the alert for empty input on send comment for a element inside the component \newline
 [] prevent user to save a recipe he created \newline
@@ -48,6 +45,10 @@ Recipe page:
 Search:
 
 User:
+
+Search - User: 
+
+[] Max 10 result + page iteration
 
 Context All:
 [] check the error response \newline

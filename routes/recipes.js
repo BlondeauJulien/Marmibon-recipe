@@ -256,27 +256,31 @@ router.put('/:id/addreview', auth, async (req, res) => {
     try {
         let recipe = await Recipe.findById(req.params.id);
         let user = await User.findById(req.user.id);
+        let firstReview = true;
 
         if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
 
         recipe.reviews.forEach(review => {
             if(req.user.id === review.authorId) {
-                return res.json({
+                firstReview = false;
+                res.json({
                     msg: "Vous avez déjà ajouté un avis par le passé",
                     userHasReviewed: true
                 })
             }
         });
 
-        review.authorReviewName = user.userName;
+        if(firstReview) {
 
-        await Recipe.findByIdAndUpdate(req.params.id, {$push: { reviews: review }})
+            review.authorReviewName = user.userName;
 
-        res.json({
-            msg: "Votre avis a été ajouté",
-            userHasReviewed: true
-        })
+            await Recipe.findByIdAndUpdate(req.params.id, {$push: { reviews: review }})
 
+            res.json({
+                msg: "Votre avis a été ajouté",
+                userHasReviewed: true
+            })
+        }
     } catch (err) {
         console.error(err.message);
 		res.status(500).send('Server error');

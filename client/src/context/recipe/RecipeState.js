@@ -12,6 +12,7 @@ import {
         RESET_SET_RECIPE_TO_UPDATE,
         EDIT_RECIPE_SUCCESS,
         ADD_RECIPE_REVIEW,
+        RESET_USER_HAS_REVIEWED,
         REDIRECT_TO_RECIPE,
         REDIRECT_TO_EDIT,
         SET_LOADING,
@@ -122,6 +123,12 @@ const RecipeState = (props) => {
 				payload: err.response.msg
 			}); */
 		}
+        }
+
+        const resetUserHasReviewed = () =>{
+                dispatch({
+                        type: RESET_USER_HAS_REVIEWED
+                }); 
         }
 
         // Redirect to recipe after creation
@@ -279,6 +286,7 @@ const RecipeState = (props) => {
                 updateRecipe,
                 deleteRecipe,
                 createReview,
+                resetUserHasReviewed,
                 userSaveRecipe,
                 redirectToRecipe,
                 redirectToEdit,

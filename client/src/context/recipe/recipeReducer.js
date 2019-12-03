@@ -4,6 +4,7 @@ import {
     LOAD_RECIPE,
     GET_RANDOM_RECIPE,
     ADD_RECIPE_REVIEW,
+    RESET_USER_HAS_REVIEWED,
     REDIRECT_TO_RECIPE,
     REDIRECT_TO_EDIT,
     SET_LOADING,
@@ -50,6 +51,11 @@ export default (state, action) => {
             return {
                 ...state,
                 userHasReviewed: action.payload
+            };
+        case RESET_USER_HAS_REVIEWED:
+            return {
+                ...state,
+                userHasReviewed: false
             };
         case REDIRECT_TO_RECIPE:
             return {

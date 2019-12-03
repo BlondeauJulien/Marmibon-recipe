@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReviewItem from './ReviewItem';
 import uuidv4 from 'uuid/v4';
 
 const Review = ( { recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed }) => {
+
+
 	const [review, setReview] = useState({
 		reviewRating: 0,
 		reviewContent: ''
