@@ -69,7 +69,12 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 	const starsRatingPick = e => {
 		if(!isAuthenticated) {
-			alert('Vous devez etre connecter')
+			let el = document.querySelector('.alert-msg-review')
+			el.style.display = 'block';
+			el.innerText = "Vous devez être connecter pour donner votre avis"
+			setTimeout(() => {
+				el.style.display = 'none';
+			}, 5000);
 		} else {
 			setReview({...review, reviewRating: Number(e.target.id.replace('sr-', '')) + 1} )
 		}
@@ -77,7 +82,12 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 	const onChangeReviewContent = e => {
 		if(!isAuthenticated) {
-			alert('Vous devez etre connecter')
+			let el = document.querySelector('.alert-msg-review')
+			el.style.display = 'block';
+			el.innerText = "Vous devez être connecter pour donner votre avis"
+			setTimeout(() => {
+				el.style.display = 'none';
+			}, 5000);
 		} else {
 			setReview({...review, reviewContent: e.target.value} )
 		}
@@ -85,7 +95,12 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 	const submitReview = () => {
 		if(review.reviewRating === 0 || review.reviewContent === '') {
-			alert('vous devez ajouter un commentaire ou une note')
+			let el = document.querySelector('.alert-msg-review')
+			el.style.display = 'block';
+			el.innerText = "Ajouter un commentaire et une note s'il vous plait"
+			setTimeout(() => {
+				el.style.display = 'none';
+			}, 5000);
 		} else {
 			let reviewForm = {...review};
 			reviewForm.id = uuidv4();
@@ -100,6 +115,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
 			<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} style={displayReviewRating()} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>
+				<p className="alert-msg-review">test</p>
 				{ userHasReviewed.userHasReviewed ? (
 					<span className="review-sent">{userHasReviewed.msg}</span>
 				) : (

@@ -39,8 +39,8 @@ Recipe page:
 [X] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). \newline
 [X] Clean the userHasReviewedState 
 [] maybe redo the send comment response with loading and dont show the write comment section if user had reviewed before. \newline
-[] change the alert for empty input on send comment for a element inside the component \newline
-[-] prevent user to save a recipe he created \newline
+[-] change the alert for empty input on send comment for a element inside the component \newline
+[X] prevent user to save a recipe he created \newline
 
 Search:
 

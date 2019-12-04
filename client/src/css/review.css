@@ -11,6 +11,18 @@
     margin-bottom: 16px;
 }
 
+.alert-msg-review {
+    display: none;
+    width: 90%;
+    text-align: center;
+    padding: 6px;
+    margin: 12px auto;
+    border-radius: 6px;
+    background-color: rgb(201, 30, 30);
+    color: white;
+    font-size: 18px;
+}
+
 .link-to-comments {
     color: inherit;
     text-decoration: none;
