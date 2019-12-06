@@ -49,6 +49,8 @@
 
 
 .review-text {
+    overflow-wrap: break-word;
+    max-width: 250px;
     border-top: dashed 1px rgb(219, 219, 219);
     margin-top: 5px;
     padding-top: 20px;
