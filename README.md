@@ -30,11 +30,11 @@ Create Recipe and Edit Pages
 
 [X] Max for prep hours and minutes (front and back) 
 
-[-] Custom validation for recipeType, price, ingredientArray and StepArray
+[X] Custom validation for recipeType, price, ingredientArray and StepArray
 
 [X] Max size for ingredient name (front and back) 
 
-[] max length of a word in preparation section 
+[X] max length of a word in preparation section 
 
 Home
 
@@ -42,7 +42,7 @@ Home
 
 Recipe page
 
-[] max length of a word in review section 
+[X] max length of a word in review section 
 
 [X] block recipe Author to rate and comment own recipe 
 
@@ -52,7 +52,7 @@ Recipe page
 
 [X] dont show the write comment section if user had reviewed before. 
 
-[X] change the alert for empty input on send comment for a element inside the component 
+[X] change the alert for empty input on send comment for an element inside the component 
 
 [X] prevent user to save a recipe he created 
 

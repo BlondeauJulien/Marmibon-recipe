@@ -62,7 +62,7 @@ router.post('/getsearchqueryresult', async(req, res) => {
         let recipes = await Recipe.find({});
         let users;
         if(req.body.user.trim() !== '') {
-            users = await User.find({});
+            users = await User.find({}).select('-password');
         }
         
         let result;
@@ -121,11 +121,13 @@ router.post('/getsearchqueryresult', async(req, res) => {
             } else {
                 prevResult = [...recipes]
             }
+            let usersFound = users.filter(user => user.userName.toLowerCase() === req.body.user.toLowerCase());
 
             let userFiltered = prevResult.filter(recipe => {
-
-                for(let i = 0; i< users.length; i++) {
-                    if(users[i].userName.toLowerCase() === req.body.user.toLowerCase()) {
+                for(let i = 0; i < usersFound.length; i++) {
+                    console.log(usersFound[i]._id)
+                    
+                    if(usersFound[i]._id.toString() === recipe.user.toString()) {
                         return recipe;
                     }
                 }
