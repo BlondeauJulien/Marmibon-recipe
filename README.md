@@ -1,64 +1,80 @@
-To Do:
-[X] = done \newline
-[-] = working on it \newline
-[] = to do \newline
+To Do
 
-Global:
+[X] = done 
+
+[-] = working on it 
+
+[] = to do 
+
+Global
 
 [] Make it responsive all screen sizes
 
-NavBar:
+NavBar
 
-Footer:
+Footer
 
-About Page:
+About Page
 
 [] Write and style content.
 
-Contact Page:
+Contact Page
 
 [] Write and style content
 
-Create Recipe and Edit Pages:
+Create Recipe and Edit Pages
 
-[X] Max size for title (front and back); \newline
-[X] Max for serving size (front and back) \newline
-[X] Max for prep hours and minutes (front and back) \newline
-[] Custom validation for recipeType, price, ingredientArray and StepArray
-[X] Max size for ingredient name (front and back) \newline
-[] max length of a word in preparation section \newline
+[X] Max size for title (front and back); 
 
-Home:
+[X] Max for serving size (front and back) 
+
+[X] Max for prep hours and minutes (front and back) 
+
+[-] Custom validation for recipeType, price, ingredientArray and StepArray
+
+[X] Max size for ingredient name (front and back) 
+
+[] max length of a word in preparation section 
+
+Home
 
 [] Link recipe presented/card to appropriate recipe page 
 
-Recipe page:
+Recipe page
 
-[] max length of a word in review section \newline
-[X] block recipe Author to rate and comment own recipe \newline
-[X] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). \newline
+[] max length of a word in review section 
+
+[X] block recipe Author to rate and comment own recipe 
+
+[X] prevent possibility to write multiple comment (still a thing apparently event tho the already commented appear). 
+
 [X] Clean the userHasReviewedState 
-[X] dont show the write comment section if user had reviewed before. \newline
-[X] change the alert for empty input on send comment for a element inside the component \newline
-[X] prevent user to save a recipe he created \newline
 
-Search:
+[X] dont show the write comment section if user had reviewed before. 
 
-User:
+[X] change the alert for empty input on send comment for a element inside the component 
 
-Search - User: 
+[X] prevent user to save a recipe he created 
+
+Search
+
+User
+
+Search - User
 
 [] Max 10 result + page iteration
 
 Context All:
-[] check the error response \newline
-[] check that loading and other element appear or desapear appropriately if a catch error is used. \newline
+
+[] check the error response 
+
+[] check that loading and other element appear or desapear appropriately if a catch error is used. 
 
 ---- Backend ----
 
-[] check the error sending for all route. \newline
+[] check the error sending for all route. 
 
-[] check the validation for edit and create recipe \newline
+[] check the validation for edit and create recipe 
 
-[] move the mongodb to atlas for production \newline
+[] move the mongodb to atlas for production 
 

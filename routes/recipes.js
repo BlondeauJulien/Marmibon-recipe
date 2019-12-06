@@ -12,13 +12,16 @@ const User = require('../models/User');
 // @access  Private 
 
 router.post('/', [auth, [
-    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}),
+    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim().escape(),
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
     check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
-    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21})
+    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape(),
+    check('price', 'Merci de choisir un prix valide').custom(str => str === "lowPrice" || str === "midPrice" || str === "highPrice"),
+    check('recipeType', 'Merci de choisir entre entrée, plat ou dessert').custom(str => str === "starter" || str === "mainCourse" || str === "dessert"),
 ]], async (req, res) => {
     const errors = validationResult(req);
+    console.log(errors)
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
@@ -218,10 +221,11 @@ router.get('/user/:id',  async (req, res) => {
 // @access  Private 
 
 router.put('/edit/:id', [auth, [
-    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}),
+    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim().escape(),
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
     check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
+    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape()
 ]], async (req, res) => {
     const errors = validationResult(req);
 	if (!errors.isEmpty()) {

@@ -11,7 +11,7 @@ const User = require('../models/User')
 // @desc    Register a user
 // @access  Public
 router.post('/', [
-    check('userName', 'please Add name').not().isEmpty(),
+    check('userName', 'please Add name').not().isEmpty().isAlphanumeric().isLength({min: 4, max: 16}),
     check('email', 'please include valid email').isEmail(),
     check('password', 'please enter a password with 6 or more characters').isLength({ min: 6})
 ], async (req, res) => {

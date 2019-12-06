@@ -64,7 +64,7 @@ const Register = ( props) => {
         <div className="auth-form-container">
             <form onSubmit={onSubmit} className="auth-form">
                 <p>Créer votre compte Marmibon:</p>
-                <input type="text" name="userName" value={userName} onChange={onChange} placeholder="Votre pseudo" required/>
+                <input type="text" name="userName" value={userName} onChange={onChange} placeholder="Votre pseudo" minLength="4" maxLength="16" required/>
                 <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
                 <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
                 <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} placeholder="Confirmer votre mot de passe" minLength="6" required/>
