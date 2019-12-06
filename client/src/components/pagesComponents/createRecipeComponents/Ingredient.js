@@ -27,6 +27,7 @@ const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) =>
 				id="ingredientName"
 				value={ingredient.ingredientName}
 				onChange={(e) => handleChange({ ingredientName: e.target.value })}
+				maxLength="20"
 				required
 			/>
 			<label htmlFor="ingredientQuantity">Quantité:</label>

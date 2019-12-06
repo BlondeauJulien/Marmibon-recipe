@@ -16,6 +16,7 @@ router.post('/', [auth, [
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
     check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
+    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21})
 ]], async (req, res) => {
     const errors = validationResult(req);
 	if (!errors.isEmpty()) {
