@@ -143,3 +143,32 @@ main {
   background-color: white;
   border : solid 1px var(--brand-color);
 }
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-item {
+  font-size: 14px;
+  font-weight: 900;
+  margin: 4px;
+  padding: 6px 8px;
+  background-color: white;
+  color: var(--brand-color);
+  border: solid 1px var(--brand-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination-item-current {
+  background-color: var(--brand-color);
+  color: white;
+}
+
+.pagination-item:hover {
+  background-color: var(--brand-color);
+  color: white;
+}

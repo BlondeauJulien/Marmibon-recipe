@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import SearchForm from '../pagesComponents/searchComponent/SearchForm';
 import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import SearchContext from '../../context/search/searchContext';
 import spinner from '../layout/spinner.gif';
+import Pagination from '../pagesComponents/Pagination';
 
 
 
@@ -13,10 +14,13 @@ const Search = (props) => {
     const recipeContext = useContext(RecipeContext);
     const searchContext =useContext(SearchContext);
 
-    const { loadUser, user, isAuthenticated } = authContext;
+    const { loadUser } = authContext;
     const { recipeInfo, redirect} = recipeContext;
     const { searchResult, getSearchQuery, searchQueryValue, setQueryValue, searchLoading, resetSearchQueryValue, resetSearchResult } = searchContext
-    
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(6);
+    const [currentPosts, setCurrentPost] = useState(null);
 
     useEffect(() => {
         if(localStorage.getItem('token') !== null) {
@@ -34,7 +38,23 @@ const Search = (props) => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
         }
-    }, [redirect])
+    }, [redirect]);
+
+    useEffect(() => {
+        if(searchResult) {
+            const indexOfLastPost = currentPage * postsPerPage;
+            const indexOfFirstPost = indexOfLastPost - postsPerPage;
+            setCurrentPost(searchResult.slice(indexOfFirstPost, indexOfLastPost));
+        }
+        console.log(searchResult)
+    }, [searchResult, currentPage])
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchLoading])
+  
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
     
     return (
         <div className="search-container">
@@ -42,11 +62,18 @@ const Search = (props) => {
             <div className="search-result-cont">
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
-                {searchResult !== null && searchResult.length > 0 && searchResult.map(recipe => {
+                {searchResult && (<Pagination
+                    postsPerPage={postsPerPage}
+                    currentPage={currentPage}
+                    totalPosts={searchResult.length}
+                    paginate={paginate}
+                />)}
+
+                {currentPosts !== null && currentPosts.length > 0 && currentPosts.map(recipe => {
                     return <RecipeAbstractItem key={recipe._id} recipe={recipe}/>
                 })}
 
-                {searchResult !== null && searchResult.length === 0 && 
+                {currentPosts !== null && currentPosts.length === 0 && 
                     (<p className="recipes-not-found">Aucune recette trouvé</p>)
                 }
             </div>
