@@ -53,7 +53,6 @@ const Search = (props) => {
         setCurrentPage(1);
     }, [searchLoading])
   
-    // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
     
     return (
@@ -62,7 +61,7 @@ const Search = (props) => {
             <div className="search-result-cont">
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
-                {searchResult && (<Pagination
+                {searchResult && searchResult.length > 0 && (<Pagination
                     postsPerPage={postsPerPage}
                     currentPage={currentPage}
                     totalPosts={searchResult.length}

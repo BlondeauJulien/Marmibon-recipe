@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
 import spinner from '../layout/spinner.gif';
+import Pagination from '../pagesComponents/Pagination';
 
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
@@ -11,10 +12,12 @@ const User = (props) => {
 	const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
 
-
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
     const { recipeInfo, redirect, deleteRecipe, loading, setRecipeToUpdate, recipeToUpdate, pushToEditRecipe} = recipeContext;
 
+	const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(6);
+    const [currentPosts, setCurrentPost] = useState([]);
 
 	useEffect(() => {
 		if(localStorage.getItem('token') !== null) {
@@ -46,7 +49,31 @@ const User = (props) => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
         }
-    }, [redirect])
+	}, [redirect])
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [displayedOnProfile]);
+	
+	useEffect(() => {
+
+		if(user) {
+            const indexOfLastPost = currentPage * postsPerPage;
+			const indexOfFirstPost = indexOfLastPost - postsPerPage;
+			if(userRecipes && displayedOnProfile === "createdRecipe") {
+				setCurrentPost(userRecipes.slice(indexOfFirstPost, indexOfLastPost));
+			}else if(user.savedRecipe && displayedOnProfile === "savedRecipe") {
+				setCurrentPost(user.savedRecipe.slice(indexOfFirstPost, indexOfLastPost));
+			} else {
+				setCurrentPost([]);
+			}
+		}
+        //console.log(searchResult)
+    }, [displayedOnProfile, currentPage ])
+
+/*     useEffect(() => {
+        setCurrentPage(1);
+    }, [searchLoading]) */
 
 	if(user === null ) {
 		return (
@@ -58,9 +85,7 @@ const User = (props) => {
 		handleDisplayedOnProfile(nameChange)
 	}
 
-	const handleLogout = () => {
-		logout();
-	}
+	const paginate = pageNumber => setCurrentPage(pageNumber);
 
 	return (
 		<div className="user-container">
@@ -83,21 +108,28 @@ const User = (props) => {
 					</div>
 				</div>
 
+				{currentPosts && currentPosts.length > 0 && (<Pagination
+                    postsPerPage={postsPerPage}
+                    currentPage={currentPage}
+                    totalPosts={displayedOnProfile === "createdRecipe" ? userRecipes.length : user.savedRecipe.length}
+                    paginate={paginate}
+                />)}
+
 				{loading.deleteRecipeInUser ? (
 					<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
 				) : displayedOnProfile === "createdRecipe" ? (
 					<div className="recipes-abstracts-container">
-						{ userRecipes.length === 0 ? (
+						{ currentPosts.length === 0 ? (
 							<h3>Vous n'avez pas encore créée de recette</h3>
 						) : 
-						userRecipes.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
+						currentPosts.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : displayedOnProfile === "savedRecipe" ? (
 					<div className="recipes-abstracts-container">
-						{ user.savedRecipe.length === 0 ? (
+						{ currentPosts.length === 0 ? (
 							<h3>Vous n'avez pas encore sauvegardé de recette</h3>
 						) : 
-						user.savedRecipe.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
+						currentPosts.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : (
 					<div className="user-info-cont">

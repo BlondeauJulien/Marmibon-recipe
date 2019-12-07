@@ -152,10 +152,13 @@ main {
 }
 
 .pagination-item {
+  width: 26px;
+  height: 26px;
+  text-align: center;
   font-size: 14px;
+  line-height: 26px;
   font-weight: 900;
   margin: 4px;
-  padding: 6px 8px;
   background-color: white;
   color: var(--brand-color);
   border: solid 1px var(--brand-color);
