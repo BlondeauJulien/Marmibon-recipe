@@ -161,7 +161,7 @@ main {
   margin: 4px;
   background-color: white;
   color: var(--brand-color);
-  border: solid 1px var(--brand-color);
+  /* border: solid 1px var(--brand-color); */
   border-radius: 4px;
   cursor: pointer;
 }

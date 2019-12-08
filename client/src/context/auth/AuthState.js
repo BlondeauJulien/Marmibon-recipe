@@ -63,6 +63,7 @@ const AuthState = (props) => {
         }
 
         try {
+            setAuthLoading();
             const res = await axios.post('/api/users', formData, config);
 
             dispatch({
@@ -71,6 +72,7 @@ const AuthState = (props) => {
 
             });
             loadUser();
+            resetAuthLoading();
 
         } catch (err) {
             console.log(err)
@@ -79,6 +81,7 @@ const AuthState = (props) => {
                 payload: err.response.data.msg
 
             })
+            resetAuthLoading();
         }
     }
     // Login User

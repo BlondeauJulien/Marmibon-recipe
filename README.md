@@ -68,7 +68,7 @@ Context All:
 
 [] check the error response 
 
-[] check that loading and other element appear or desapear appropriately if a catch error is used. 
+[-] check that loading and other element appear or desapear appropriately if a catch error is used. 
 
 ---- Backend ----
 
