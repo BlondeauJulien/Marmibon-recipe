@@ -62,7 +62,7 @@ User
 
 Search - User
 
-[-] Max 10 result pagination
+[X] Max 6 result pagination
 
 Context All:
 

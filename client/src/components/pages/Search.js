@@ -23,6 +23,7 @@ const Search = (props) => {
     const [currentPosts, setCurrentPost] = useState(null);
 
     useEffect(() => {
+        console.log(currentPosts)
         if(localStorage.getItem('token') !== null) {
             loadUser()
         }
@@ -31,7 +32,7 @@ const Search = (props) => {
 
     useEffect(() => {
         resetSearchQueryValue();
-            resetSearchResult();
+        resetSearchResult();
     }, [props.history]);
 
     useEffect(() => {
@@ -46,7 +47,6 @@ const Search = (props) => {
             const indexOfFirstPost = indexOfLastPost - postsPerPage;
             setCurrentPost(searchResult.slice(indexOfFirstPost, indexOfLastPost));
         }
-        console.log(searchResult)
     }, [searchResult, currentPage])
 
     useEffect(() => {
@@ -61,18 +61,18 @@ const Search = (props) => {
             <div className="search-result-cont">
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
-                {searchResult && searchResult.length > 0 && (<Pagination
+                {searchResult && searchResult.length > postsPerPage && (<Pagination
                     postsPerPage={postsPerPage}
                     currentPage={currentPage}
                     totalPosts={searchResult.length}
                     paginate={paginate}
                 />)}
 
-                {currentPosts !== null && currentPosts.length > 0 && currentPosts.map(recipe => {
+                {searchResult && currentPosts !== null && currentPosts.length > 0 && currentPosts.map(recipe => {
                     return <RecipeAbstractItem key={recipe._id} recipe={recipe}/>
                 })}
 
-                {currentPosts !== null && currentPosts.length === 0 && 
+                {searchResult && currentPosts !== null && currentPosts.length === 0 && 
                     (<p className="recipes-not-found">Aucune recette trouvé</p>)
                 }
             </div>

@@ -13,3 +13,7 @@
     text-align: center;
     margin-bottom: 35px;
 }
+
+.search-result-cont {
+    min-height: 400px;
+}
