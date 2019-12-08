@@ -70,6 +70,9 @@ Context All:
 
 [-] check that loading and other element appear or desapear appropriately if a catch error is used. 
 
+[] Put a loading for posting review
+
+
 ---- Backend ----
 
 [] check the error sending for all route. 

@@ -24,6 +24,7 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 			</div>
 	<label htmlFor="stepContent">Etape {stepNumber}:</label>
 			<textarea
+				minLength="10"
 				maxLength="400"
 				className="create-recipe step-1"
 				name="stepContent"

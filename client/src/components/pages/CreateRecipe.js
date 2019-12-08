@@ -4,13 +4,15 @@ import Ingredient from '../pagesComponents/createRecipeComponents/Ingredient';
 import Step from '../pagesComponents/createRecipeComponents/Step';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
+import spinner from '../layout/spinner.gif';
+
 
 const CreateRecipe = (props) => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { createRecipe, recipeInfo, pushToCreatedRecipe, redirectToRecipe, redirect } = recipeContext;
+	const { createRecipe, recipeInfo, pushToCreatedRecipe, redirectToRecipe, redirect, loading } = recipeContext;
 
 	useEffect(() => {
 		loadUser();
@@ -261,8 +263,14 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 				</div>
-
-				<input type="submit" value="Poster ma recette" className="btn btn-mid btn-submit-recipe" />
+				{loading.sendingRecipe ? (
+					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
+						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
+					</div>
+				) : (
+					<input type="submit" value="Poster ma recette" className="btn btn-mid btn-submit-recipe" />
+				)}
+				
 			</form>
 		</div>
 	);

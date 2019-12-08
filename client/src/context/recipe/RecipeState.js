@@ -37,6 +37,7 @@ const RecipeState = (props) => {
                         recipePage: false,
                         saveRecipeBtn: false,
                         updateRecipe: false,
+                        sendingRecipe: false,
                         deleteRecipeInUser: false
 
                 }
@@ -54,6 +55,7 @@ const RecipeState = (props) => {
                 }
 
                 try {
+                        setLoading('sendingRecipe')
                         const recipeRes = await axios.post('/api/recipes', formData, config);
                         const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
             
@@ -64,7 +66,8 @@ const RecipeState = (props) => {
                                 recipeAuthorRes: recipeAuthorRes.data
                             }
             
-                        });      
+                        });     
+                        stopLoading('sendingRecipe')    
             
                 } catch (err) {
                         console.log(err)
@@ -72,6 +75,7 @@ const RecipeState = (props) => {
                                 type: CREATE_RECIPE_FAIL,
                                 payload: err.response.data.msg
                         })
+                        stopLoading('sendingRecipe')   
                 }
         }
 
@@ -90,7 +94,7 @@ const RecipeState = (props) => {
                                 recipeAuthorRes: recipeAuthorRes.data
                                 }
                         })
-            
+                        stopLoading("recipePage");
                 } catch (err) {
                         console.log(err)
                         dispatch({
@@ -159,8 +163,10 @@ const RecipeState = (props) => {
                                 type: USER_SAVE_RECIPE,
                                 payload: res.data
                         })
+                        stopLoading("saveRecipeBtn")
                 } catch (err) {
                         console.log(err)
+                        stopLoading("saveRecipeBtn")
                 }
         }
 
@@ -172,9 +178,10 @@ const RecipeState = (props) => {
                                 type: USER_UNSAVE_RECIPE,
                                 payload: res.data
                         })
-
+                        stopLoading("saveRecipeBtn")
                 } catch (err) {
                         console.log(err)
+                        stopLoading("saveRecipeBtn")
                 }
         }
 
@@ -193,8 +200,10 @@ const RecipeState = (props) => {
                                 }
                         });
                         resetRedirect()
+                        stopLoading("recipePage");
                 } catch (err) {
                         console.log(err)
+                        stopLoading("recipePage");
                 }
 
         }
@@ -220,6 +229,7 @@ const RecipeState = (props) => {
                 }
 
                 try {
+                        setLoading('sendingRecipe')
                         const recipeRes = await axios.put(`/api/recipes/edit/${id}`, formData, config);
                         const recipeAuthorRes = await axios.get(`/api/users/${recipeRes.data.user}`)
             
@@ -230,7 +240,8 @@ const RecipeState = (props) => {
                                 recipeAuthorRes: recipeAuthorRes.data
                             }
             
-                        });      
+                        });   
+                        stopLoading('sendingRecipe')   
             
                 } catch (err) {
                         console.log(err)
@@ -238,6 +249,7 @@ const RecipeState = (props) => {
                                 type: CREATE_RECIPE_FAIL,
                                 payload: err.response.data.msg
                         })
+                        stopLoading('sendingRecipe')   
                 }
         }
 
@@ -250,6 +262,7 @@ const RecipeState = (props) => {
                         stopLoading('deleteRecipeInUser')
                 } catch (err) {
                         console.log(err)
+                        stopLoading('deleteRecipeInUser')
                 }
         }
 

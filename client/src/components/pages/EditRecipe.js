@@ -255,8 +255,14 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 				</div>
-
-				<input type="submit" value="Editer ma recette" className="btn btn-mid btn-submit-recipe" />
+				{loading.sendingRecipe ? (
+					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
+						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
+					</div>
+				) : (
+					<input type="submit" value="Editer ma recette" className="btn btn-mid btn-submit-recipe" />
+				)}
+				
 			</form>
 		</div>
 	);
