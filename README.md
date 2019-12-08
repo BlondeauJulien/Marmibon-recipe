@@ -68,14 +68,16 @@ Context All:
 
 [] check the error response 
 
-[-] check that loading and other element appear or desapear appropriately if a catch error is used. 
+[X] check that loading and other element appear or desapear appropriately if a catch error is used. 
+[] Will need to check again the loading after the error because we can stop the loading directly in the response dispatch without error
 
 [] Put a loading for posting review
 
 
 ---- Backend ----
 
-[] check the error sending for all route. 
+[-] check the error sending for all route.
+    X - errors sent and displayed on login and register errors
 
 [] check the validation for edit and create recipe 
 

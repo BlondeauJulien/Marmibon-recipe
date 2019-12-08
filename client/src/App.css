@@ -175,3 +175,12 @@ main {
   background-color: var(--brand-color);
   color: white;
 }
+
+/* Errors */
+
+.error-msg {
+  margin: auto;
+  background-color: rgb(255, 0, 0) !important;
+  color: white !important;
+  font-weight: 900;
+}

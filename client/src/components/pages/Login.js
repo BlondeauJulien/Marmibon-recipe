@@ -22,7 +22,11 @@ const Login = (props) => {
         if(isAuthenticated) {
             props.history.push('/')
         }
-        // eslint-disable-next-line
+        if(error) {
+            setTimeout(() => {
+                clearErrors()
+            }, 7000);
+        }
     }, [error, isAuthenticated, props.history]);
 
     useEffect(() => {
@@ -66,6 +70,7 @@ const Login = (props) => {
                 ) : (
                     <input type="submit" value="Se connecter" />
                 )}
+                {error && (<p className="error-msg">{error}</p>)}
             </form>
             {!authLoading && (
                 <Fragment>

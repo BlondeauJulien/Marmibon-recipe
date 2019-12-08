@@ -13,7 +13,8 @@ import {
     LOGIN_FAIL,
     SET_AUTH_LOADING,
     RESET_AUTH_LOADING,
-    LOGOUT
+    LOGOUT,
+    CLEAR_ERRORS
 } from '../types';
 
 const AuthState = (props) => {
@@ -71,11 +72,12 @@ const AuthState = (props) => {
                 payload: res.data
 
             });
+            console.log('pass')
             loadUser();
             resetAuthLoading();
 
         } catch (err) {
-            console.log(err)
+            console.log(err.response)
             dispatch({
                 type: REGISTER_FAIL,
                 payload: err.response.data.msg
@@ -137,6 +139,8 @@ const AuthState = (props) => {
     }
 
     // Clear Errors
+
+    const clearErrors = () => dispatch({type: CLEAR_ERRORS})
     
     // Handle what's displayed on user profile
 
@@ -161,7 +165,8 @@ const AuthState = (props) => {
                 loadUser,
                 logUser,
                 logout,
-                handleDisplayedOnProfile
+                handleDisplayedOnProfile,
+                clearErrors
 			}}
 		>
 			{props.children}

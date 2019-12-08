@@ -17,6 +17,7 @@ router.post('/', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
+        console.log(res.status(400).json({ errors: errors.array() }))
         return res.status(400).json({ errors: errors.array() });
     }
 
@@ -26,7 +27,7 @@ router.post('/', [
         let user = await User.findOne({userName, email})
 
         if(user) {
-            res.status(400).json({ msg: 'User already exists' })
+            res.status(400).json({ msg: 'Votre pseudo ou email a déjà été utilisé' })
         }
     
         user = new User({

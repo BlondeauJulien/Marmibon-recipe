@@ -22,7 +22,11 @@ const Register = ( props) => {
         if(isAuthenticated) {
             props.history.push('/')
         }
-        // eslint-disable-next-line
+        if(error) {
+            setTimeout(() => {
+                clearErrors()
+            }, 7000);
+        }
 
     }, [error, isAuthenticated, props.history]);
 
@@ -73,7 +77,9 @@ const Register = ( props) => {
                 ) : (
                     <input type="submit" value="Créer un compte" />
                 )}
+                {error && (<p className="error-msg">{error}</p>)}
             </form>
+
             {!authLoading && (
                 <Fragment>
                     <p className="create-account-text">Déjà inscrit?</p>

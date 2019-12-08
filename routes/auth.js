@@ -52,10 +52,12 @@ router.post('/', [
         let user = await User.findOne( { email });
 
         if(!user) {
-            return res.status(400).json({ errors: errors.array() })
+            res.status(400).json({ msg: 'Pas de compte pour cette email' })
         }
     
-        await bcrypt.compare(password, user.password);
+        let passwordMatch = await bcrypt.compare(password, user.password);
+        
+        if(!passwordMatch) res.status(400).json({ msg: 'Vous avez entré un mauvais mot de passe' })
 
         let payload = {
             user: {

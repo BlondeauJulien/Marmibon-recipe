@@ -8,7 +8,8 @@ import {
     LOGIN_SUCCESS,
     SET_AUTH_LOADING,
     RESET_AUTH_LOADING,
-    LOGOUT
+    LOGOUT,
+    CLEAR_ERRORS
 } from '../types';
 
 export default (state, action) => {
@@ -59,11 +60,16 @@ export default (state, action) => {
             return {
                 ...state,
                 authLoading: false
-            }
+            };
         case DISPLAYED_ON_PROFILE:
             return {
                 ...state,
                 displayedOnProfile: action.payload
+            };
+        case CLEAR_ERRORS: 
+            return {
+                ...state,
+                error: null
             }
         default:
             return state;
