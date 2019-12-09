@@ -17,17 +17,22 @@ router.post('/', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        console.log(res.status(400).json({ errors: errors.array() }))
-        return res.status(400).json({ errors: errors.array() });
+        let errorsArrMsg = errors.array().reduce((acc, error) => {
+            return [...acc, error.msg]
+        }, [])
+        return res.status(400).json({ msg: errorsArrMsg })
     }
 
     const { userName, email, password } = req.body;
 
     try {
-        let user = await User.findOne({userName, email})
+        let user = await User.findOne({ $or: [
+            {userName},
+            {email}
+        ]})
 
         if(user) {
-            res.status(400).json({ msg: 'Votre pseudo ou email a déjà été utilisé' })
+            return res.status(400).json({ msg: ['Votre pseudo ou email a déjà été utilisé'] })
         }
     
         user = new User({

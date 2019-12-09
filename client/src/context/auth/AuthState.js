@@ -72,12 +72,10 @@ const AuthState = (props) => {
                 payload: res.data
 
             });
-            console.log('pass')
             loadUser();
             resetAuthLoading();
 
         } catch (err) {
-            console.log(err.response)
             dispatch({
                 type: REGISTER_FAIL,
                 payload: err.response.data.msg
@@ -107,7 +105,6 @@ const AuthState = (props) => {
             resetAuthLoading();
             
         } catch (err) {
-            console.log(err)
             dispatch({
                 type: LOGIN_FAIL,
                 payload: err.response.data.msg
@@ -138,7 +135,14 @@ const AuthState = (props) => {
         })
     }
 
-    // Clear Errors
+    // Errors
+
+    const setAuthError = (msg) => {
+        dispatch({
+            type: AUTH_ERROR,
+            payload: msg
+        })
+    }
 
     const clearErrors = () => dispatch({type: CLEAR_ERRORS})
     
@@ -166,6 +170,7 @@ const AuthState = (props) => {
                 logUser,
                 logout,
                 handleDisplayedOnProfile,
+                setAuthError,
                 clearErrors
 			}}
 		>

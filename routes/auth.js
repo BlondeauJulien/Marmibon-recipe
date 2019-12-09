@@ -37,13 +37,16 @@ router.get('/', auth, async (req, res) => {
 // @access  Public 
 
 router.post('/', [
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Password is required').exists()
+    check('email', `S'il vous plait, utiliser un email valide`).isEmail(),
+    check('password', 'Vous devez entrer un mot de passe').exists().isLength({min: 1})
 ], async (req, res) => {
     const errors = validationResult(req);
 
     if(!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
+        let errorsArrMsg = errors.array().reduce((acc, error) => {
+            return [...acc, error.msg]
+        }, [])
+        return res.status(400).json({ msg: errorsArrMsg })
     }
 
     const { email, password } = req.body;
@@ -52,12 +55,12 @@ router.post('/', [
         let user = await User.findOne( { email });
 
         if(!user) {
-            res.status(400).json({ msg: 'Pas de compte pour cette email' })
+            res.status(400).json({ msg: ['Pas de compte pour cette email'] })
         }
     
         let passwordMatch = await bcrypt.compare(password, user.password);
         
-        if(!passwordMatch) res.status(400).json({ msg: 'Vous avez entré un mauvais mot de passe' })
+        if(!passwordMatch) res.status(400).json({ msg: ['Vous avez entré un mauvais mot de passe'] })
 
         let payload = {
             user: {

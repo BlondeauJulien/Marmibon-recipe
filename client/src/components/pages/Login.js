@@ -46,15 +46,10 @@ const Login = (props) => {
 
     const onSubmit = e => {
         e.preventDefault();
-
-        if(email === "" || password === "") {
-            console.log("Empty input")
-        } else {
-            logUser({
-                email,
-                password
-            })
-        }
+        logUser({
+            email,
+            password
+        })
     }
 
 
@@ -70,7 +65,7 @@ const Login = (props) => {
                 ) : (
                     <input type="submit" value="Se connecter" />
                 )}
-                {error && (<p className="error-msg">{error}</p>)}
+                {error && error.map( (e,i) => (<p className="error-msg" key={'error-' + i}>{e}</p>))}
             </form>
             {!authLoading && (
                 <Fragment>

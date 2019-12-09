@@ -8,7 +8,7 @@ const Register = ( props) => {
     const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
 
-    const { register, error, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
+    const { register, error, setAuthError, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
     const { recipeInfo, redirect} = recipeContext;
 
     useEffect(() => {
@@ -50,11 +50,9 @@ const Register = ( props) => {
     const onSubmit = e => {
         e.preventDefault();
 
-        if(userName === "" || email === "" || password === "") {
-            console.log("Empty input")
-        } else if (password !== passwordConfirm) {
-            console.log("password doesn't match")
-        } else {
+        if(password !== passwordConfirm) {
+            setAuthError(["Les mots de passe entrés ne correspondent pas"])
+        } else { 
             register({
                 userName,
                 email,
@@ -77,7 +75,7 @@ const Register = ( props) => {
                 ) : (
                     <input type="submit" value="Créer un compte" />
                 )}
-                {error && (<p className="error-msg">{error}</p>)}
+                {error && error.map( (e,i) => (<p className="error-msg" key={'error-' + i}>{e}</p>))}
             </form>
 
             {!authLoading && (
