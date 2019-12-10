@@ -13,7 +13,8 @@ import {
 	SET_NAV_QUERY_VALUE,
 	RESET_SEARCH_QUERY_VALUE,
 	RESET_NAV_SEARCH_INPUT,
-	RESET_SEARCH_RESULT
+	RESET_SEARCH_RESULT,
+	SEARCH_FAIL
 } from '../types';
 
 const SearchState = (props) => {
@@ -27,7 +28,8 @@ const SearchState = (props) => {
 		navSearchInput: '',
 		RedirectSearchCont: false,
 		searchResult: null,
-		searchLoading: false
+		searchLoading: false,
+		searchErrors: null
 	};
 
 	const [ state, dispatch ] = useReducer(searchReducer, initialState);
@@ -42,7 +44,10 @@ const SearchState = (props) => {
 				payload: res.data
 			})
 		} catch (err) {
-			console.log(err)
+			dispatch({
+				type: SEARCH_FAIL,
+				payload: err.response.data.msg
+		}) 
 		}
 	}
 
@@ -56,7 +61,10 @@ const SearchState = (props) => {
 				payload: res.data
 			})
 		} catch (err) {
-			console.log(err)
+			dispatch({
+				type: SEARCH_FAIL,
+				payload: err.response.data.msg
+		}) 
 		}
 	}
 
@@ -84,7 +92,18 @@ const SearchState = (props) => {
 		try {
 			resetSearchResult();
 			setLoading();
-			const res = await axios.post('/api/recipes/getsearchqueryresult', state.searchQueryValue, config);
+			let res;
+			if(
+				state.searchQueryValue.name === '' 
+				&& state.searchQueryValue.ingredient === ''
+				&& state.searchQueryValue.time === ''
+				&& state.searchQueryValue.user === ''
+				) {
+					res = await axios.get('/api/recipes/all');
+				} else {
+					res = await axios.post('/api/recipes/getsearchqueryresult', state.searchQueryValue, config);
+				}
+			
 
              dispatch({
                 type: GET_SEARCH_QUERY_RESULT,
@@ -94,7 +113,10 @@ const SearchState = (props) => {
 			resetRedirectToSearchCont(); 
 
         } catch (err) {
-            console.log(err)
+            dispatch({
+				type: SEARCH_FAIL,
+				payload: err.response.data.msg
+		}) 
 
         }
 	}
@@ -125,7 +147,10 @@ const SearchState = (props) => {
 /* 			resetNavSearchInput(); */
 
         } catch (err) {
-            console.log(err)
+            dispatch({
+				type: SEARCH_FAIL,
+				payload: err.response.data.msg
+		}) 
 
         }
 	}
@@ -171,6 +196,7 @@ const SearchState = (props) => {
 				redirectSearchCont: state.redirectSearchCont,
 				searchResult: state.searchResult,
 				searchLoading: state.searchLoading,
+				searchErrors: state.searchErrors,
 				getAllRecipes,
 				getByRecipeType,
 				getSearchQuery,

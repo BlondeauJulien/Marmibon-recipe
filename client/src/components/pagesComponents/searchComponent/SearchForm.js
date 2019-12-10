@@ -30,7 +30,7 @@ const SearchForm = ({searchQueryValue, setQueryValue, getSearchQuery}) => {
                         <input value={searchQueryValue.user} onChange={onChange} name="user" type="search" />
                     </div>
                 </div>
-                <button /* onClick={handleClickSearch} */ className="btn btn-search">Rechercher</button>
+                <button className="btn btn-search">Rechercher</button>
             </form>
         </div>
     )

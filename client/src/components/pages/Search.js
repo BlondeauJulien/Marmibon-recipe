@@ -16,7 +16,7 @@ const Search = (props) => {
 
     const { loadUser } = authContext;
     const { recipeInfo, redirect} = recipeContext;
-    const { searchResult, getSearchQuery, searchQueryValue, setQueryValue, searchLoading, resetSearchQueryValue, resetSearchResult } = searchContext
+    const { searchResult, getSearchQuery, searchQueryValue, setQueryValue, searchLoading, resetSearchQueryValue, resetSearchResult, searchErrors } = searchContext
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
@@ -60,6 +60,8 @@ const Search = (props) => {
             <SearchForm searchQueryValue={searchQueryValue} setQueryValue={setQueryValue} getSearchQuery={getSearchQuery}/>
             <div className="search-result-cont">
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
+
+                {searchErrors && searchErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
 
                 {searchResult && searchResult.length > postsPerPage && (<Pagination
                     postsPerPage={postsPerPage}

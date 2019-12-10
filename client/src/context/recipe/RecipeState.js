@@ -265,6 +265,8 @@ const RecipeState = (props) => {
                 }
         }
 
+        /* ERRORS */
+
         const setRecipeError = (msg) => {
                 dispatch({
                     type: RECIPE_ERROR,
@@ -273,7 +275,6 @@ const RecipeState = (props) => {
             }
         
         const clearRecipeErrors = () => dispatch({type: CLEAR_RECIPE_ERRORS});
-
         // Loading
         const setLoading = element => dispatch( {
                 type: SET_LOADING,

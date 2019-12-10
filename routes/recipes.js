@@ -15,7 +15,7 @@ router.post('/', [auth, [
     check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim().escape(),
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
-    check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
+    check('prepTimeMins', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
     check('price', 'Merci de choisir un prix valide').custom(str => str === "lowPrice" || str === "midPrice" || str === "highPrice"),
     check('recipeType', 'Merci de choisir entre entrée, plat ou dessert').custom(str => str === "starter" || str === "mainCourse" || str === "dessert"),
     check('ingredients', 'Vous devez ajouter au moins 1 ingredient').custom(arr => arr.length > 0 ),
@@ -145,7 +145,8 @@ router.post('/getsearchqueryresult', async(req, res) => {
         res.json(result)
 
     } catch (err) {
-        console.log(err)
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la recherche, veuillez réessayer'] })
+		res.status(500).send('Server Error');
     }
 })
 
@@ -158,8 +159,8 @@ router.get('/all', async (req, res) => {
         const recipes = await Recipe.find({});
         res.json(recipes)
     } catch (err) {
-		console.error(err.message);
-		res.status(500).send('Server error');
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la recherche, veuillez réessayer'] })
+		res.status(500).send('Server Error');
     }
 
 });
@@ -191,7 +192,8 @@ router.get('/getbytype/:type', async (req, res) => {
         res.json(recipes);
 
     } catch (err) {
-        console.log(err)
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la recherche, veuillez réessayer'] })
+		res.status(500).send('Server Error');
     }
 })
 
@@ -219,8 +221,8 @@ router.get('/user/:id',  async (req, res) => {
         const recipes = await Recipe.find( { user: req.params.id});
         res.json(recipes)
     } catch (err) {
-		console.error(err.message);
-		res.status(500).send('Server error');
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la recherche, veuillez réessayer'] })
+		res.status(500).send('Server Error');
     }
 
 });
@@ -233,8 +235,13 @@ router.put('/edit/:id', [auth, [
     check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim().escape(),
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
-    check('prepTimeHours', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
-    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape()
+    check('prepTimeMins', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
+    check('price', 'Merci de choisir un prix valide').custom(str => str === "lowPrice" || str === "midPrice" || str === "highPrice"),
+    check('recipeType', 'Merci de choisir entre entrée, plat ou dessert').custom(str => str === "starter" || str === "mainCourse" || str === "dessert"),
+    check('ingredients', 'Vous devez ajouter au moins 1 ingredient').custom(arr => arr.length > 0 ),
+    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape(),
+    check('steps', 'Vous devez ajouter au moins une étape').custom(arr => arr.length > 0 ),
+    check('steps.*.stepContent', "Un étape doit contenir entre 10 et 400 characters").isLength({min: 10, max: 400}).trim().escape(),
 ]], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {

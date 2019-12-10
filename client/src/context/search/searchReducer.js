@@ -9,8 +9,8 @@ import {
     RESET_REDIRECT_SEARCH_CONT,
     RESET_SEARCH_QUERY_VALUE,
     RESET_NAV_SEARCH_INPUT,
-    RESET_SEARCH_RESULT
-
+    RESET_SEARCH_RESULT,
+    SEARCH_FAIL
 } from '../types';
 
 export default (state, action) => {
@@ -67,7 +67,13 @@ export default (state, action) => {
             return {
                 ...state,
                 searchResult: null
-            }
+            };
+        case SEARCH_FAIL:
+        return {
+            ...state,
+            searchErrors: action.payload,
+            searchLoading: false
+        }
         default:
             return state;
     }
