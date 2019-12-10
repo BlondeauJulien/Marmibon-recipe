@@ -12,7 +12,7 @@ const CreateRecipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { createRecipe, recipeInfo, pushToCreatedRecipe, redirectToRecipe, redirect, loading } = recipeContext;
+	const { createRecipe, recipeInfo, pushToCreatedRecipe, redirect, loading, recipeErrors, clearRecipeErrors } = recipeContext;
 
 	useEffect(() => {
 		loadUser();
@@ -23,9 +23,13 @@ const CreateRecipe = (props) => {
         if(!isAuthenticated) {
             props.history.push('/')
         }
-        // eslint-disable-next-line
+		if(recipeErrors) {
+            setTimeout(() => {
+				clearRecipeErrors()
+            }, 60000);
+        }
 
-    }, [isAuthenticated, props.history])
+    }, [recipeErrors, isAuthenticated, props.history])
 
 	useEffect(() => {
         if(recipeInfo !== null && pushToCreatedRecipe) {
@@ -132,7 +136,6 @@ const CreateRecipe = (props) => {
 		});
 
 		createRecipe(recipeForm);
-		redirectToRecipe(true)
 	};
 
 	return (
@@ -263,6 +266,7 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 				</div>
+				{recipeErrors && recipeErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
 				{loading.sendingRecipe ? (
 					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
 						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>

@@ -184,3 +184,10 @@ main {
   color: white !important;
   font-weight: 900;
 }
+
+.err-recipe-form {
+  text-align: center;
+  margin: 8px auto;
+  padding: 6px;
+  border-radius: 6px;
+}

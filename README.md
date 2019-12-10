@@ -77,7 +77,8 @@ Context All:
 ---- Backend ----
 
 [-] check the error sending for all route.
-    X - errors sent and displayed on login and register errors
+    [X] - errors sent and displayed on login and register errors + the login registercheck
+    [X] -  errors create recipe
 
 [] check the validation for edit and create recipe 
 

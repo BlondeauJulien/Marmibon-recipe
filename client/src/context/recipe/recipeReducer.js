@@ -14,26 +14,68 @@ import {
     RESET_REDIRECT,
     SET_RECIPE_TO_UPDATE,
     RESET_SET_RECIPE_TO_UPDATE,
-    EDIT_RECIPE_SUCCESS
+    EDIT_RECIPE_SUCCESS,
+    CLEAR_RECIPE_ERRORS,
+    RECIPE_ERROR
 } from '../types';
 
 export default (state, action) => {
     switch(action.type) {
         case CREATE_RECIPE_SUCCESS:
+                return {
+                    ...state,
+                    recipeInfo: action.payload.recipeRes,
+                    recipeAuthor: action.payload.recipeAuthorRes,
+                    pushToCreatedRecipe: true,
+                    loading: {
+                        ...state.loading,
+                        recipePage: false,
+                        sendingRecipe: false
+                    },
+                };
         case EDIT_RECIPE_SUCCESS:
+            return {
+                ...state,
+                recipeInfo: action.payload.recipeRes,
+                recipeAuthor: action.payload.recipeAuthorRes,
+                pushToEditRecipe: true,
+                loading: {
+                    ...state.loading,
+                    recipePage: false,
+                    sendingRecipe: false
+                },
+            };
         case LOAD_RECIPE:
             return {
                 ...state,
                 recipeInfo: action.payload.recipeRes,
                 recipeAuthor: action.payload.recipeAuthorRes,
-                loading: { recipePage: false},
+                pushToCreatedRecipe: false,
+                pushToEditRecipe: false,
+                loading: {
+                    ...state.loading,
+                    recipePage: false,
+                    sendingRecipe: false
+                },
             };
+        case CREATE_RECIPE_FAIL:
+            return {
+                ...state,
+                recipeInfo: null,
+                recipeAuthor: null,
+                loading: {
+                    ...state.loading,
+                    recipePage: false,
+                    sendingRecipe: false
+                },
+                recipeErrors: action.payload
+            }
         case GET_RANDOM_RECIPE:
             return {
                 ...state,
                 recipeInfo: action.payload.recipeRes,
                 recipeAuthor: action.payload.recipeAuthorRes,
-                loading: { recipePage: false},
+                loading: { ...state.loading, recipePage: false},
                 redirect: {recipeCont: true}
             };
         case SET_RECIPE_TO_UPDATE:
@@ -72,24 +114,29 @@ export default (state, action) => {
             return {
                 ...state,
                 recipeInfo : action.payload.recipe,
-                loading: { saveRecipeBtn: false},
+                loading: { ...state.loading, saveRecipeBtn: false},
             };
         case SET_LOADING: 
             return {
                 ...state,
-                loading: { [action.payload]: true}
+                loading: { ...state.loading, [action.payload]: true}
             };
         case STOP_LOADING:
             return {
                 ...state,
-                loading: { [action.payload]: false}
+                loading: { ...state.loading, [action.payload]: false}
             };
-        case RESET_REDIRECT: {
+        case RESET_REDIRECT: 
             return {
                 ...state,
                 redirect: {recipeCont: false}
+            
+        };
+        case CLEAR_RECIPE_ERRORS: 
+            return {
+                ...state,
+                recipeErrors: null
             }
-        }
         default:
             return state;
     }

@@ -19,7 +19,9 @@ import {
         STOP_LOADING,
         USER_SAVE_RECIPE,
         USER_UNSAVE_RECIPE,
-        RESET_REDIRECT
+        RESET_REDIRECT,
+        CLEAR_RECIPE_ERRORS,
+        RECIPE_ERROR
 } from '../types';
 
 const RecipeState = (props) => {
@@ -39,8 +41,8 @@ const RecipeState = (props) => {
                         updateRecipe: false,
                         sendingRecipe: false,
                         deleteRecipeInUser: false
-
-                }
+                },
+                recipeErrors: null
 	};
 
         const [ state, dispatch ] = useReducer(recipeReducer, initialState);
@@ -66,16 +68,13 @@ const RecipeState = (props) => {
                                 recipeAuthorRes: recipeAuthorRes.data
                             }
             
-                        });     
-                        stopLoading('sendingRecipe')    
+                        });       
             
                 } catch (err) {
-                        console.log(err)
                         dispatch({
                                 type: CREATE_RECIPE_FAIL,
                                 payload: err.response.data.msg
-                        })
-                        stopLoading('sendingRecipe')   
+                        }) 
                 }
         }
 
@@ -94,14 +93,14 @@ const RecipeState = (props) => {
                                 recipeAuthorRes: recipeAuthorRes.data
                                 }
                         })
-                        stopLoading("recipePage");
+
                 } catch (err) {
                         console.log(err)
                         dispatch({
                                 type: LOAD_RECIPE_FAIL,
                                 payload: err.response.data.msg
                         })
-                        stopLoading("recipePage");
+
                 }
         }
 
@@ -266,6 +265,15 @@ const RecipeState = (props) => {
                 }
         }
 
+        const setRecipeError = (msg) => {
+                dispatch({
+                    type: RECIPE_ERROR,
+                    payload: msg
+                })
+            }
+        
+        const clearRecipeErrors = () => dispatch({type: CLEAR_RECIPE_ERRORS});
+
         // Loading
         const setLoading = element => dispatch( {
                 type: SET_LOADING,
@@ -292,6 +300,7 @@ const RecipeState = (props) => {
                 pushToEditRecipe: state.pushToEditRecipe,
                 redirect: state.redirect,
                 loading: state.loading,
+                recipeErrors: state.recipeErrors,
                 createRecipe,
                 loadRecipe,
                 setRecipeToUpdate,
@@ -305,7 +314,9 @@ const RecipeState = (props) => {
                 redirectToEdit,
                 userDeleteSaveRecipe,
                 getRandomRecipe,
-                resetRedirect        
+                resetRedirect,
+                clearRecipeErrors,
+                setRecipeError    
 		}}
 		>
 			{props.children}
