@@ -239,6 +239,7 @@ const Recipe = (props) => {
 				isAuthenticated={isAuthenticated} 
 				averageRatingStarsClassName={averageRatingStarsClassName}
 				userHasReviewed={userHasReviewed}
+				loading={loading}
 			/>
 		</Fragment>
 	);

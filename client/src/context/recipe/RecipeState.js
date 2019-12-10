@@ -39,6 +39,7 @@ const RecipeState = (props) => {
                         recipePage: false,
                         saveRecipeBtn: false,
                         updateRecipe: false,
+                        review: false,
                         sendingRecipe: false,
                         deleteRecipeInUser: false
                 },
@@ -113,18 +114,16 @@ const RecipeState = (props) => {
 			}
 		}
 		try {
+                        setLoading("review");
                         const res = await axios.put(`/api/recipes/${id}/addreview`, formData, config);
  			dispatch({
                                 type: ADD_RECIPE_REVIEW,
                                 payload: res.data
 			}); 
-
+                        stopLoading("review");
 		} catch (err) {
+                        stopLoading("review");
                         console.log('error')
-/* 			dispatch({
-				type: CONTACT_ERROR,
-				payload: err.response.msg
-			}); */
 		}
         }
 

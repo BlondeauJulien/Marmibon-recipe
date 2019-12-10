@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReviewItem from './ReviewItem';
 import uuidv4 from 'uuid/v4';
+import spinner from '../../layout/spinner.gif';
 
-const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed }) => {
+const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed, loading }) => {
 
 
 	const [review, setReview] = useState({
@@ -113,9 +114,12 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 	return (
 		<div id="review-section" className="review-container">
 			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
-			<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} style={displayReviewRating()} className="user-review-container">
+			{loading.review ? (
+				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
+			) : (
+				<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} style={displayReviewRating()} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>
-				<p className="alert-msg-review">test</p>
+				<p className="alert-msg-review"></p>
 				{ userHasReviewed.userHasReviewed ? (
 					<span className="review-sent">{userHasReviewed.msg}</span>
 				) : (
@@ -149,6 +153,9 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 				)}
 
 			</div>
+			)}
+
+
 			<div className="recipe-rating">
 				<span className="overall-stars-rating-text">Cette recette a reçu:</span>
 				<div className="overall-stars-rating-stars-cont">

@@ -56,6 +56,8 @@ Recipe page
 
 [X] prevent user to save a recipe he created 
 
+[] When on a recipe and click "recette au hasard" the address link doesn't change
+
 Search
 
 User
@@ -80,6 +82,7 @@ Context All:
     [X] - errors sent and displayed on login and register errors + the login registercheck
     [X] -  errors create recipe
     [X] -  errors edit recipe
+    [X] - errors search
 
 [] check the validation for edit and create recipe 
 

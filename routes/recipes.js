@@ -263,7 +263,6 @@ router.put('/edit/:id', [auth, [
         res.json(recipe);
 
     } catch (err) {
-        console.error(err.message);
         res.status(400).json({ msg: ['Une erreur est survenu pendant la sauvegarde, veuillez réessayer'] })
 		res.status(500).send('Server error');
     }
@@ -323,13 +322,13 @@ router.put('/:id/saverecipe', auth, async (req, res) => {
         let recipe = await Recipe.findById(req.params.id);
         let user = await User.findById(req.user.id);
 
-        if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
-        if(!user) return res.status(404).json({ msg: 'User not found'});
+        if(!recipe) return res.status(404).json({ msg: ['Recipe not found']});
+        if(!user) return res.status(404).json({ msg: ['User not found']});
 
         user.savedRecipe.forEach(recipe => {
             if(req.params.id === recipe._id) {
-                console.log('already saved')
-                res.json({
+
+                return res.json({
                     msg: "Vous avez déjà sauvegardé la recette"
                 }) 
             }
@@ -354,8 +353,8 @@ router.put('/:id/saverecipe', auth, async (req, res) => {
         })
 
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la sauvegarde, veuillez réessayer'] })
+		res.status(500).send('Server error');
     }
 })
 
@@ -368,8 +367,8 @@ router.put('/:id/deletesaverecipe', auth, async (req, res) => {
         let recipe = await Recipe.findById(req.params.id);
         let user = await User.findById(req.user.id);
 
-        if(!recipe) return res.status(404).json({ msg: 'Contact not found'});
-        if(!user) return res.status(404).json({ msg: 'User not found'});
+        if(!recipe) return res.status(404).json({ msg: ['Recipe not found']});
+        if(!user) return res.status(404).json({ msg: ['User not found']});
 
         //delete user id in recipe DATA
         let savedArr = [...recipe.saved].filter(u => u !== req.user.id)
@@ -390,8 +389,8 @@ router.put('/:id/deletesaverecipe', auth, async (req, res) => {
         })
 
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la suppression, veuillez réessayer'] })
+		res.status(500).send('Server error');
     }
 })
 
@@ -403,18 +402,18 @@ router.delete('/:id', auth, async (req, res) => {
     try {
         let recipe = await Recipe.findById(req.params.id);
 
-        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
+        if(!recipe) return res.status(404).json({ msg: [`Nous n'avons pas trouvé la recette à supprimer`]});
 
-        if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: 'Not authorized to delete this recipe'});
+        if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: [`vous n'êtes pas autorisé à supprimer cette recette`]});
 
         await Recipe.findByIdAndRemove(req.params.id)
 
-        res.json({ msg: 'La recette a bien été supprimer' })
+        res.json({ msg: ['La recette a bien été supprimer'] })
 
 
     } catch (err) {
-        console.error(err.message);
-		res.status(500).send('Server Error');
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la suppression, veuillez réessayer'] })
+		res.status(500).send('Server error');
     }
 })
 
