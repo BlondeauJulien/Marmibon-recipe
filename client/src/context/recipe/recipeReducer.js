@@ -22,6 +22,7 @@ import {
 export default (state, action) => {
     switch(action.type) {
         case CREATE_RECIPE_SUCCESS:
+        case EDIT_RECIPE_SUCCESS:
                 return {
                     ...state,
                     recipeInfo: action.payload.recipeRes,
@@ -33,18 +34,6 @@ export default (state, action) => {
                         sendingRecipe: false
                     },
                 };
-        case EDIT_RECIPE_SUCCESS:
-            return {
-                ...state,
-                recipeInfo: action.payload.recipeRes,
-                recipeAuthor: action.payload.recipeAuthorRes,
-                pushToEditRecipe: true,
-                loading: {
-                    ...state.loading,
-                    recipePage: false,
-                    sendingRecipe: false
-                },
-            };
         case LOAD_RECIPE:
             return {
                 ...state,

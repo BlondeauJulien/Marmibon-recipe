@@ -11,7 +11,7 @@ const CreateRecipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { recipeInfo, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit, pushToCreatedRecipe} = recipeContext;
+	const { recipeInfo, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit, pushToCreatedRecipe, recipeErrors, clearRecipeErrors} = recipeContext;
 
 	useEffect(() => {
 		loadUser();
@@ -23,8 +23,12 @@ const CreateRecipe = (props) => {
         if(!isAuthenticated) {
             props.history.push('/')
 		}
-        // eslint-disable-next-line
-	}, [isAuthenticated, props.history])
+		if(recipeErrors) {
+            setTimeout(() => {
+				clearRecipeErrors()
+            }, 60000);
+        }
+	}, [recipeErrors, isAuthenticated, props.history])
 	
 	useEffect(() => {
         if(recipeInfo !== null && pushToCreatedRecipe) {
@@ -124,7 +128,6 @@ const CreateRecipe = (props) => {
 		});
 
 		updateRecipe(recipeToUpdate._id , recipeForm);
-		redirectToRecipe(true)
 	};
 
 
@@ -169,7 +172,7 @@ const CreateRecipe = (props) => {
 							min="0"
 							max="24"
 							className="pct-50"
-							required
+							
 						/>
 						<input
 							type="number"
@@ -180,7 +183,7 @@ const CreateRecipe = (props) => {
 							min="1"
 							max="59"
 							className="pct-50"
-							required
+							
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
@@ -255,6 +258,7 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 				</div>
+				{recipeErrors && recipeErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
 				{loading.sendingRecipe ? (
 					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
 						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>

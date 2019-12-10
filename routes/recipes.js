@@ -237,16 +237,19 @@ router.put('/edit/:id', [auth, [
     check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape()
 ]], async (req, res) => {
     const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() });
+    if(!errors.isEmpty()) {
+        let errorsArrMsg = errors.array().reduce((acc, error) => {
+            return [...acc, error.msg]
+        }, [])
+        return res.status(400).json({ msg: errorsArrMsg })
     }
     
     try {
         let recipe = await Recipe.findById(req.params.id);
 
-        if(!recipe) return res.status(404).json({ msg: 'Recipe not found'});
+        if(!recipe) return res.status(404).json({ msg: [`Nous n'avons pas trouver la recette à éditer: réessayer`]});
 
-        if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: 'Not authorized to modify this recipe'});
+        if(recipe.user.toString() !== req.user.id ) return res.status(404).json({ msg: [`Vous n'êtes pas authorisé à éditer cette recette`]});
 
         recipe = await Recipe.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
 
@@ -254,6 +257,7 @@ router.put('/edit/:id', [auth, [
 
     } catch (err) {
         console.error(err.message);
+        res.status(400).json({ msg: ['Une erreur est survenu pendant la sauvegarde, veuillez réessayer'] })
 		res.status(500).send('Server error');
     }
 })
