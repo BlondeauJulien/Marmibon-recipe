@@ -122,7 +122,6 @@ const RecipeState = (props) => {
                         stopLoading("review");
 		} catch (err) {
                         stopLoading("review");
-                        console.log('error')
 		}
         }
 

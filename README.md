@@ -84,7 +84,9 @@ Context All:
     [X] -  errors edit recipe
     [X] - errors search
 
-[] check the validation for edit and create recipe 
+[X] check the validation for edit and create recipe 
+
+[] check the validation for review
 
 [] move the mongodb to atlas for production 
 

@@ -137,6 +137,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 						<div className="review-content-cont">
 							<span>Votre commentaire:</span>
 							<textarea
+								minLength="10"
 								maxLength="400"
 								name="reviewContent"
 								value={review.reviewContent}

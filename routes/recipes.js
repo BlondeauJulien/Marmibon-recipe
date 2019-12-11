@@ -272,7 +272,17 @@ router.put('/edit/:id', [auth, [
 // @desc    Add a review to a recipe
 // @access  Private 
 
-router.put('/:id/addreview', auth, async (req, res) => {
+router.put('/:id/addreview', [auth, [
+    check('reviewRating', `Ajouter une note s'il vous plait`).isInt({min: 1, max: 5}),
+    check('reviewContent', 'Ajouter un avis de 10 characters minimum').isLength({min: 10, max: 400}).trim(),
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        let errorsArrMsg = errors.array().reduce((acc, error) => {
+            return [...acc, error.msg]
+        }, [])
+        return res.status(400).json({ msg: errorsArrMsg })
+    }
 
         let review = {...req.body};
         review.authorId = req.user.id;
