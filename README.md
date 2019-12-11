@@ -56,7 +56,7 @@ Recipe page
 
 [X] prevent user to save a recipe he created 
 
-[] When on a recipe and click "recette au hasard" the address link doesn't change
+[X] When on a recipe and click "recette au hasard" the url doesn't change
 
 Search
 

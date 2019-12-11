@@ -65,7 +65,7 @@ export default (state, action) => {
                 recipeInfo: action.payload.recipeRes,
                 recipeAuthor: action.payload.recipeAuthorRes,
                 loading: { ...state.loading, recipePage: false},
-                redirect: {recipeCont: true}
+                redirect: {...state.recipeCont, recipeCont: true},
             };
         case SET_RECIPE_TO_UPDATE:
             return {
@@ -118,7 +118,7 @@ export default (state, action) => {
         case RESET_REDIRECT: 
             return {
                 ...state,
-                redirect: {recipeCont: false}
+                redirect: {...state.recipeCont, recipeCont: false},
             
         };
         case CLEAR_RECIPE_ERRORS: 

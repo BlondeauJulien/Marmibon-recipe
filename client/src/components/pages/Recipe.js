@@ -40,6 +40,13 @@ const Recipe = (props) => {
         // eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		if(recipeInfo) {
+			props.history.push(`/recipe/${recipeInfo._id}`)
+		}
+
+	}, [recipeInfo]);
+
 	if(loading.recipePage) {
 		return (
 			<div className="recipe-container loading-recipe">

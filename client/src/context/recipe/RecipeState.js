@@ -96,7 +96,6 @@ const RecipeState = (props) => {
                         })
 
                 } catch (err) {
-                        console.log(err)
                         dispatch({
                                 type: LOAD_RECIPE_FAIL,
                                 payload: err.response.data.msg

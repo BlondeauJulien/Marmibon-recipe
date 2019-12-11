@@ -10,13 +10,7 @@ const Footer = () => {
     const { getRandomRecipe } = recipeContext;
 	const { 
 		getAllRecipes,
-		getByRecipeType, 
-		navSearchInput,
-		setNavQueryValue, 
-		redirectSearchCont,
-		redirectToSearchCont,
-		getSearchQueryFromNav,
-		resetNavSearchInput
+		getByRecipeType
 	} = searchContext;
 
 	return (
@@ -34,11 +28,11 @@ const Footer = () => {
                     <div>
                         <p className="list-header">Recettes</p>
                         <ul>
-                            <li><Link to="/search" onClick={getAllRecipes} href="#">Voir tout</Link></li>
-                            <li><Link to="/search" onClick={() => getByRecipeType('starter')} href="#">Entrées</Link></li>
-                            <li><Link to="/search" onClick={() => getByRecipeType('mainCourse')} href="#">Plats</Link></li>
-                            <li><Link to="/search" onClick={() => getByRecipeType('dessert')} href="#">Dessert</Link></li>
-                            <li><a onClick={getRandomRecipe} href="#">Recette au hasard</a></li>
+                            <li><Link to="/search" onClick={getAllRecipes} >Voir tout</Link></li>
+                            <li><Link to="/search" onClick={() => getByRecipeType('starter')} >Entrées</Link></li>
+                            <li><Link to="/search" onClick={() => getByRecipeType('mainCourse')} >Plats</Link></li>
+                            <li><Link to="/search" onClick={() => getByRecipeType('dessert')} >Dessert</Link></li>
+                            <li><a onClick={getRandomRecipe} style={{cursor: 'pointer'}}>Recette au hasard</a></li>
                         </ul>
                     </div>
                     <div>

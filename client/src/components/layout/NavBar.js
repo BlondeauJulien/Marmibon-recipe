@@ -68,19 +68,19 @@ const NavBar = (props) => {
 			<nav className="header-nav">
 				<ul>
 					<li>
-						<Link to="/search" onClick={getAllRecipes} href="#">Voir Tout</Link>
+						<Link to="/search" onClick={getAllRecipes} >Voir Tout</Link>
 					</li>
 					<li>
-						<Link to="/search" onClick={() => getByRecipeType('starter')} href="#">Entrées</Link>
+						<Link to="/search" onClick={() => getByRecipeType('starter')} >Entrées</Link>
 					</li>
 					<li>
-						<Link to="/search" onClick={() => getByRecipeType('mainCourse')} href="#">Plats</Link>
+						<Link to="/search" onClick={() => getByRecipeType('mainCourse')} >Plats</Link>
 					</li>
 					<li>
-						<Link to="/search" onClick={() => getByRecipeType('dessert')} href="#">Desserts</Link>
+						<Link to="/search" onClick={() => getByRecipeType('dessert')} >Desserts</Link>
 					</li>
 					<li className="random-recipe">
-						<a onClick={getRandomRecipe} href="#">Recette au hasard</a>
+						<a onClick={getRandomRecipe} style={{cursor: 'pointer'}}>Recette au hasard</a>
 					</li>
 					{isAuthenticated && (
 					<li className="create-recipe-nav">
