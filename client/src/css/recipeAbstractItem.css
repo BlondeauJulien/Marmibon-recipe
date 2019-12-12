@@ -26,6 +26,7 @@
 
 .recipe-abstract {
     padding: 4px 20px;
+    min-width: 130px;
 }
 
 .recipe-abstract-item img {
@@ -83,5 +84,14 @@
 
 .fa-clock {
     color: var(--brand-color);
+}
 
+@media (max-width: 440px) {
+    .recipe-abstract-rating-cont {
+        flex-direction: column;
+    }
+
+    .recipe-abstract-rating-text {
+        margin-top: 4px;
+    }
 }
