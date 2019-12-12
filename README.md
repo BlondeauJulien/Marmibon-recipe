@@ -11,7 +11,8 @@ Global
 [-] Make it responsive all screen sizes
     [X] NavBar
     [X] Home
-    [-] Search
+    [X] Search Form/cont
+    [-] Auth Form
 
 break point phone 480 under
 
