@@ -8,7 +8,9 @@ To Do
 
 Global
 
-[] Make it responsive all screen sizes
+[-] Make it responsive all screen sizes
+
+break point phone 480 under
 
 NavBar
 
@@ -68,17 +70,17 @@ Search - User
 
 Context All:
 
-[] check the error response 
+[X] check the error response 
 
 [X] check that loading and other element appear or desapear appropriately if a catch error is used. 
-[] Will need to check again the loading after the error because we can stop the loading directly in the response dispatch without error
+[X] Will need to check again the loading after the error because we can stop the loading directly in the response dispatch without error
 
-[] Put a loading for posting review
+[X] Put a loading for posting review
 
 
 ---- Backend ----
 
-[-] check the error sending for all route.
+[X] check the error sending for all route.
     [X] - errors sent and displayed on login and register errors + the login registercheck
     [X] -  errors create recipe
     [X] -  errors edit recipe
@@ -86,7 +88,7 @@ Context All:
 
 [X] check the validation for edit and create recipe 
 
-[] check the validation for review
+[X] check the validation for review
 
 [] move the mongodb to atlas for production 
 

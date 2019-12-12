@@ -36,7 +36,6 @@ const NavBar = (props) => {
 		e.preventDefault();
 		redirectToSearchCont();
 		getSearchQueryFromNav();
-
     }
 
 	return (
@@ -51,6 +50,7 @@ const NavBar = (props) => {
 					<input type="search" name="name" onChange={onChange} value={navSearchInput} placeholder="Je cherche une recette:" />
 				</form>
 				<div className="header-btn-container">
+				<Link to="/search" className="btn-search-mobile"><i className="fas fa-search brand-color-txt" /></Link>
 					{isAuthenticated ? (
 						<Link to="/user" className="btn btn-mid btn-brand brand-color-bg text-color-white">
 							<i className="fas fa-user" />

@@ -23,9 +23,17 @@ const Search = (props) => {
     const [currentPosts, setCurrentPost] = useState(null);
 
     useEffect(() => {
-        console.log(currentPosts)
         if(localStorage.getItem('token') !== null) {
             loadUser()
+        }
+        document.querySelector('.header-nav').style.display = "block"
+
+        return () => {
+            if (document.querySelector('.header-nav').style.removeProperty) {
+                document.querySelector('.header-nav').style.removeProperty('display');
+            } else {
+                document.querySelector('.header-nav').style.removeAttribute('display');
+            }
         }
 		// eslint-disable-next-line
     }, []);
