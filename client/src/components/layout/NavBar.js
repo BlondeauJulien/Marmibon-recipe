@@ -54,12 +54,12 @@ const NavBar = (props) => {
 					{isAuthenticated ? (
 						<Link to="/user" className="btn btn-mid btn-brand brand-color-bg text-color-white">
 							<i className="fas fa-user" />
-							{" "}Mon Profil
+							<p className="btn-user-header-text">Mon Profil</p>
 						</Link>
 					) : (
 						<Link to="/login" className="btn btn-mid btn-brand brand-color-bg text-color-white">
 							<i className="fas fa-user" />
-							{" "}Connexion
+							<p className="btn-user-header-text">Connexion</p>
 						</Link>
 					)}
 				</div>

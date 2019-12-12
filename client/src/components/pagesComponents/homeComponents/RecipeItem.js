@@ -4,7 +4,7 @@ const RecipeItem = ({ img, name }) => {
 
 
     return (
-        <div className="RecipeItem">
+        <div className="recipeItem">
             <div className={`recipe-item-img-bg ${img}`} ></div>
             <div className="recipe-item-name-container">
                 <h3>{name}</h3>

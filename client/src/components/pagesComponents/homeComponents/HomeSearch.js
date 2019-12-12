@@ -34,6 +34,7 @@ const HomeSearch = () => {
 			<div className="home-search-bg-image" onMouseEnter={unBlur} onMouseLeave={blur} />
 			<div className="home-search-container" onMouseEnter={unBlur} onMouseLeave={blur}>
 				<span>Trouver votre prochaine idée de recette:</span>
+				<div className="search-wrapper">
 				<div className="search-bar-bg">
 					<form onSubmit={handleSubmitSearch} className="search-bar-home-container">
 						<input type="search" name="name" onChange={onChange} value={searchQueryValue.name} placeholder="Rechercher parmi nos recettes..." />
@@ -45,6 +46,7 @@ const HomeSearch = () => {
 				<div className="search-advanced">
 					<i className="fas fa-long-arrow-alt-right" />
 					<Link to="/search">Recherche Avancée</Link>
+				</div>
 				</div>
 			</div>
 		</Fragment>

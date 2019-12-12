@@ -31,13 +31,20 @@
     font-family: sans-serif;
     font-size: 22px;
     font-weight: 900;
+    text-align: center;
 
     margin-top: 100px;
 }
 
+.search-wrapper {
+    width: 100%;
+}
+
 .search-bar-bg {
-    width: 650px;
+    width: 100%;
+    max-width: 650px;
     padding: 12px;
+    margin: auto;
     margin-top: 20px;
     border-radius: 10px;
     background-color: hsl(0, 0%, 0%, 0.25);
@@ -67,11 +74,15 @@
 }
 
 .search-advanced {
+    width: 100%;
+    max-width: 650px;
+    text-align: right;
     order: 0;
     flex: 0 1 auto;
     align-self: flex-end;
+    margin: auto;
     margin-top: 10px;
-    margin-right: 200px;
+    padding-right: 14px;
     cursor: pointer;
 }
 
@@ -82,3 +93,11 @@
     font-size: 16px;
 
 }
+
+@media (max-width: 400px) {
+    .search-bar-home-container input {
+        width: 80%;
+    }
+}
+
+

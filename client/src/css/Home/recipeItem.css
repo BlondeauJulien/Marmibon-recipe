@@ -1,4 +1,4 @@
-.RecipeItem {
+.recipeItem {
     width: 300px;
     height: 500px;
     border: solid 2px #efefef;
@@ -61,4 +61,31 @@
     font-weight: 900;
     text-align: center;
     margin: 15px;
+}
+
+@media (max-width: 610px) {
+    .recipeItem {
+        width: 150px; 
+        height: 250px;
+    }
+    
+    .recipe-item-img-bg {
+        height: 85%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+       /*  background-image: url("./recipe4saladenicoise.jpg"); */
+        background-repeat: no-repeat;
+        background-size: 165px;
+    }
+
+    .recipe-item-name-container {
+        height: 15%;
+    }
+
+    .recipe-item-name-container h3 {
+        font-size: 20px;
+        font-weight: 900;
+        text-align: center;
+        margin: 8px;
+    }
 }

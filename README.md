@@ -9,6 +9,8 @@ To Do
 Global
 
 [-] Make it responsive all screen sizes
+    [X] NavBar
+    [-] Home
 
 break point phone 480 under
 

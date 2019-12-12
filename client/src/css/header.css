@@ -58,6 +58,14 @@
     margin: auto;
 }
 
+.header-btn-container .btn {
+    display: flex;
+}
+
+.btn-user-header-text {
+    margin-left: 4px;
+}
+
 
 /* Navigation */
 
@@ -160,3 +168,16 @@
         margin: 0 4px;
     }
 }
+
+@media (max-width: 400px) {
+    .btn-user-header-text {
+        display: none;
+    }
+}
+
+@media (max-width: 305px) {
+    .logo-container h1 {
+        display: none;
+    }
+}
+
