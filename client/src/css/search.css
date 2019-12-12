@@ -15,5 +15,13 @@
 }
 
 .search-result-cont {
+    margin: auto;
     min-height: 400px;
+    max-width: 600px;
+}
+
+@media (max-width: 940px) {
+    .search-container {
+        padding: 25px 10px 40px 10px;
+    }
 }

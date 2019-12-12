@@ -38,6 +38,10 @@
     border-radius: 4px;
 }
 
+.search-param-cont input[type="number"] {
+    width: 98%;
+}
+
 
 .btn-search {
     width: 175px;
@@ -47,4 +51,13 @@
     background-color: var(--brand-color);
     color: white;
     cursor: pointer;
+}
+
+@media (max-width: 725px) {
+    .search-input-cont {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        max-width: 550px;
+    }
 }

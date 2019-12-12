@@ -10,7 +10,8 @@ Global
 
 [-] Make it responsive all screen sizes
     [X] NavBar
-    [-] Home
+    [X] Home
+    [-] Search
 
 break point phone 480 under
 

@@ -66,17 +66,20 @@ const Search = (props) => {
     return (
         <div className="search-container">
             <SearchForm searchQueryValue={searchQueryValue} setQueryValue={setQueryValue} getSearchQuery={getSearchQuery}/>
+
+            {searchResult && searchResult.length > postsPerPage && (<Pagination
+                postsPerPage={postsPerPage}
+                currentPage={currentPage}
+                totalPosts={searchResult.length}
+                paginate={paginate}
+            />)}
+
             <div className="search-result-cont">
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
                 {searchErrors && searchErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
 
-                {searchResult && searchResult.length > postsPerPage && (<Pagination
-                    postsPerPage={postsPerPage}
-                    currentPage={currentPage}
-                    totalPosts={searchResult.length}
-                    paginate={paginate}
-                />)}
+
 
                 {searchResult && currentPosts !== null && currentPosts.length > 0 && currentPosts.map(recipe => {
                     return <RecipeAbstractItem key={recipe._id} recipe={recipe}/>
