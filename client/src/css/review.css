@@ -146,9 +146,21 @@
 
 .reviews-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 16px;
     padding: 16px;
+}
+
+@media (max-width: 900px) {
+
+    .reviews-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        grid-gap: 16px;
+        padding: 16px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -162,5 +174,20 @@
 
     .btn-review {
         margin-top: 16px;
+    }
+
+    .reviews-container {
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+}
+
+@media (max-width: 700px) {
+    .recipe-rating {
+        font-size: 18px;
+        font-weight: 900;
+        padding: 24px 0px;
+        margin-bottom: 16px;
+        border-bottom: solid 1px rgb(201, 201, 201);
     }
 }
