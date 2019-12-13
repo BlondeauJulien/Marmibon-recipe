@@ -11,6 +11,12 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		reviewContent: ''
 	});
 
+	useEffect(() => {
+		if(review.reviewRating) {
+			document.querySelector('.review-content-cont').style.display = 'block';
+		}
+	}, [review.reviewRating])
+
 	const displayReviewTextArea = () => {
 		if(!userHasReviewed) {
 			document.querySelector('.review-content-cont').style.display = 'block';
@@ -98,7 +104,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		if(review.reviewRating === 0 || review.reviewContent === '') {
 			let el = document.querySelector('.alert-msg-review')
 			el.style.display = 'block';
-			el.innerText = "Ajouter un commentaire et une note s'il vous plait"
+			el.innerText = "Ajouter une note et un commentaire s'il vous plait"
 			setTimeout(() => {
 				el.style.display = 'none';
 			}, 5000);
@@ -117,13 +123,12 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 			{loading.review ? (
 				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
 			) : (
-				<div onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea} style={displayReviewRating()} className="user-review-container">
+				<div  onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea}  style={displayReviewRating()} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>
 				<p className="alert-msg-review"></p>
 				{ userHasReviewed.userHasReviewed ? (
 					<span className="review-sent">{userHasReviewed.msg}</span>
 				) : (
-					<>
 					<div className="grid-columns-2">
 					<div className="user-stars-rating-cont">
 						<span>Noter cette recette:</span>
@@ -147,10 +152,9 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 					</div>
 					<div className="btn-review">
-						<span onClick={submitReview}>Ajouter un avis</span>
+						<span onClick={submitReview}>Ajouter mon avis</span>
 					</div>
 				</div>
-				</>
 				)}
 
 			</div>
