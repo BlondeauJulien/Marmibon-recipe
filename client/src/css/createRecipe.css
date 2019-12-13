@@ -113,3 +113,38 @@
     color: white;
     cursor: pointer;
 }
+
+@media (max-width: 950px) {
+    .create-recipe-cont {
+        color: #5f5f5f;
+        margin-top: 25px;
+        padding: 25px 40px;
+        padding-bottom: 80px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        background-color: white;
+    }
+}
+
+@media (max-width: 790px) {
+    .create-recipe-single-input-cont .pct-50 {
+        width: 36%;
+    }
+}
+
+@media (max-width: 550px) {
+    .create-recipe-single-input-cont {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .create-recipe-single-input-cont .pct-50 {
+        width: 38%;
+    }
+
+    .create-recipe-steps-ing-cont {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+

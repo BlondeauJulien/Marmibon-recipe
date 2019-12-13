@@ -15,7 +15,8 @@ Global
     [X] Auth Form
     [X] Recipe Abstract
     [X] Recipe
-    [-] Review
+    [X] Review
+    [-] Recipe Form
 
 [] Make a button for create recipe in 
 
