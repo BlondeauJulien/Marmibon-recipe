@@ -12,7 +12,11 @@ Global
     [X] NavBar
     [X] Home
     [X] Search Form/cont
-    [-] Auth Form
+    [X] Auth Form
+    [X] Recipe Abstract
+    [X] Recipe
+
+[] Make a button for create recipe in 
 
 break point phone 480 under
 

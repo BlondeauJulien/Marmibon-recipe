@@ -157,7 +157,7 @@ const Recipe = (props) => {
 						<span className="recipe-author-name">{recipeAuthor}</span>
 					</div>
 					<div className="recipe-rating-container">
-						<div>
+						<div class="stars-cont">
 							<div className="stars-rating">
 								{averageRatingStarsClassName().map((el) => {
 									return (<i key={Math.random()} className={el} />);
