@@ -19,9 +19,8 @@ Global
     [X] Recipe Form
     [X] User
 
-[] Make a button for create recipe in 
+[X] Make a button for create recipe when navbar is hidden
 
-break point phone 480 under
 
 NavBar
 

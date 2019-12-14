@@ -22,7 +22,7 @@ const NavBar = (props) => {
 		getSearchQueryFromNav,
 		resetNavSearchInput
 	} = searchContext;
-
+	console.log(props.history)
 	useEffect(() => {
 		if(redirectSearchCont) {
 			resetNavSearchInput();
@@ -89,6 +89,11 @@ const NavBar = (props) => {
 					}
 				</ul>
 			</nav>
+			{isAuthenticated && props.history.location.pathname != "/create" && (
+				<div className="mobileAddRecipeBtn">
+					<Link to="/create"><i class="fas fa-plus"></i></Link>
+				</div>
+			)}
 		</header>
 	);
 };

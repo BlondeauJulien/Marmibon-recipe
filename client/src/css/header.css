@@ -117,6 +117,26 @@
     display: none;
 }
 
+.mobileAddRecipeBtn {
+    display: none;
+    position: fixed;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    background: hsl(120, 100%, 25%, 80%);
+    bottom: 10px;
+    right: 10px;
+    z-index: 50;
+    cursor: pointer;
+}
+
+.mobileAddRecipeBtn:hover {
+    background: hsl(120, 100%, 25%, 100%);
+}
+
+
+
 @media (max-width: 1340px) {
     .search-bar-container input {
         width: 90%;
@@ -167,6 +187,11 @@
     .header-nav ul li a {
         margin: 0 4px;
     }
+
+    .mobileAddRecipeBtn {
+        display: block;
+    }
+    
 }
 
 @media (max-width: 400px) {
