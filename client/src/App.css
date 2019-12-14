@@ -59,6 +59,10 @@ a {
 
 }
 
+.fwbold {
+  font-weight: 900;
+}
+
 /* MAIN Container */
 
 main {

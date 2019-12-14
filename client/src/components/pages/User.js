@@ -17,11 +17,23 @@ const User = (props) => {
 
 	const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
-    const [currentPosts, setCurrentPost] = useState([]);
+	const [currentPosts, setCurrentPost] = useState([]);
 
 	useEffect(() => {
 		if(localStorage.getItem('token') !== null) {
-            loadUser()
+			loadUser()
+		}
+		const handleResize = () => {
+			if( document.body.clientWidth > 800) {
+				document.querySelector('.user-profile-action-container').style.display = "block";
+			} else {
+				document.querySelector('.user-profile-action-container').style.display = "none";
+			}
+		}
+		window.addEventListener('resize', handleResize );
+
+		return () => {
+			window.removeEventListener('resize', handleResize)
 		}
 	// eslint-disable-next-line
 	}, []);
@@ -81,8 +93,17 @@ const User = (props) => {
 		)
 	}
 
+	const handleMobileUserMenu = (action) => {
+		if(action === "show") {
+			document.querySelector('.user-profile-action-container').style.display = "block";
+		} else {
+			document.querySelector('.user-profile-action-container').style.display = "none";
+		}
+	}
+
 	const handleDisplayChange = (nameChange) => {
-		handleDisplayedOnProfile(nameChange)
+		handleMobileUserMenu('close');
+		handleDisplayedOnProfile(nameChange);
 	}
 
 	const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -90,12 +111,14 @@ const User = (props) => {
 	return (
 		<div className="user-container">
 			<div className="user-profile-action-container">
+				<div className="cross-dont-show-menu"><i onClick={() => handleMobileUserMenu('close')} className="far fa-times-circle"></i></div>
 				<a>
 					<div onClick={() => handleDisplayChange('profileInfo')} className="btn-info">Mes infos</div>
 				</a>
 				<button onClick={logout} className="btn-logout">Se déconnecter</button>
 			</div>
 			<div className="user-profile-container">
+			<div className="arrow-show-menu" onClick={() => handleMobileUserMenu('show')}><i className="fas fa-angle-double-right"></i></div>
 				<h1>{user.userName}</h1>
 				<div className="user-content-container">
 					<div className="btn-saved-or-created-recipe-cont">
@@ -108,7 +131,7 @@ const User = (props) => {
 					</div>
 				</div>
 
-				{currentPosts && currentPosts.length > 0 && (<Pagination
+				{currentPosts && currentPosts.length > 1 && (<Pagination
                     postsPerPage={postsPerPage}
                     currentPage={currentPage}
                     totalPosts={displayedOnProfile === "createdRecipe" ? userRecipes.length : user.savedRecipe.length}

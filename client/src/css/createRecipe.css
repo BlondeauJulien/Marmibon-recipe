@@ -146,5 +146,10 @@
         display: grid;
         grid-template-columns: 1fr;
     }
+
+    .recipe-type-cont span{
+        text-align: left;
+    }
+
 }
 

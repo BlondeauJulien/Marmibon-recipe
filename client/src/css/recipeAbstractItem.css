@@ -11,6 +11,7 @@
 
 .btn-recipe-abstract-cont {
     position: absolute;
+    top: 4px;
     right: 0;
     margin-right: 10px;
 }
@@ -22,6 +23,8 @@
     right: 0;
     padding-left: 10px;
     margin-right: 10px;
+    font-weight: 900;
+    color: rgb(51, 51, 51);
 }
 
 .recipe-abstract {
@@ -85,6 +88,14 @@
 .fa-clock {
     color: var(--brand-color);
 }
+
+@media (max-width: 640px) {
+
+    .recipe-abstract-item {
+        padding: 16px 8px;
+    }
+}
+
 
 @media (max-width: 440px) {
     .recipe-abstract-rating-cont {

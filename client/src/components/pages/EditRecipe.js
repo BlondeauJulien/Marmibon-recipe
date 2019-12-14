@@ -137,7 +137,7 @@ const CreateRecipe = (props) => {
 			<form onSubmit={onSubmit}>
 				<div className="create-recipe-single-input-cont">
 					<div className="create-recipe-input-cont">
-						<label htmlFor="recipeName">Nom de la recette:</label>
+						<label htmlFor="recipeName" className="fwbold">Nom de la recette:</label>
 						<input
 							type="text"
 							name="recipeName"
@@ -148,8 +148,8 @@ const CreateRecipe = (props) => {
 							required
 						/>
 					</div>
-					<div className="create-recipe-input-cont">
-						<label htmlFor="serving">Nombre de portion:</label>
+					<div className="create-recipe-input-cont" >
+						<label htmlFor="serving" className="fwbold">Nombre de portion:</label>
 						<input
 							type="number"
 							name="serving"
@@ -162,7 +162,7 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label>Temps de préparation:</label>
+						<label className="fwbold">Temps de préparation:</label>
 						<input
 							type="number"
 							name="prepTimeHours"
@@ -187,7 +187,7 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label>Prix:</label>
+						<label className="fwbold">Prix:</label>
 						<div className="price-radio-cont">
 							<div className="radiobtn-recipe-price">
 								<label>Faible:</label>
@@ -206,7 +206,7 @@ const CreateRecipe = (props) => {
 				</div>
 
 				<div className="recipe-type-cont">
-					<span>Cette recette est:</span>
+					<span className="fwbold">Cette recette est:</span>
 					<div className="radiobtn-recipe-type-cont">
 						<div className="radiobtn-recipe-type">
 							<label>Une entrée</label>
@@ -225,7 +225,7 @@ const CreateRecipe = (props) => {
 
 				<div className="create-recipe-steps-ing-cont">
 					<div className="create-recipe-ingredient-cont">
-						<span>Ingredients:</span>
+						<span className="fwbold">Ingredients:</span>
 
 						{ingredients.map((ingredient) => (
 							<Ingredient
@@ -241,7 +241,7 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 					<div className="create-recipe-steps-cont">
-						<span>Etapes:</span>
+						<span className="fwbold">Etapes:</span>
 
 						{steps.map((step) => (
 							<Step

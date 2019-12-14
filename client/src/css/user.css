@@ -10,8 +10,13 @@
 }
 
 .user-profile-action-container {
+    display:block;
     border-right: solid 1px rgb(199, 199, 199);
     padding-top: 20px;
+}
+
+.arrow-show-menu, .cross-dont-show-menu {
+    display: none;
 }
 
 .btn-info, .btn-logout {
@@ -109,4 +114,76 @@
 
 .userInfo-item {
     margin-bottom: 16px;
+}
+
+@media (max-width: 800px) {
+    .user-container {
+        display: block;
+        min-height: 0px;
+        padding: 0px 0px 40px 0px; 
+    }
+
+    .user-profile-action-container {
+        display: none;
+        position: absolute;
+        margin: 0;
+        width: 200px;
+        height: 100%;
+        padding-left: 12px;
+        z-index: 10;
+        background-color: white;
+        border-top-left-radius: 12px;
+    }
+
+    .arrow-show-menu {
+        display: block;
+        position: absolute;
+        left:0;
+        width: 50px;
+        margin-top: 8px;
+        padding: 6px 8px;
+        text-align: center;
+        border-bottom-right-radius: 50%;
+        border-top-right-radius: 50%;
+        color: white;
+        background-color: var(--brand-color);
+        font-size: 26px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .cross-dont-show-menu {
+        display: block;
+        font-size: 26px;
+        text-align: right;
+        margin-right: 22px;
+        margin-bottom: 10px;
+        color: var(--brand-color);
+    }
+    
+    .cross-dont-show-menu i {
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 640px) {
+    .user-profile-container h1 {
+        font-size: 26px;
+        margin: 10px 0px 20px 0px;
+    }
+    
+    .user-content-container {
+        padding: 0 16px;
+    }
+    
+    .btn-saved-or-created-recipe-cont {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    /**/
+
+    .recipes-abstracts-container {
+        padding: 0;
+    }
 }
