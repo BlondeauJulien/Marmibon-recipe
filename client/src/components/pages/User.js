@@ -102,7 +102,10 @@ const User = (props) => {
 	}
 
 	const handleDisplayChange = (nameChange) => {
-		handleMobileUserMenu('close');
+		if(nameChange === "profileInfo" && document.body.clientWidth <= 800) {
+			handleMobileUserMenu('close');
+		}
+
 		handleDisplayedOnProfile(nameChange);
 	}
 
