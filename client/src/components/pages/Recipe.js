@@ -25,6 +25,7 @@ const Recipe = (props) => {
 		recipeInfo, 
 		recipeAuthor, 
 		loadRecipe, 
+		clearRecipeFromState,
 		createReview, 
 		resetUserHasReviewed,
 		userHasReviewed, 
@@ -37,28 +38,32 @@ const Recipe = (props) => {
     const { loadUser, user, isAuthenticated } = authContext;
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
         if(localStorage.getItem('token') !== null) {
             loadUser()
 		}
 		resetUserHasReviewed();
+		return () => {
+			clearRecipeFromState()
+		}
 		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
-		window.scrollTo(0, 0);
 		loadRecipe(props.match.params.recipeId);
 		redirectToRecipe(false)
         // eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		if(recipeInfo) {
 			props.history.push(`/recipe/${recipeInfo._id}`)
 		}
 
 	}, [recipeInfo]);
 
-	if(loading.recipePage) {
+	if(loading.recipePage || (recipeInfo === null || recipeAuthor === null)) {
 		return (
 			<div className="recipe-container loading-recipe">
 				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
@@ -66,11 +71,11 @@ const Recipe = (props) => {
 		)
 	}
 
-	if(recipeInfo === null || recipeAuthor === null) {
+/* 	if(recipeInfo === null || recipeAuthor === null) {
 		return (
 			<Error404 />
 		)
-	}
+	} */
 
 	const saveRecipe = () => {
 		if(isAuthenticated) {

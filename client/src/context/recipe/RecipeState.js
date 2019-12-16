@@ -7,6 +7,7 @@ import {
         CREATE_RECIPE_FAIL,
         LOAD_RECIPE,
         LOAD_RECIPE_FAIL,
+        CLEAR_RECIPE_FROM_STATE,
         GET_RANDOM_RECIPE,
         SET_RECIPE_TO_UPDATE,
         RESET_SET_RECIPE_TO_UPDATE,
@@ -103,6 +104,8 @@ const RecipeState = (props) => {
 
                 }
         }
+
+        const clearRecipeFromState = () => dispatch({type: CLEAR_RECIPE_FROM_STATE})
 
         // Create an user review
 
@@ -301,6 +304,7 @@ const RecipeState = (props) => {
                 recipeErrors: state.recipeErrors,
                 createRecipe,
                 loadRecipe,
+                clearRecipeFromState,
                 setRecipeToUpdate,
                 resetRecipeToUpdate,
                 updateRecipe,

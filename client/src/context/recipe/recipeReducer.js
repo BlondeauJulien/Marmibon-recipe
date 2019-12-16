@@ -2,6 +2,7 @@ import {
     CREATE_RECIPE_SUCCESS,
     CREATE_RECIPE_FAIL,
     LOAD_RECIPE,
+    CLEAR_RECIPE_FROM_STATE,
     GET_RANDOM_RECIPE,
     ADD_RECIPE_REVIEW,
     RESET_USER_HAS_REVIEWED,
@@ -46,6 +47,12 @@ export default (state, action) => {
                     recipePage: false,
                     sendingRecipe: false
                 },
+            };
+        case CLEAR_RECIPE_FROM_STATE:
+            return {
+                ...state,
+                recipeInfo: null,
+                recipeAuthor: null,
             };
         case CREATE_RECIPE_FAIL:
             return {

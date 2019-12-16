@@ -23,6 +23,7 @@ const Search = (props) => {
     const [currentPosts, setCurrentPost] = useState(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if(localStorage.getItem('token') !== null) {
             loadUser()
         }
@@ -50,6 +51,8 @@ const Search = (props) => {
     }, [redirect]);
 
     useEffect(() => {
+        let mainCont = document.querySelector('#main-cont');
+        mainCont.scrollIntoView()
         if(searchResult) {
             const indexOfLastPost = currentPage * postsPerPage;
             const indexOfFirstPost = indexOfLastPost - postsPerPage;
