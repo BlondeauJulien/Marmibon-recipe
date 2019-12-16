@@ -12,16 +12,16 @@ const User = require('../models/User');
 // @access  Private 
 
 router.post('/', [auth, [
-    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim().escape(),
+    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim(),
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
     check('prepTimeMins', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
     check('price', 'Merci de choisir un prix valide').custom(str => str === "lowPrice" || str === "midPrice" || str === "highPrice"),
     check('recipeType', 'Merci de choisir entre entrée, plat ou dessert').custom(str => str === "starter" || str === "mainCourse" || str === "dessert"),
     check('ingredients', 'Vous devez ajouter au moins 1 ingredient').custom(arr => arr.length > 0 ),
-    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape(),
+    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim(),
     check('steps', 'Vous devez ajouter au moins une étape').custom(arr => arr.length > 0 ),
-    check('steps.*.stepContent', "Un étape doit contenir entre 10 et 400 characters").isLength({min: 10, max: 400}).trim().escape(),
+    check('steps.*.stepContent', "Un étape doit contenir entre 10 et 400 characters").isLength({min: 10, max: 400}).trim(),
 
 ]], async (req, res) => {
     const errors = validationResult(req);
@@ -232,16 +232,16 @@ router.get('/user/:id',  async (req, res) => {
 // @access  Private 
 
 router.put('/edit/:id', [auth, [
-    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim().escape(),
+    check('recipeName', 'Please add a name to the recipe').isLength({min: 4, max: 30}).trim(),
     check('serving', 'Please add the number of serving').isInt({min: 1, max: 10}),
     check('prepTimeHours', `S'il vous plait remplisser le champ heure (0 si moins de 60 minutes). Merci.`).isInt({min: 0, max: 24}),
     check('prepTimeMins', `S'il vous plait remplisser le champ minute (0 si besoin). Merci.`).isInt({min: 0, max: 59}),
     check('price', 'Merci de choisir un prix valide').custom(str => str === "lowPrice" || str === "midPrice" || str === "highPrice"),
     check('recipeType', 'Merci de choisir entre entrée, plat ou dessert').custom(str => str === "starter" || str === "mainCourse" || str === "dessert"),
     check('ingredients', 'Vous devez ajouter au moins 1 ingredient').custom(arr => arr.length > 0 ),
-    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim().escape(),
+    check('ingredients.*.ingredientName', `Un ingrédient ne peut pas contenir plus de 20 characters`).isLength({min: 2, max: 21}).trim(),
     check('steps', 'Vous devez ajouter au moins une étape').custom(arr => arr.length > 0 ),
-    check('steps.*.stepContent', "Un étape doit contenir entre 10 et 400 characters").isLength({min: 10, max: 400}).trim().escape(),
+    check('steps.*.stepContent', "Un étape doit contenir entre 10 et 400 characters").isLength({min: 10, max: 400}).trim(),
 ]], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {

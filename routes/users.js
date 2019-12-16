@@ -11,16 +11,16 @@ const User = require('../models/User')
 // @desc    Register a user
 // @access  Public
 router.post('/', [
-    check('userName', 'please Add name').not().isEmpty().isAlphanumeric().isLength({min: 4, max: 16}),
-    check('email', 'please include valid email').isEmail(),
-    check('password', 'please enter a password with 6 or more characters').isLength({ min: 6})
+    check('userName', `S'il vous plait ajouter un nom d'utilisateur.`).not().isEmpty().isAlphanumeric().isLength({min: 4, max: 16}),
+    check('email', `S'il vous plait ajouter un email valide.`).isEmail(),
+    check('password', `Votre mot de passe doit faire au moins 6 characters`).isLength({ min: 6})
 ], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         let errorsArrMsg = errors.array().reduce((acc, error) => {
             return [...acc, error.msg]
         }, [])
-        return res.status(400).json({ msg: errorsArrMsg })
+        return res.status(400).json({ msg: [errorsArrMsg] })
     }
 
     const { userName, email, password } = req.body;

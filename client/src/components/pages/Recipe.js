@@ -152,6 +152,23 @@ const Recipe = (props) => {
 
 	}
 
+	const getMesureFrench = (qty, mesureName) => {
+		switch (mesureName) {
+			case "whole":
+				return qty > 1 ? `${qty} - entiers/ères` : `${qty} - entier/ère`;
+			case "gram":
+				return qty > 1 ? `${qty} - grammes` : `${qty} - gramme`;
+			case "kilo":
+				return qty > 1 ? `${qty} - kilos` : `${qty} - kilo`;
+			case "liter":
+				return qty > 1 ? `${qty} - litres` : `${qty} - litre`;
+			case "centilitre":
+				return qty > 1 ? `${qty} - centilitres` : `${qty} - centilitre`;
+			default:
+				return "";
+		}
+	}
+
 	/* BTN SAVE RECIPE */
 	const saveBtn = () => {
 
@@ -263,7 +280,7 @@ const Recipe = (props) => {
 					<div className="recipe-ingredients">
 						<h2>Ingrédients</h2>
 						{recipeInfo.ingredients.map(ing => {
-							return (<span key={ing.id} className="ingredient-item">{ing.ingredientQuantity} {ing.ingredientMesure} {ing.ingredientName}</span>)
+							return (<span key={ing.id} className="ingredient-item">{ing.ingredientName}: {getMesureFrench(ing.ingredientQuantity, ing.ingredientMesure)}</span>)
 						})}
 					</div>
 					<div className="recipe-instructions">
