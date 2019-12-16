@@ -121,7 +121,7 @@ const User = (props) => {
 				<button onClick={logout} className="btn-logout">Se déconnecter</button>
 			</div>
 			<div className="user-profile-container">
-			<div className="arrow-show-menu" onClick={() => handleMobileUserMenu('show')}><i className="fas fa-angle-double-right"></i></div>
+				<div className="arrow-show-menu" onClick={() => handleMobileUserMenu('show')}><i className="fas fa-angle-double-right"></i></div>
 				<h1>{user.userName}</h1>
 				<div className="user-content-container">
 					<div className="btn-saved-or-created-recipe-cont">
@@ -133,13 +133,6 @@ const User = (props) => {
 						>Mes recettes sauvegardées</div>
 					</div>
 				</div>
-
-				{currentPosts && currentPosts.length > 1 && (<Pagination
-                    postsPerPage={postsPerPage}
-                    currentPage={currentPage}
-                    totalPosts={displayedOnProfile === "createdRecipe" ? userRecipes.length : user.savedRecipe.length}
-                    paginate={paginate}
-                />)}
 
 				{loading.deleteRecipeInUser ? (
 					<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
@@ -168,6 +161,13 @@ const User = (props) => {
 					</div>
 
 				)}
+
+				{currentPosts && currentPosts.length > 1 && (<Pagination
+					postsPerPage={postsPerPage}
+					currentPage={currentPage}
+					totalPosts={displayedOnProfile === "createdRecipe" ? userRecipes.length : user.savedRecipe.length}
+					paginate={paginate}
+				/>)}
 
 			</div>
 		</div>

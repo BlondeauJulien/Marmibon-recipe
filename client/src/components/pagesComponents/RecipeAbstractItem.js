@@ -1,5 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import tomKaKaiImg from '../../css/Home/recipe1tomkakai.jpg'
+import pizzaImg from '../../css/Home/recipe2pizza.jpg'
+import fritesImg from '../../css/Home/recipe3frites.jpg'
+import saladeNicoiseImg from '../../css/Home/recipe4saladenicoise.jpg'
+import crepeImg from '../../css/Home/recipe5crepe.jpg'
+import ramenImg from '../../css/Home/recipe6ramen.jpg'
+import falafelImg from '../../css/Home/recipe7falafel.jpg'
+import ratatouilleImg from '../../css/Home/recipe8ratatouille.jpg'
+import padThaiImg from '../../css/Home/recipe9padthai.jpg'
+import defaultImg from '../../css/Home/recipeDefault.jpg'
 
 const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRecipeToUpdate }) => {
 
@@ -33,6 +43,37 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 		return starsArr
 	}
 
+	const blurred = {
+		filter: "blur(3px)",
+		WebkitFilter: "blur(3px)",
+	}
+
+	const getImg = () => {
+		switch (recipe.img) {
+			case "tomkakai":
+				return(<img src={tomKaKaiImg}  width="115"  />);
+			case "pizza":
+				return(<img src={pizzaImg}  width="115" />);
+			case "frites":
+				return(<img src={fritesImg}  width="115" />);
+			case "saladenicoise":
+				return(<img src={saladeNicoiseImg}  width="115" />);
+			case "crepe":
+				return(<img src={crepeImg}  width="115" />);
+			case "ramen":
+				return(<img src={ramenImg}  width="115" />);
+			case "falafel":
+				return(<img src={falafelImg}  width="115" />);
+			case "ratatouille":
+				return(<img src={ratatouilleImg}  width="115" />);
+			case "padthai":
+				return(<img src={padThaiImg}  width="115" />);
+			default:
+				return (<img src={defaultImg}  width="115" style={blurred}/>);
+		}
+
+	}
+
 	const displayConfirmDeleteCont = () => {
 		document.getElementById(`btn-recipe-abstract-cont-${recipe._id}`).style.display = "none";
 		document.getElementById(`confirm-delete-cont-${recipe._id}`).style.display = "block";
@@ -61,7 +102,7 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 				</div>
 				</>)
 			}
-			<img src="https://feelgoodfoodie.net/wp-content/uploads/2019/07/Falafel-Recipe-19.jpg" height="175" />
+			{getImg()}
 			<div className="recipe-abstract">
 				<h2><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></h2>
 				<div className="recipe-abstract-rating-cont">

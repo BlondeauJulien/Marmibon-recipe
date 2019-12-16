@@ -50,7 +50,7 @@ Create Recipe and Edit Pages
 
 Home
 
-[] Link recipe presented/card to appropriate recipe page 
+[-] Link recipe presented/card to appropriate recipe page 
 
 Recipe page
 
@@ -100,5 +100,5 @@ Context All:
 
 [X] check the validation for review
 
-[] move the mongodb to atlas for production 
+[X] move the mongodb to atlas for production 
 

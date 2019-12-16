@@ -91,7 +91,7 @@
 .recipe-img-container img {
     width: 300px;
     border-radius: 10px;
-    filter: blur(8px);
+/*     filter: blur(8px); */
 }
 
 .recipe-text-info-cont {
@@ -199,7 +199,7 @@
 
     .recipe-img-container img {
         width: 175px;
-        filter: blur(6px);
+/*         filter: blur(6px); */
     }
 
     .recipe-info-name {

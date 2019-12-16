@@ -67,13 +67,6 @@ const Search = (props) => {
         <div className="search-container">
             <SearchForm searchQueryValue={searchQueryValue} setQueryValue={setQueryValue} getSearchQuery={getSearchQuery}/>
 
-            {searchResult && searchResult.length > postsPerPage && (<Pagination
-                postsPerPage={postsPerPage}
-                currentPage={currentPage}
-                totalPosts={searchResult.length}
-                paginate={paginate}
-            />)}
-
             <div className="search-result-cont">
                 {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
 
@@ -89,6 +82,13 @@ const Search = (props) => {
                     (<p className="recipes-not-found">Aucune recette trouvé</p>)
                 }
             </div>
+
+            {searchResult && searchResult.length > postsPerPage && (<Pagination
+                postsPerPage={postsPerPage}
+                currentPage={currentPage}
+                totalPosts={searchResult.length}
+                paginate={paginate}
+            />)}
         </div>
     )
 }

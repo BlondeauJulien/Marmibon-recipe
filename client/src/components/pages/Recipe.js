@@ -4,6 +4,17 @@ import Error404 from '../errorsPages/Recipe404Error';
 import AuthContext from '../../context/auth/authContext';
 import spinner from '../layout/spinner.gif';
 
+import tomKaKaiImg from '../../css/Home/recipe1tomkakai.jpg'
+import pizzaImg from '../../css/Home/recipe2pizza.jpg'
+import fritesImg from '../../css/Home/recipe3frites.jpg'
+import saladeNicoiseImg from '../../css/Home/recipe4saladenicoise.jpg'
+import crepeImg from '../../css/Home/recipe5crepe.jpg'
+import ramenImg from '../../css/Home/recipe6ramen.jpg'
+import falafelImg from '../../css/Home/recipe7falafel.jpg'
+import ratatouilleImg from '../../css/Home/recipe8ratatouille.jpg'
+import padThaiImg from '../../css/Home/recipe9padthai.jpg'
+import defaultImg from '../../css/Home/recipeDefault.jpg'
+
 import RecipeContext from '../../context/recipe/recipeContext';
 
 const Recipe = (props) => {
@@ -105,6 +116,37 @@ const Recipe = (props) => {
 		return starsArr
 	}
 
+	const blurred = {
+		filter: "blur(5px)",
+		WebkitFilter: "blur(5px)",
+	}
+
+	const getImg = () => {
+		switch (recipeInfo.img) {
+			case "tomkakai":
+				return(<img src={tomKaKaiImg} width="300"  />);
+			case "pizza":
+				return(<img src={pizzaImg}  width="300"  />);
+			case "frites":
+				return(<img src={fritesImg}  width="300"  />);
+			case "saladenicoise":
+				return(<img src={saladeNicoiseImg}  width="300"  />);
+			case "crepe":
+				return(<img src={crepeImg}  width="300"  />);
+			case "ramen":
+				return(<img src={ramenImg}  width="300"  />);
+			case "falafel":
+				return(<img src={falafelImg}  width="300"  />);
+			case "ratatouille":
+				return(<img src={ratatouilleImg}  width="300"  />);
+			case "padthai":
+				return(<img src={padThaiImg}  width="300"  />);
+			default:
+				return (<img src={defaultImg}  width="300"  style={blurred}/>);
+		}
+
+	}
+
 	/* BTN SAVE RECIPE */
 	const saveBtn = () => {
 
@@ -174,11 +216,7 @@ const Recipe = (props) => {
 
 				<div className="recipe-general-info-container">
 					<div className="recipe-img-container">
-						<img
-							src="https://feelgoodfoodie.net/wp-content/uploads/2019/07/Falafel-Recipe-19.jpg"
-							width="300"
-							heigth="350"
-						/>
+						{getImg()}
 					</div>
 					<div className="recipe-text-info-cont">
 						<div>

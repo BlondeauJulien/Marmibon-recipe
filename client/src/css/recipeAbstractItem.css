@@ -27,6 +27,10 @@
     color: rgb(51, 51, 51);
 }
 
+.recipe-abstract-item img {
+    min-width: 115px;
+}
+
 .recipe-abstract {
     padding: 4px 20px;
     min-width: 130px;
