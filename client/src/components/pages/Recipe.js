@@ -7,7 +7,7 @@ import spinner from '../layout/spinner.gif';
 import tomKaKaiImg from '../../css/Home/recipe1tomkakai.jpg'
 import pizzaImg from '../../css/Home/recipe2pizza.jpg'
 import fritesImg from '../../css/Home/recipe3frites.jpg'
-import saladeNicoiseImg from '../../css/Home/recipe4saladenicoise.jpg'
+import gazpachoImg from '../../css/Home/recipe4gazpacho.jpg'
 import crepeImg from '../../css/Home/recipe5crepe.jpg'
 import ramenImg from '../../css/Home/recipe6ramen.jpg'
 import falafelImg from '../../css/Home/recipe7falafel.jpg'
@@ -45,9 +45,9 @@ const Recipe = (props) => {
 	}, []);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		loadRecipe(props.match.params.recipeId);
 		redirectToRecipe(false)
-		window.scrollTo(0, 0);
         // eslint-disable-next-line
 	}, []);
 
@@ -130,7 +130,7 @@ const Recipe = (props) => {
 			case "frites":
 				return(<img src={fritesImg}  width="300"  />);
 			case "saladenicoise":
-				return(<img src={saladeNicoiseImg}  width="300"  />);
+				return(<img src={gazpachoImg}  width="300"  />);
 			case "crepe":
 				return(<img src={crepeImg}  width="300"  />);
 			case "ramen":

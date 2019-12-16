@@ -61,7 +61,9 @@ const Search = (props) => {
         setCurrentPage(1);
     }, [searchLoading])
   
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber)
+    };
     
     return (
         <div className="search-container">

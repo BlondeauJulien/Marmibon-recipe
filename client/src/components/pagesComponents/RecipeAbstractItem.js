@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import tomKaKaiImg from '../../css/Home/recipe1tomkakai.jpg'
-import pizzaImg from '../../css/Home/recipe2pizza.jpg'
-import fritesImg from '../../css/Home/recipe3frites.jpg'
-import saladeNicoiseImg from '../../css/Home/recipe4saladenicoise.jpg'
-import crepeImg from '../../css/Home/recipe5crepe.jpg'
-import ramenImg from '../../css/Home/recipe6ramen.jpg'
-import falafelImg from '../../css/Home/recipe7falafel.jpg'
-import ratatouilleImg from '../../css/Home/recipe8ratatouille.jpg'
-import padThaiImg from '../../css/Home/recipe9padthai.jpg'
-import defaultImg from '../../css/Home/recipeDefault.jpg'
+import tomKaKaiImg from '../../css/Home/recipe1tomkakai.jpg';
+import pizzaImg from '../../css/Home/recipe2pizza.jpg';
+import fritesImg from '../../css/Home/recipe3frites.jpg';
+import gazpachoImg from '../../css/Home/recipe4gazpacho.jpg';
+import crepeImg from '../../css/Home/recipe5crepe.jpg';
+import ramenImg from '../../css/Home/recipe6ramen.jpg';
+import falafelImg from '../../css/Home/recipe7falafel.jpg';
+import ratatouilleImg from '../../css/Home/recipe8ratatouille.jpg';
+import padThaiImg from '../../css/Home/recipe9padthai.jpg';
+import defaultImg from '../../css/Home/recipeDefault.jpg';
 
 const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRecipeToUpdate }) => {
 
@@ -22,9 +22,9 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 
 		let averageRating = Math.round(total / recipe.reviews.length);
 
-		if(isNaN(averageRating)) return 0
+		if(isNaN(averageRating)) return 0;
 
-		return averageRating
+		return averageRating;
 	}
 
 	const averageRatingStarsClassName = () => {
@@ -57,7 +57,7 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 			case "frites":
 				return(<img src={fritesImg}  width="115" />);
 			case "saladenicoise":
-				return(<img src={saladeNicoiseImg}  width="115" />);
+				return(<img src={gazpachoImg}  width="115" />);
 			case "crepe":
 				return(<img src={crepeImg}  width="115" />);
 			case "ramen":

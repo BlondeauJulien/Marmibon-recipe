@@ -10,14 +10,19 @@ const Pagination = ({ postsPerPage, currentPage, totalPosts, paginate }) => {
   return (
     <nav>
       <ul className='pagination'>
-          <li onClick={() => paginate(1)} className='pagination-item'><i className="fas fa-step-backward"></i></li>
+        <a onClick={() => paginate(1)} href="#main-cont"><li className='pagination-item'>
+          <i className="fas fa-step-backward"></i></li>
+        </a>
         {pageNumbers.map(number => (
-          <li key={number} onClick={() => paginate(number)}
-           className={currentPage === number ? 'pagination-item pagination-item-current' : "pagination-item"}>  
-            {number} 
-          </li>
+          <a key={number}  onClick={() => paginate(number)} href="#main-cont">
+            <li className={currentPage === number ? 'pagination-item pagination-item-current' : "pagination-item"}>  
+              {number} 
+            </li>
+          </a>
         ))}
-            <li onClick={() => paginate(pageNumbers.length)} className='pagination-item'><i className="fas fa-step-forward"></i></li>
+        <a onClick={() => paginate(pageNumbers.length)} href="#main-cont">
+          <li className='pagination-item'><i className="fas fa-step-forward"></i></li>
+        </a>
       </ul>
     </nav>
   );

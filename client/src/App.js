@@ -31,7 +31,7 @@ function App() {
 					<Router>
 						<Fragment>
 							<NavBar />
-							<main>
+							<main id="main-cont">
 								<Switch>
 									<Route exact path="/" component={Home} />
 									<Route exact path="/login" component={Login} />

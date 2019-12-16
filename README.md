@@ -50,7 +50,7 @@ Create Recipe and Edit Pages
 
 Home
 
-[-] Link recipe presented/card to appropriate recipe page 
+[X] Link recipe presented/card to appropriate recipe page 
 
 Recipe page
 
