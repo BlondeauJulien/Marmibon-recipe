@@ -43,7 +43,7 @@ const Home = (props) => {
     return (
         <Fragment>
             <HomeSearch />
-            <RecipesContainer />
+            <RecipesContainer {...props} />
         </Fragment>
     )
 }

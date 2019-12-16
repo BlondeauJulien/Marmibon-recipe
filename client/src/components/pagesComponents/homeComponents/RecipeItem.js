@@ -1,13 +1,16 @@
 import React from 'react'
 
-const RecipeItem = ({ img, name }) => {
-
-
+const RecipeItem = (props) => {
+    
+    const handleClick = () => {
+        props.history.push(`/recipe/${props.recipeDBID}`)
+    }
+    
     return (
-        <div className="recipeItem">
-            <div className={`recipe-item-img-bg ${img}`} ></div>
+        <div className="recipeItem" onClick={handleClick}>
+            <div className={`recipe-item-img-bg ${props.img}`} ></div>
             <div className="recipe-item-name-container">
-                <h3>{name}</h3>
+                <h3>{props.name}</h3>
             </div>
         </div>
     )
