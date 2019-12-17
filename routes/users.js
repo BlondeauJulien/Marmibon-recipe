@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+require('dotenv/config');
+const request = require('request')
 const { check, validationResult } = require('express-validator');
 
 const User = require('../models/User')
@@ -24,45 +26,68 @@ router.post('/', [
     }
 
     const { userName, email, password } = req.body;
+    console.log(req.body)
+    // Captcha
+    if(
+        req.body.captcha === undefined ||
+        req.body.captcha === '' ||
+        req.body.captcha === null
+    ) {return res.status(400).json({ msg: ['Captcha Error'] })}
 
-    try {
-        let user = await User.findOne({ $or: [
-            {userName},
-            {email}
-        ]})
+    const secretCaptchaKey = process.env.CAPTCHA_SECRET_KEY;
+    const verifyCaptchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretCaptchaKey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
 
-        if(user) {
-            return res.status(400).json({ msg: ['Votre pseudo ou email a déjà été utilisé'] })
+    //Make request to verify captcha
+    request(verifyCaptchaUrl, async (err, response,body) => {
+        body = JSON.parse(body)
+
+        // If not successful
+        if(body.success !== undefined && !body.success) {
+            return res.status(400).json({ msg: ['Captcha Error'] })
         }
-    
-        user = new User({
-            userName,
-            email,
-            password
-        })
-    
-        const salt = await bcrypt.genSalt(10);
-    
-        user.password = await bcrypt.hash(password, salt);
-    
-        await user.save()
 
-        let payload = {
-            user: {
-                id: user.id
+
+        try {
+            let user = await User.findOne({ $or: [
+                {userName},
+                {email}
+            ]})
+    
+            if(user) {
+                return res.status(400).json({ msg: ['Votre pseudo ou email a déjà été utilisé'] })
             }
+        
+            user = new User({
+                userName,
+                email,
+                password
+            })
+        
+            const salt = await bcrypt.genSalt(10);
+        
+            user.password = await bcrypt.hash(password, salt);
+        
+            await user.save()
+    
+            let payload = {
+                user: {
+                    id: user.id
+                }
+            }
+    
+            jwt.sign(payload, config.get('jwtSecret'),
+            (err, token) => {
+                if(err) throw err;
+                res.json({token});
+            });
+    
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error')
         }
+    })
 
-        jwt.sign(payload, config.get('jwtSecret'),
-        (err, token) => {
-            if(err) throw err;
-            res.json({token});
-        });
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error')
-    }
+    
 
 })
 

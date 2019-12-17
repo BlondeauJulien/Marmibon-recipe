@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+require('dotenv/config');
+const request = require('request')
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth')
 
@@ -51,36 +53,37 @@ router.post('/', [
 
     const { email, password } = req.body;
 
-    try {
-        let user = await User.findOne( { email });
+        try {
+            let user = await User.findOne( { email });
 
-        if(!user) {
-            res.status(400).json({ msg: ['Pas de compte pour cette email'] })
+            if(!user) {
+                res.status(400).json({ msg: ['Pas de compte pour cette email'] })
+            }
+        
+            let passwordMatch = await bcrypt.compare(password, user.password);
+            
+            if(!passwordMatch) res.status(400).json({ msg: ['Vous avez entré un mauvais mot de passe'] })
+
+            let payload = {
+                user: {
+                    id: user.id
+                }
+            }
+
+            jwt.sign(payload, config.get('jwtSecret'), (err, token) => {
+                if(err) {
+                    throw err 
+                } 
+
+                res.json({ token })
+            });
+
+
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error')
         }
     
-        let passwordMatch = await bcrypt.compare(password, user.password);
-        
-        if(!passwordMatch) res.status(400).json({ msg: ['Vous avez entré un mauvais mot de passe'] })
-
-        let payload = {
-            user: {
-                id: user.id
-            }
-        }
-
-        jwt.sign(payload, config.get('jwtSecret'), (err, token) => {
-            if(err) {
-                throw err 
-            } 
-
-            res.json({ token })
-        });
-
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error')
-    }
 })
 
 

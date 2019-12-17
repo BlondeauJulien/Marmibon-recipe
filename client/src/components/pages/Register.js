@@ -1,4 +1,5 @@
 import React, { Fragment, useState , useContext, useEffect} from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import { Link } from 'react-router-dom';
@@ -40,8 +41,10 @@ const Register = ( props) => {
         userName: '',
         email: '',
         password: '',
-        passwordConfirm: ''
+        passwordConfirm: '',
     });
+
+    const [captcha, setCaptcha] = useState(undefined);
 
     const {userName, email, password, passwordConfirm } = user;
 
@@ -49,14 +52,14 @@ const Register = ( props) => {
 
     const onSubmit = e => {
         e.preventDefault();
-
         if(password !== passwordConfirm) {
             setAuthError(["Les mots de passe entrés ne correspondent pas"])
         } else { 
             register({
                 userName,
                 email,
-                password
+                password,
+                captcha
             });
         }
     }
@@ -70,6 +73,13 @@ const Register = ( props) => {
                 <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
                 <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
                 <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} placeholder="Confirmer votre mot de passe" minLength="6" required/>
+                <div  style={{textAlign: "center", marginBottom: "8px"}}>
+                    <ReCAPTCHA
+                    style={{display: "inline-block"}}
+                        sitekey="6LeLJsgUAAAAABBZTKu_FRvmvSHDzywvbRj2j69T"
+                        onChange={(value) => setCaptcha(value)}
+                    />
+                </div>
                 {authLoading ? (
                     <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}}/>
                 ) : (

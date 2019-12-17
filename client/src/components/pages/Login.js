@@ -49,7 +49,7 @@ const Login = (props) => {
         logUser({
             email,
             password
-        })
+        })  
     }
 
 
