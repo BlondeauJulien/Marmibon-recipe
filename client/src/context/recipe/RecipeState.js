@@ -22,7 +22,7 @@ import {
         USER_UNSAVE_RECIPE,
         RESET_REDIRECT,
         CLEAR_RECIPE_ERRORS,
-        RECIPE_ERROR
+        RECIPE_ERROR,
 } from '../types';
 
 const RecipeState = (props) => {

@@ -26,18 +26,21 @@ const Home = (props) => {
 
     useEffect(() => {
         resetSearchQueryValue();
+        // eslint-disable-next-line
     }, [props.history]);
 
     useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
         }
+        // eslint-disable-next-line
     }, [redirect]);
 
     useEffect(() => {
 		if(redirectSearchCont) {
 			props.history.push(`search`)
         }
+        // eslint-disable-next-line
 	}, [redirectSearchCont])
     
     return (

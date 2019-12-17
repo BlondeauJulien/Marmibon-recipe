@@ -32,7 +32,7 @@ const Footer = () => {
                             <li><Link to="/search" onClick={() => getByRecipeType('starter')} >Entrées</Link></li>
                             <li><Link to="/search" onClick={() => getByRecipeType('mainCourse')} >Plats</Link></li>
                             <li><Link to="/search" onClick={() => getByRecipeType('dessert')} >Dessert</Link></li>
-                            <li><a onClick={getRandomRecipe} style={{cursor: 'pointer'}}>Recette au hasard</a></li>
+                            <li onClick={getRandomRecipe} style={{cursor: 'pointer'}}>Recette au hasard</li>
                         </ul>
                     </div>
                     <div>

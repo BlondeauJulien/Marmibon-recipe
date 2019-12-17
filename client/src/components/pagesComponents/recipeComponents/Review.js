@@ -5,7 +5,6 @@ import spinner from '../../layout/spinner.gif';
 
 const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed, loading }) => {
 
-
 	const [review, setReview] = useState({
 		reviewRating: 0,
 		reviewContent: ''
@@ -35,12 +34,14 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		let display = {};
 		if(isAuthenticated) {
 			for(let i = 0; i<recipeInfo.reviews.length; i++) {
-				if(user._id === recipeInfo.reviews[i].authorId || user._id == recipeInfo.user) {
+				console.log( user._id === recipeInfo.user);
+				console.log( user._id === recipeInfo.user);
+				if(user._id === recipeInfo.reviews[i].authorId || user._id === recipeInfo.user) {
 					display.display = "none";
 					break;
 				}
 			}
-			if(user._id == recipeInfo.user) {
+			if(user._id === recipeInfo.user) {
 				display.display = "none";
 			}
 		}
@@ -121,7 +122,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		<div id="review-section" className="review-container">
 			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
 			{loading.review ? (
-				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
+				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 			) : (
 				<div  onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea}  style={displayReviewRating()} className="user-review-container">
 				<h3>Qu'en avez-vous pensé ?</h3>

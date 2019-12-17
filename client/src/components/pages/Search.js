@@ -42,12 +42,14 @@ const Search = (props) => {
     useEffect(() => {
         resetSearchQueryValue();
         resetSearchResult();
+        // eslint-disable-next-line
     }, [props.history]);
 
     useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
         }
+        // eslint-disable-next-line
     }, [redirect]);
 
     useEffect(() => {
@@ -58,6 +60,7 @@ const Search = (props) => {
             const indexOfFirstPost = indexOfLastPost - postsPerPage;
             setCurrentPost(searchResult.slice(indexOfFirstPost, indexOfLastPost));
         }
+        // eslint-disable-next-line
     }, [searchResult, currentPage])
 
     useEffect(() => {
@@ -73,7 +76,7 @@ const Search = (props) => {
             <SearchForm searchQueryValue={searchQueryValue} setQueryValue={setQueryValue} getSearchQuery={getSearchQuery}/>
 
             <div className="search-result-cont">
-                {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} />)}
+                {searchLoading && (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>)}
 
                 {searchErrors && searchErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
 

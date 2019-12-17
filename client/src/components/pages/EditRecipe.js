@@ -11,7 +11,7 @@ const CreateRecipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 
 	const { loadUser, isAuthenticated } = authContext;
-	const { recipeInfo, redirectToRecipe, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit, pushToCreatedRecipe, recipeErrors, clearRecipeErrors} = recipeContext;
+	const { recipeInfo, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit, pushToCreatedRecipe, recipeErrors, clearRecipeErrors} = recipeContext;
 
 	useEffect(() => {
 		loadUser();
@@ -27,7 +27,8 @@ const CreateRecipe = (props) => {
             setTimeout(() => {
 				clearRecipeErrors()
             }, 60000);
-        }
+		}
+		// eslint-disable-next-line
 	}, [recipeErrors, isAuthenticated, props.history])
 	
 	useEffect(() => {
@@ -35,18 +36,18 @@ const CreateRecipe = (props) => {
             props.history.push(`/recipe/${recipeInfo._id}`)
         }
         // eslint-disable-next-line
-
 	}, [recipeInfo, props.history]);
 	
 	useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
-        }
+		}
+		// eslint-disable-next-line
     }, [redirect]);
 
     useEffect(() => {
         if(loading.updateRecipe) {
-            return (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>)
+            return (<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>)
         }
 	}, [loading])
 
@@ -261,7 +262,7 @@ const CreateRecipe = (props) => {
 				{recipeErrors && recipeErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
 				{loading.sendingRecipe ? (
 					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
-						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
+						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 					</div>
 				) : (
 					<input type="submit" value="Editer ma recette" className="btn btn-mid btn-submit-recipe" />

@@ -16,8 +16,7 @@ import {
     SET_RECIPE_TO_UPDATE,
     RESET_SET_RECIPE_TO_UPDATE,
     EDIT_RECIPE_SUCCESS,
-    CLEAR_RECIPE_ERRORS,
-    RECIPE_ERROR
+    CLEAR_RECIPE_ERRORS
 } from '../types';
 
 export default (state, action) => {

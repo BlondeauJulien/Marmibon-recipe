@@ -1,6 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import Review from '../pagesComponents/recipeComponents/Review';
-import Error404 from '../errorsPages/Recipe404Error';
 import AuthContext from '../../context/auth/authContext';
 import spinner from '../layout/spinner.gif';
 
@@ -60,13 +59,13 @@ const Recipe = (props) => {
 		if(recipeInfo) {
 			props.history.push(`/recipe/${recipeInfo._id}`)
 		}
-
+        // eslint-disable-next-line
 	}, [recipeInfo]);
 
 	if(loading.recipePage || (recipeInfo === null || recipeAuthor === null)) {
 		return (
 			<div className="recipe-container loading-recipe">
-				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
+				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 			</div>
 		)
 	}
@@ -129,25 +128,25 @@ const Recipe = (props) => {
 	const getImg = () => {
 		switch (recipeInfo.img) {
 			case "tomkakai":
-				return(<img src={tomKaKaiImg} width="300"  />);
+				return(<img src={tomKaKaiImg} width="300" alt="recipe" />);
 			case "pizza":
-				return(<img src={pizzaImg}  width="300"  />);
+				return(<img src={pizzaImg}  width="300" alt="recipe" />);
 			case "frites":
-				return(<img src={fritesImg}  width="300"  />);
+				return(<img src={fritesImg}  width="300" alt="recipe" />);
 			case "saladenicoise":
-				return(<img src={gazpachoImg}  width="300"  />);
+				return(<img src={gazpachoImg}  width="300" alt="recipe" />);
 			case "crepe":
-				return(<img src={crepeImg}  width="300"  />);
+				return(<img src={crepeImg}  width="300" alt="recipe" />);
 			case "ramen":
-				return(<img src={ramenImg}  width="300"  />);
+				return(<img src={ramenImg}  width="300" alt="recipe" />);
 			case "falafel":
-				return(<img src={falafelImg}  width="300"  />);
+				return(<img src={falafelImg}  width="300" alt="recipe" />);
 			case "ratatouille":
-				return(<img src={ratatouilleImg}  width="300"  />);
+				return(<img src={ratatouilleImg}  width="300" alt="recipe" />);
 			case "padthai":
-				return(<img src={padThaiImg}  width="300"  />);
+				return(<img src={padThaiImg}  width="300" alt="recipe" />);
 			default:
-				return (<img src={defaultImg}  width="300"  style={blurred}/>);
+				return (<img src={defaultImg}  width="300"  style={blurred} alt="recipe"/>);
 		}
 
 	}
@@ -173,7 +172,7 @@ const Recipe = (props) => {
 	const saveBtn = () => {
 
 		if(isAuthenticated) {
-			if(user._id == recipeInfo.user) {
+			if(user._id === recipeInfo.user) {
 				return
 			}
 		}
@@ -181,7 +180,7 @@ const Recipe = (props) => {
 		if(loading.saveRecipeBtn) {
 			return (			
 				<div style={{width: '250px', margin: 'auto', display: 'block'}}>
-					<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
+					<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 				</div>
 			)
 		} else {

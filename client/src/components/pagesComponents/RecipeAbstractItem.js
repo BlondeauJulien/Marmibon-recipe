@@ -51,25 +51,25 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 	const getImg = () => {
 		switch (recipe.img) {
 			case "tomkakai":
-				return(<img src={tomKaKaiImg}  width="115"  />);
+				return(<img src={tomKaKaiImg}  width="115" alt="recipe" />);
 			case "pizza":
-				return(<img src={pizzaImg}  width="115" />);
+				return(<img src={pizzaImg}  width="115" alt="recipe"/>);
 			case "frites":
-				return(<img src={fritesImg}  width="115" />);
+				return(<img src={fritesImg}  width="115" alt="recipe"/>);
 			case "saladenicoise":
-				return(<img src={gazpachoImg}  width="115" />);
+				return(<img src={gazpachoImg}  width="115" alt="recipe"/>);
 			case "crepe":
-				return(<img src={crepeImg}  width="115" />);
+				return(<img src={crepeImg}  width="115" alt="recipe"/>);
 			case "ramen":
-				return(<img src={ramenImg}  width="115" />);
+				return(<img src={ramenImg}  width="115" alt="recipe"/>);
 			case "falafel":
-				return(<img src={falafelImg}  width="115" />);
+				return(<img src={falafelImg}  width="115" alt="recipe"/>);
 			case "ratatouille":
-				return(<img src={ratatouilleImg}  width="115" />);
+				return(<img src={ratatouilleImg}  width="115" alt="recipe"/>);
 			case "padthai":
-				return(<img src={padThaiImg}  width="115" />);
+				return(<img src={padThaiImg}  width="115" alt="recipe"/>);
 			default:
-				return (<img src={defaultImg}  width="115" style={blurred}/>);
+				return (<img src={defaultImg}  width="115" style={blurred} alt="recipe"/>);
 		}
 
 	}

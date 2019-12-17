@@ -29,7 +29,7 @@ const CreateRecipe = (props) => {
 				clearRecipeErrors()
             }, 60000);
         }
-
+		// eslint-disable-next-line
     }, [recipeErrors, isAuthenticated, props.history])
 
 	useEffect(() => {
@@ -37,13 +37,13 @@ const CreateRecipe = (props) => {
             props.history.push(`/recipe/${recipeInfo._id}`)
         }
         // eslint-disable-next-line
-
 	}, [recipeInfo, props.history]);
 	
 	useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
-        }
+		}
+		// eslint-disable-next-line
     }, [redirect]);
 
 	const [ recipe, setRecipe ] = useState({
@@ -280,7 +280,7 @@ const CreateRecipe = (props) => {
                 </div>
 				{loading.sendingRecipe ? (
 					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
-						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
+						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}} alt="loading spinner"/>
 					</div>
 				) : (
 					<input type="submit" value="Poster ma recette" className="btn btn-mid btn-submit-recipe" />

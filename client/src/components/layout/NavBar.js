@@ -28,9 +28,10 @@ const NavBar = (props) => {
 			resetNavSearchInput();
 			props.history.push(`search`)
 		}
+		// eslint-disable-next-line
 	}, [redirectSearchCont]);
 
-	const onChange = e => setNavQueryValue({navSearchInput, navSearchInput: e.target.value});
+	const onChange = e => setNavQueryValue({...navSearchInput, navSearchInput: e.target.value});
 
 	const handleSubmitSearch = e => {
 		e.preventDefault();
@@ -89,7 +90,7 @@ const NavBar = (props) => {
 					}
 				</ul>
 			</nav>
-			{isAuthenticated && props.history.location.pathname != "/create" && (
+			{isAuthenticated && props.history.location.pathname !== "/create" && (
 				<div className="mobileAddRecipeBtn">
 					<Link to="/create"><i className="fas fa-plus"></i></Link>
 				</div>

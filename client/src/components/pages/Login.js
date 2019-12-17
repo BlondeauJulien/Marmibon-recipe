@@ -27,12 +27,14 @@ const Login = (props) => {
                 clearErrors()
             }, 7000);
         }
+        // eslint-disable-next-line
     }, [error, isAuthenticated, props.history]);
 
     useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
         }
+        // eslint-disable-next-line
     }, [redirect]);
 
     const [user, setUser] = useState({
@@ -61,7 +63,7 @@ const Login = (props) => {
                 <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
                 <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
                 {authLoading ? (
-                    <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}}/>
+                    <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
                 ) : (
                     <input type="submit" value="Se connecter" />
                 )}

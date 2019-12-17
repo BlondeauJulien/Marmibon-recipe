@@ -28,13 +28,14 @@ const Register = ( props) => {
                 clearErrors()
             }, 7000);
         }
-
+		// eslint-disable-next-line
     }, [error, isAuthenticated, props.history]);
 
     useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
         }
+        // eslint-disable-next-line
     }, [redirect])
 
     const [user, setUser] = useState({
@@ -81,7 +82,7 @@ const Register = ( props) => {
                     />
                 </div>
                 {authLoading ? (
-                    <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}}/>
+                    <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}} alt="spinner"/>
                 ) : (
                     <input type="submit" value="Créer un compte" />
                 )}

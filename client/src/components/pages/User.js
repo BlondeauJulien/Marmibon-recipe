@@ -42,12 +42,14 @@ const User = (props) => {
 		if(localStorage.getItem('token') !== null) {
             loadUser()
 		}
+        // eslint-disable-next-line
 	}, [loading]);
 
 	useEffect(() => {
 		if(recipeToUpdate !== null && pushToEditRecipe) {
 			props.history.push("edit");
 		}
+        // eslint-disable-next-line
 	}, [recipeToUpdate])
 
 	useEffect(() => {
@@ -60,7 +62,8 @@ const User = (props) => {
 	useEffect(() => {
         if(redirect.recipeCont) {
             props.history.push(`recipe/${recipeInfo._id}`)
-        }
+		}
+        // eslint-disable-next-line
 	}, [redirect])
 
 	useEffect(() => {
@@ -80,7 +83,7 @@ const User = (props) => {
 				setCurrentPost([]);
 			}
 		}
-        //console.log(searchResult)
+    	// eslint-disable-next-line
     }, [displayedOnProfile, currentPage ])
 
 /*     useEffect(() => {
@@ -115,9 +118,9 @@ const User = (props) => {
 		<div className="user-container">
 			<div className="user-profile-action-container">
 				<div className="cross-dont-show-menu"><i onClick={() => handleMobileUserMenu('close')} className="far fa-times-circle"></i></div>
-				<a>
+				<div>
 					<div onClick={() => handleDisplayChange('profileInfo')} className="btn-info">Mes infos</div>
-				</a>
+				</div>
 				<button onClick={logout} className="btn-logout">Se déconnecter</button>
 			</div>
 			<div className="user-profile-container">
@@ -135,7 +138,7 @@ const User = (props) => {
 				</div>
 
 				{loading.deleteRecipeInUser ? (
-					<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}}/>
+					<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 				) : displayedOnProfile === "createdRecipe" ? (
 					<div className="recipes-abstracts-container">
 						{ currentPosts.length === 0 ? (

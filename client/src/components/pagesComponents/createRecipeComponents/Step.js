@@ -1,10 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import RecipeContext from '../../../context/recipe/recipeContext';
+import React from 'react';
 
 const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
-	const recipeContext = useContext(RecipeContext);
-
-	const {} = recipeContext;
 
 	const handleChange = (change) => {
 		handleStepChange(step.id, { ...step, ...change });

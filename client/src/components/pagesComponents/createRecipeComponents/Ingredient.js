@@ -1,10 +1,6 @@
-import React, { useContext } from 'react';
-import RecipeContext from '../../../context/recipe/recipeContext';
+import React from 'react';
 
 const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) => {
-	const recipeContext = useContext(RecipeContext);
-
-	const {} = recipeContext;
 
 	const handleChange = (change) => {
 		handleIngredientChange(ingredient.id, { ...ingredient, ...change });
