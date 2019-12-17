@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 require('dotenv/config');
-const request = require('request')
+const request = require('request');
 const { check, validationResult } = require('express-validator');
 
 const User = require('../models/User')
@@ -26,7 +26,7 @@ router.post('/', [
     }
 
     const { userName, email, password } = req.body;
-    console.log(req.body)
+
     // Captcha
     if(
         req.body.captcha === undefined ||

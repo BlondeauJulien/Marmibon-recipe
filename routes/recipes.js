@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
+require('dotenv/config');
+const request = require('request');
 
 const Recipe = require('../models/Recipe');
 const User = require('../models/User');
@@ -33,27 +35,49 @@ router.post('/', [auth, [
     }
 
     let {recipeName, prepTimeHours, prepTimeMins, serving, price, recipeType, steps, ingredients} = req.body;
-    try {
-        let newRecipe = new Recipe({
-            user: req.user.id,
-            recipeName,
-            prepTimeHours,
-            prepTimeMins,
-            serving,
-            price,
-            recipeType,
-            steps,
-            ingredients 
-        });
 
-        const recipe = await newRecipe.save();
+    // Captcha
+    if(
+        req.body.captcha === undefined ||
+        req.body.captcha === '' ||
+        req.body.captcha === null
+    ) {return res.status(400).json({ msg: ['Captcha Error'] })}
 
-        res.json(recipe);
-    } catch (err) {
-        console.error(err.message);
-        res.status(400).json({ msg: ['Une erreur est survenu pendant la sauvegarde, veuillez réessayer'] })
-		res.status(500).send('Server Error');
-    }
+    const secretCaptchaKey = process.env.CAPTCHA_SECRET_KEY;
+    const verifyCaptchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretCaptchaKey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
+
+    //Make request to verify captcha
+    request(verifyCaptchaUrl, async (err, response,body) => {
+        body = JSON.parse(body)
+
+        // If not successful
+        if(body.success !== undefined && !body.success) {
+            return res.status(400).json({ msg: ['Captcha Error'] })
+        }
+
+        try {
+            let newRecipe = new Recipe({
+                user: req.user.id,
+                recipeName,
+                prepTimeHours,
+                prepTimeMins,
+                serving,
+                price,
+                recipeType,
+                steps,
+                ingredients 
+            });
+    
+            const recipe = await newRecipe.save();
+    
+            res.json(recipe);
+        } catch (err) {
+            console.error(err.message);
+            res.status(400).json({ msg: ['Une erreur est survenu pendant la sauvegarde, veuillez réessayer'] })
+            res.status(500).send('Server Error');
+        }
+    })
+   
 })
 
 // @route   GET /api/recipes/getsearchqueryresult

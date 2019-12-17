@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 import uuidv4 from 'uuid/v4';
 import Ingredient from '../pagesComponents/createRecipeComponents/Ingredient';
 import Step from '../pagesComponents/createRecipeComponents/Step';
@@ -71,6 +72,8 @@ const CreateRecipe = (props) => {
 		}
 	]);
 
+	const [captcha, setCaptcha] = useState(undefined);
+
 	const handleChangeRecipe = (e) => {
 		setRecipe({ ...recipe, [e.target.name]: e.target.value });
 	};
@@ -134,6 +137,7 @@ const CreateRecipe = (props) => {
 			step.stepName = `Etape ${index + 1}`;
 			return step;
 		});
+		recipeForm.captcha = captcha;
 
 		createRecipe(recipeForm);
 	};
@@ -267,6 +271,13 @@ const CreateRecipe = (props) => {
 					</div>
 				</div>
 				{recipeErrors && recipeErrors.map( (e,i) => (<p className="error-msg err-recipe-form" key={'error-' + i}>{e}</p>))}
+				<div  style={{textAlign: "center", marginBottom: "8px"}}>
+                    <ReCAPTCHA
+                    style={{display: "inline-block"}}
+                        sitekey="6LeLJsgUAAAAABBZTKu_FRvmvSHDzywvbRj2j69T"
+                        onChange={(value) => setCaptcha(value)}
+                    />
+                </div>
 				{loading.sendingRecipe ? (
 					<div style={{width: '250px', margin: 'auto', display: 'block'}}>
 						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}}/>
