@@ -51,25 +51,25 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 	const getImg = () => {
 		switch (recipe.img) {
 			case "tomkakai":
-				return(<img src={tomKaKaiImg}  width="115" alt="recipe" />);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={tomKaKaiImg}  width="115" alt="recipe" /></Link>);
 			case "pizza":
-				return(<img src={pizzaImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={pizzaImg}  width="115" alt="recipe"/></Link>);
 			case "frites":
-				return(<img src={fritesImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={fritesImg}  width="115" alt="recipe"/></Link>);
 			case "saladenicoise":
-				return(<img src={gazpachoImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={gazpachoImg}  width="115" alt="recipe"/></Link>);
 			case "crepe":
-				return(<img src={crepeImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={crepeImg}  width="115" alt="recipe"/></Link>);
 			case "ramen":
-				return(<img src={ramenImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={ramenImg}  width="115" alt="recipe"/></Link>);
 			case "falafel":
-				return(<img src={falafelImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={falafelImg}  width="115" alt="recipe"/></Link>);
 			case "ratatouille":
-				return(<img src={ratatouilleImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={ratatouilleImg}  width="115" alt="recipe"/></Link>);
 			case "padthai":
-				return(<img src={padThaiImg}  width="115" alt="recipe"/>);
+				return(<Link to={`/recipe/${recipe._id}`}><img src={padThaiImg}  width="115" alt="recipe"/></Link>);
 			default:
-				return (<img src={defaultImg}  width="115" style={blurred} alt="recipe"/>);
+				return (<Link to={`/recipe/${recipe._id}`}><img src={defaultImg}  width="115" style={blurred} alt="recipe"/></Link>);
 		}
 
 	}

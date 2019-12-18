@@ -53,7 +53,7 @@ const Search = (props) => {
     }, [redirect]);
 
     useEffect(() => {
-        let mainCont = document.querySelector('#main-cont');
+        let mainCont = document.querySelector('#search-nav');
         mainCont.scrollIntoView()
         if(searchResult) {
             const indexOfLastPost = currentPage * postsPerPage;

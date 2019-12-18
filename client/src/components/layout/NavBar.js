@@ -66,7 +66,7 @@ const NavBar = (props) => {
 				</div>
 			</div>
 
-			<nav className="header-nav">
+			<nav id="search-nav" className="header-nav">
 				<ul>
 					<li>
 						<Link to="/search" onClick={getAllRecipes} >Voir Tout</Link>

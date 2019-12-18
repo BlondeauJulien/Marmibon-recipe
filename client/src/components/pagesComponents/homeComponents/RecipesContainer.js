@@ -4,7 +4,7 @@ import RecipeItem from './RecipeItem';
 const RecipesContainer = (props) => {
     return (
         <div className="recipes-container">
-            <RecipeItem {...props} img={'img1'} name={'Tom Kha Kai'} recipeDBID={'5df678ca3f9acd207c356df4'}/>
+            <RecipeItem {...props} img={'img1'} name={'Tom Kha Gai'} recipeDBID={'5df678ca3f9acd207c356df4'}/>
             <RecipeItem {...props} img={'img8'} name={'Ratatouille'} recipeDBID={'5df69cfa87980b373c0c1045'}/>
             <RecipeItem {...props} img={'img4'} name={'Gazpacho'} recipeDBID={'5df69cbd87980b373c0c1041'}/>
             <RecipeItem {...props} img={'img2'} name={'Pizza hawai'} recipeDBID={'5df6741e990ea02bcc9fa8a0'}/>
