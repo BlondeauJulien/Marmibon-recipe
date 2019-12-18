@@ -71,7 +71,6 @@ const User = (props) => {
 	}, [displayedOnProfile]);
 	
 	useEffect(() => {
-
 		if(user) {
             const indexOfLastPost = currentPage * postsPerPage;
 			const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -84,7 +83,7 @@ const User = (props) => {
 			}
 		}
     	// eslint-disable-next-line
-    }, [displayedOnProfile, currentPage ])
+    }, [displayedOnProfile, currentPage, userRecipes ])
 
 /*     useEffect(() => {
         setCurrentPage(1);
