@@ -75,7 +75,7 @@ router.post('/', [
                 }
             }
     
-            jwt.sign(payload, config.get('jwtSecret'),
+            jwt.sign(payload, process.env.JWT_SECRET,
             (err, token) => {
                 if(err) throw err;
                 res.json({token});
