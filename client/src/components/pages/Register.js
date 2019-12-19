@@ -12,6 +12,17 @@ const Register = ( props) => {
     const { register, error, setAuthError, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
     const { recipeInfo, redirect} = recipeContext;
 
+    const [user, setUser] = useState({
+        userName: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+    });
+
+    const [captcha, setCaptcha] = useState(undefined);
+
+    const {userName, email, password, passwordConfirm } = user;
+
     useEffect(() => {
         if(localStorage.getItem('token') !== null) {
             loadUser()
@@ -38,16 +49,12 @@ const Register = ( props) => {
         // eslint-disable-next-line
     }, [redirect])
 
-    const [user, setUser] = useState({
-        userName: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-    });
-
-    const [captcha, setCaptcha] = useState(undefined);
-
-    const {userName, email, password, passwordConfirm } = user;
+    useEffect(() => {
+        if(userName !== "" && email !== "" && password !== "" && passwordConfirm !== "") {
+           document.querySelector('.captcha-register').style.display = "block"
+        }
+        // eslint-disable-next-line
+    }, [user])
 
     const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -74,7 +81,7 @@ const Register = ( props) => {
                 <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
                 <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
                 <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} placeholder="Confirmer votre mot de passe" minLength="6" required/>
-                <div  style={{textAlign: "center", marginBottom: "8px"}}>
+                <div className="captcha-register" style={{textAlign: "center", marginBottom: "8px"}}>
                     <ReCAPTCHA
                     style={{display: "inline-block"}}
                         sitekey="6LeLJsgUAAAAABBZTKu_FRvmvSHDzywvbRj2j69T"
