@@ -1,0 +1,102 @@
+.contact-cont {
+    margin-top: 25px;
+    padding: 25px 10px 40px 10px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color: white;
+    text-align: center;
+}
+
+.contact-cont h1 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #393c6d;
+    margin-bottom: 25px;
+}
+
+.twitter-links-contact {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.twitter-info-cont h2 {
+    font-weight: 900;
+}
+
+.twitter-links-contact * {
+    margin: 18px 6px;
+}
+
+.form-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin: auto;
+    max-width: 500px;
+    border-top: grey solid 1px;
+    padding-top: 12px;
+}
+
+.form-contact * {
+    display: inline-block;
+    margin: 6px;
+    font-weight: 900;
+    color: #363636;
+}
+
+.form-contact h2 {
+    display: inline;
+    color: black;
+}
+
+.form-contact input {
+    font-weight: 500;
+    padding: 6px;
+}
+
+.form-contact textarea {
+    font-weight: 500;
+    padding: 6px;
+}
+
+.form-contact input[type='submit'] {
+    font-weight: 900;
+    font-size: 14px;
+    background-color: var(--brand-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.send-success {
+    display: block;
+    max-width: 500px;
+    border-top: grey solid 1px;
+    margin: auto;
+    padding-top: 12px;
+}
+
+.send-success * {
+    color: green;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.send-fail {
+    display: block;
+    max-width: 500px;
+    margin: auto;
+    padding-top: 12px;
+}
+
+.send-fail * {
+    color: red;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 900;
+}
