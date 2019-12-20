@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap');
 @import './css/variables.css';
 @import './css/resetDefault.css';
 @import './css/header.css';
@@ -22,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
