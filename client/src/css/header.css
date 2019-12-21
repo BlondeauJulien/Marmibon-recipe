@@ -152,15 +152,15 @@
     }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 1000px) {
     .header-top-container {
-        grid-template-columns: 1fr 5fr 2.4fr;
+        grid-template-columns: 1fr 5fr 2.6fr;
     }
 }
 
 @media (max-width: 735px) {
     .header-top-container {
-        grid-template-columns: 0.9fr 3.8fr 2.5fr;
+        grid-template-columns: 0.9fr 3.8fr 2.6fr;
     }
 }
 
@@ -206,13 +206,13 @@
     
 }
 
-@media (max-width: 445px) {
+@media (max-width: 500px) {
     .btn-user-header-text {
         display: none;
     }
 }
 
-@media (max-width: 365px) {
+@media (max-width: 380px) {
     .logo-container h1 {
         display: none;
     }
