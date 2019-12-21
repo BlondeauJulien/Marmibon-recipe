@@ -5,15 +5,18 @@ import Ingredient from '../pagesComponents/createRecipeComponents/Ingredient';
 import Step from '../pagesComponents/createRecipeComponents/Step';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
+import LanguageContext from '../../context/language/languageContext';
 import spinner from '../layout/spinner.gif';
 
 
 const CreateRecipe = (props) => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
+	const languageContext = useContext(LanguageContext);
 
 	const { loadUser, isAuthenticated } = authContext;
 	const { createRecipe, recipeInfo, pushToCreatedRecipe, redirect, loading, recipeErrors, clearRecipeErrors } = recipeContext;
+	const { languageDisplayed } = languageContext;
 
 	useEffect(() => {
 		loadUser();
@@ -144,11 +147,11 @@ const CreateRecipe = (props) => {
 
 	return (
 		<div className="create-recipe-cont">
-			<h1>Créer une recette</h1>
+			<h1>{languageDisplayed === 'fr' ? `Créer une recette` : 'Create a recipe'}</h1>
 			<form onSubmit={onSubmit}>
 				<div className="create-recipe-single-input-cont">
 					<div className="create-recipe-input-cont">
-						<label htmlFor="recipeName" className="fwbold">Nom de la recette:</label>
+						<label htmlFor="recipeName" className="fwbold">{languageDisplayed === 'fr' ? `Nom de la recette` : 'Recipe Name'}:</label>
 						<input
 							type="text"
 							name="recipeName"
@@ -161,7 +164,7 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label htmlFor="serving" className="fwbold">Nombre de portion:</label>
+						<label htmlFor="serving" className="fwbold">{languageDisplayed === 'fr' ? `Nombre de portion` : 'Serving'}:</label>
 						<input
 							type="number"
 							name="serving"
@@ -174,13 +177,13 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label className="fwbold">Temps de préparation:</label>
+						<label className="fwbold">{languageDisplayed === 'fr' ? `Temps de préparation` : 'Preparation time'}:</label>
 						<input
 							type="number"
 							name="prepTimeHours"
 							value={recipe.prepTimeHours}
 							onChange={handleChangeRecipe}
-							placeholder="Heures"
+							placeholder={languageDisplayed === 'fr' ? `Heures` : 'Hours'}
 							min="0"
 							max="24"
 							className="pct-50"
@@ -199,18 +202,18 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label className="fwbold">Prix:</label>
+						<label className="fwbold">{languageDisplayed === 'fr' ? `Prix` : 'Price'}:</label>
 						<div className="price-radio-cont">
 							<div className="radiobtn-recipe-price">
-								<label>Faible:</label>
+								<label>{languageDisplayed === 'fr' ? `Faible` : 'Low'}:</label>
 								<input type="radio" name="price" onClick={handleChangeRecipe} value="lowPrice" />
 							</div>
 							<div className="radiobtn-recipe-price">
-								<label>Moyen:</label>
+								<label>{languageDisplayed === 'fr' ? `Moyen` : 'Medium'}:</label>
 								<input type="radio" name="price" onClick={handleChangeRecipe} value="midPrice" />
 							</div>
 							<div className="radiobtn-recipe-price">
-								<label>Elevé:</label>
+								<label>{languageDisplayed === 'fr' ? `Elevé` : 'high'}:</label>
 								<input type="radio" name="price" onClick={handleChangeRecipe} value="highPrice" />
 							</div>
 						</div>
@@ -218,18 +221,18 @@ const CreateRecipe = (props) => {
 				</div>
 
 				<div className="recipe-type-cont">
-					<span className="fwbold">Cette recette est:</span>
+					<span className="fwbold">{languageDisplayed === 'fr' ? `Cette recette est` : 'This recipe is'}:</span>
 					<div className="radiobtn-recipe-type-cont">
 						<div className="radiobtn-recipe-type">
-							<label>Une entrée</label>
+							<label>{languageDisplayed === 'fr' ? `Une entrée` : 'A starter'}</label>
 							<input type="radio" name="recipeType" onClick={handleChangeRecipe} value="starter" />
 						</div>
 						<div className="radiobtn-recipe-type">
-							<label>Un plat</label>
+							<label>{languageDisplayed === 'fr' ? `Un plat` : 'A main course'}</label>
 							<input type="radio" name="recipeType" onClick={handleChangeRecipe} value="mainCourse" />
 						</div>
 						<div className="radiobtn-recipe-type">
-							<label>Un déssert</label>
+							<label>{languageDisplayed === 'fr' ? `Un déssert` : 'A dessert'}</label>
 							<input type="radio" name="recipeType" onClick={handleChangeRecipe} value="dessert" />
 						</div>
 					</div>
@@ -237,7 +240,7 @@ const CreateRecipe = (props) => {
 
 				<div className="create-recipe-steps-ing-cont">
 					<div className="create-recipe-ingredient-cont">
-						<span>Ingredients:</span>
+						<span>{languageDisplayed === 'fr' ? `Ingrédients` : 'Ingredients'}:</span>
 
 						{ingredients.map((ingredient) => (
 							<Ingredient
@@ -245,6 +248,7 @@ const CreateRecipe = (props) => {
 								ingredient={ingredient}
 								deleteIngredient={deleteIngredient}
 								handleIngredientChange={handleIngredientChange}
+								lang={languageDisplayed}
 							/>
 						))}
 
@@ -253,7 +257,7 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 					<div className="create-recipe-steps-cont">
-						<span>Etapes:</span>
+						<span>{languageDisplayed === 'fr' ? `Etapes` : 'Steps'}:</span>
 
 						{steps.map((step) => (
 							<Step
@@ -262,6 +266,7 @@ const CreateRecipe = (props) => {
 								stepNumber={steps.indexOf(step) + 1}
 								deleteStep={deleteStep}
 								handleStepChange={handleStepChange}
+								lang={languageDisplayed}
 							/>
 						))}
 
@@ -283,7 +288,7 @@ const CreateRecipe = (props) => {
 						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}} alt="loading spinner"/>
 					</div>
 				) : (
-					<input type="submit" value="Poster ma recette" className="btn btn-mid btn-submit-recipe" />
+					<input type="submit" value={languageDisplayed === 'fr' ? `Poster ma recette` : 'Send my recipe'} className="btn btn-mid btn-submit-recipe" />
 				)}
 				
 			</form>

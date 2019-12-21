@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
+const Step = ({ step, stepNumber, deleteStep, handleStepChange, lang }) => {
 
 	const handleChange = (change) => {
 		handleStepChange(step.id, { ...step, ...change });
@@ -18,7 +18,7 @@ const Step = ({ step, stepNumber, deleteStep, handleStepChange }) => {
 					&times;
 				</button>
 			</div>
-	<label htmlFor="stepContent">Etape {stepNumber}:</label>
+	<label htmlFor="stepContent">{lang === 'fr' ? 'Etape' : 'Step'} {stepNumber}:</label>
 			<textarea
 				minLength="10"
 				maxLength="400"

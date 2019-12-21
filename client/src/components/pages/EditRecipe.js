@@ -4,14 +4,17 @@ import Ingredient from '../pagesComponents/createRecipeComponents/Ingredient';
 import Step from '../pagesComponents/createRecipeComponents/Step';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
+import LanguageContext from '../../context/language/languageContext';
 import spinner from '../layout/spinner.gif';
 
-const CreateRecipe = (props) => {
+const EditRecipe = (props) => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
+	const languageContext = useContext(LanguageContext);
 
 	const { loadUser, isAuthenticated } = authContext;
 	const { recipeInfo, redirect, loading, recipeToUpdate, updateRecipe, redirectToEdit, pushToCreatedRecipe, recipeErrors, clearRecipeErrors} = recipeContext;
+	const { languageDisplayed } = languageContext;
 
 	useEffect(() => {
 		loadUser();
@@ -134,11 +137,11 @@ const CreateRecipe = (props) => {
 
 	return (
 		<div className="create-recipe-cont">
-			<h1>Editer votre recette</h1>
+			<h1>{languageDisplayed === 'fr' ? `Editer votre recette` : 'Edit your recipe'}</h1>
 			<form onSubmit={onSubmit}>
 				<div className="create-recipe-single-input-cont">
 					<div className="create-recipe-input-cont">
-						<label htmlFor="recipeName" className="fwbold">Nom de la recette:</label>
+						<label htmlFor="recipeName" className="fwbold">{languageDisplayed === 'fr' ? `Nom de la recette` : 'Recipe Name'}:</label>
 						<input
 							type="text"
 							name="recipeName"
@@ -150,7 +153,7 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont" >
-						<label htmlFor="serving" className="fwbold">Nombre de portion:</label>
+						<label htmlFor="serving" className="fwbold">{languageDisplayed === 'fr' ? `Nombre de portion` : 'Serving'}:</label>
 						<input
 							type="number"
 							name="serving"
@@ -163,13 +166,13 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label className="fwbold">Temps de préparation:</label>
+						<label className="fwbold">{languageDisplayed === 'fr' ? `Temps de préparation` : 'Preparation time'}:</label>
 						<input
 							type="number"
 							name="prepTimeHours"
 							value={recipe.prepTimeHours}
 							onChange={handleChangeRecipe}
-							placeholder="Heures"
+							placeholder={languageDisplayed === 'fr' ? `Heures` : 'Hours'}
 							min="0"
 							max="24"
 							className="pct-50"
@@ -188,18 +191,18 @@ const CreateRecipe = (props) => {
 						/>
 					</div>
 					<div className="create-recipe-input-cont">
-						<label className="fwbold">Prix:</label>
+						<label className="fwbold">{languageDisplayed === 'fr' ? `Prix` : 'Price'}:</label>
 						<div className="price-radio-cont">
 							<div className="radiobtn-recipe-price">
-								<label>Faible:</label>
+								<label>{languageDisplayed === 'fr' ? `Faible` : 'Low'}:</label>
 								<input type="radio" name="price" onChange={handleChangeRecipe} value="lowPrice" checked={recipe.price === "lowPrice"}/>
 							</div>
 							<div className="radiobtn-recipe-price">
-								<label>Moyen:</label>
+								<label>{languageDisplayed === 'fr' ? `Moyen` : 'Medium'}:</label>
 								<input type="radio" name="price" onChange={handleChangeRecipe} value="midPrice" checked={recipe.price === "midPrice"}/>
 							</div>
 							<div className="radiobtn-recipe-price">
-								<label>Elevé:</label>
+								<label>{languageDisplayed === 'fr' ? `Elevé` : 'high'}:</label>
 								<input type="radio" name="price" onChange={handleChangeRecipe} value="highPrice" checked={recipe.price === "highPrice"}/>
 							</div>
 						</div>
@@ -207,18 +210,18 @@ const CreateRecipe = (props) => {
 				</div>
 
 				<div className="recipe-type-cont">
-					<span className="fwbold">Cette recette est:</span>
+					<span className="fwbold">{languageDisplayed === 'fr' ? `Cette recette est` : 'This recipe is'}:</span>
 					<div className="radiobtn-recipe-type-cont">
 						<div className="radiobtn-recipe-type">
-							<label>Une entrée</label>
+							<label>{languageDisplayed === 'fr' ? `Une entrée` : 'A starter'}</label>
 							<input type="radio" name="recipeType" onChange={handleChangeRecipe} value="starter" checked={recipe.recipeType === "starter"}/>
 						</div>
 						<div className="radiobtn-recipe-type">
-							<label>Un plat</label>
+							<label>{languageDisplayed === 'fr' ? `Un plat` : 'A main course'}</label>
 							<input type="radio" name="recipeType" onChange={handleChangeRecipe} value="mainCourse" checked={recipe.recipeType === "mainCourse"}/>
 						</div>
 						<div className="radiobtn-recipe-type">
-							<label>Un déssert</label>
+							<label>{languageDisplayed === 'fr' ? `Un déssert` : 'A dessert'}</label>
 							<input type="radio" name="recipeType" onChange={handleChangeRecipe} value="dessert" checked={recipe.recipeType === "dessert"}/>
 						</div>
 					</div>
@@ -226,7 +229,7 @@ const CreateRecipe = (props) => {
 
 				<div className="create-recipe-steps-ing-cont">
 					<div className="create-recipe-ingredient-cont">
-						<span className="fwbold">Ingredients:</span>
+						<span className="fwbold">{languageDisplayed === 'fr' ? `Ingrédients` : 'Ingredients'}:</span>
 
 						{ingredients.map((ingredient) => (
 							<Ingredient
@@ -242,7 +245,7 @@ const CreateRecipe = (props) => {
 						</button>
 					</div>
 					<div className="create-recipe-steps-cont">
-						<span className="fwbold">Etapes:</span>
+						<span className="fwbold">{languageDisplayed === 'fr' ? `Etapes` : 'Steps'}:</span>
 
 						{steps.map((step) => (
 							<Step
@@ -265,7 +268,7 @@ const CreateRecipe = (props) => {
 						<img src={spinner} style={{width: '50px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 					</div>
 				) : (
-					<input type="submit" value="Editer ma recette" className="btn btn-mid btn-submit-recipe" />
+					<input type="submit" value={languageDisplayed === 'fr' ? "Editer ma recette" : 'Edit my recipe'} className="btn btn-mid btn-submit-recipe" />
 				)}
 				
 			</form>
@@ -273,4 +276,4 @@ const CreateRecipe = (props) => {
 	);
 };
 
-export default CreateRecipe;
+export default EditRecipe;

@@ -1,15 +1,18 @@
 import React, { Fragment, useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
+import LanguageContext from '../../context/language/languageContext';
 import { Link } from 'react-router-dom';
 import spinner from '../layout/spinner.gif'
 
 const Login = (props) => {
     const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
+    const languageContext = useContext(LanguageContext);
 
     const { logUser, error, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
     const { recipeInfo, redirect} = recipeContext;
+    const { languageDisplayed, language, switchLanguage } = languageContext;
 
     useEffect(() => {
         if(localStorage.getItem('token') !== null) {
@@ -59,20 +62,20 @@ const Login = (props) => {
         
         <div className="auth-form-container">
             <form onSubmit={onSubmit} className="auth-form">
-                <p>Connectez-vous avec vos identifiants Marmibon:</p>
-                <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
-                <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
+                <p>{ language[languageDisplayed].login.header }</p>
+                <input type="email" name="email" value={email} onChange={onChange} placeholder={ language[languageDisplayed].login.email } required/>
+                <input type="password" name="password" value={password} onChange={onChange} placeholder={ language[languageDisplayed].login.password } minLength="6" required/>
                 {authLoading ? (
                     <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
                 ) : (
-                    <input type="submit" value="Se connecter" />
+                    <input type="submit" value={ language[languageDisplayed].login.login } />
                 )}
                 {error && error.map( (e,i) => (<p className="error-msg" key={'error-' + i}>{e}</p>))}
             </form>
             {!authLoading && (
                 <Fragment>
-                <p className="create-account-text">Ou créer votre compte:</p>
-                <Link to="/register" className="switch-auth-component">Clickez ici pour créer un compte</Link>
+                <p className="create-account-text">{ language[languageDisplayed].login.switchTxt }</p>
+                <Link to="/register" className="switch-auth-component">{ language[languageDisplayed].login.switchBtnTxt }</Link>
                 </Fragment>
             )}
 

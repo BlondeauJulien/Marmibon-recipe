@@ -4,6 +4,7 @@ import RecipeAbstractItem from '../pagesComponents/RecipeAbstractItem';
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
 import SearchContext from '../../context/search/searchContext';
+import LanguageContext from '../../context/language/languageContext';
 import spinner from '../layout/spinner.gif';
 import Pagination from '../pagesComponents/Pagination';
 
@@ -13,10 +14,12 @@ const Search = (props) => {
     const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
     const searchContext =useContext(SearchContext);
+    const languageContext = useContext(LanguageContext);
 
     const { loadUser } = authContext;
     const { recipeInfo, redirect} = recipeContext;
     const { searchResult, getSearchQuery, searchQueryValue, setQueryValue, searchLoading, resetSearchQueryValue, resetSearchResult, searchErrors } = searchContext
+    const { languageDisplayed, switchLanguage } = languageContext;
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
@@ -87,7 +90,7 @@ const Search = (props) => {
                 })}
 
                 {searchResult && currentPosts !== null && currentPosts.length === 0 && 
-                    (<p className="recipes-not-found">Aucune recette trouvé</p>)
+                    (<p className="recipes-not-found">{languageDisplayed === "fr" ? "Aucune recette trouvé" : "No recipe found"}</p>)
                 }
             </div>
 

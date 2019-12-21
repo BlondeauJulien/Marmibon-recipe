@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) => {
+const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange, lang }) => {
 
 	const handleChange = (change) => {
 		handleIngredientChange(ingredient.id, { ...ingredient, ...change });
@@ -16,7 +16,7 @@ const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) =>
 			<div className="btn-delete-cont" onClick={handleDeleteIngredient}>
 				<button className="btn-delete">&times;</button>
 			</div>
-			<label htmlFor="ingredientName">Nom:</label>
+			<label htmlFor="ingredientName">{lang === 'fr' ? 'Nom' : 'Name'}:</label>
 			<input
 				type="text"
 				name="ingredientName"
@@ -26,7 +26,7 @@ const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) =>
 				maxLength="20"
 				required
 			/>
-			<label htmlFor="ingredientQuantity">Quantité:</label>
+			<label htmlFor="ingredientQuantity">{lang === 'fr' ? 'Quantité' : 'Quantity'}:</label>
 			<input
 				type="number"
 				name="ingredientQuantity"
@@ -36,17 +36,17 @@ const Ingredient = ({ ingredient, deleteIngredient, handleIngredientChange }) =>
 				onChange={(e) => handleChange({ ingredientQuantity: e.target.value })}
 				required
 			/>
-			<label htmlFor="ingredientMesure">Mesure:</label>
+			<label htmlFor="ingredientMesure">{lang === 'fr' ? 'Mesure' : 'Mesurement'}:</label>
 			<select
 				name="ingredientMesure"
 				value={ingredient.ingredientMesure}
 				onChange={(e) => handleChange({ ingredientMesure: e.target.value })}
 			>
-				<option value="whole">Entier</option>
-				<option value="gram">Gramme</option>
+				<option value="gram">{lang === 'fr' ? 'Gramme' : 'Gram'}</option>
 				<option value="kilo">Kilo</option>
-				<option value="liter">litre</option>
-				<option value="centilitre">Centilitre</option>
+				<option value="liter">{lang === 'fr' ? 'litre' : 'liter'}</option>
+				<option value="centilitre">{lang === 'fr' ? 'Centilitre' : 'Centiliter'}</option>
+				<option value="whole">{lang === 'fr' ? 'Entier' : 'Whole'}</option>
 			</select>
 		</div>
 	);

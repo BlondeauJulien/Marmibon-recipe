@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import tomKaKaiImg from '../../css/Home/recipe1tomkakai.jpg';
 import pizzaImg from '../../css/Home/recipe2pizza.jpg';
@@ -10,8 +10,29 @@ import falafelImg from '../../css/Home/recipe7falafel.jpg';
 import ratatouilleImg from '../../css/Home/recipe8ratatouille.jpg';
 import padThaiImg from '../../css/Home/recipe9padthai.jpg';
 import defaultImg from '../../css/Home/recipeDefault.jpg';
+import LanguageContext from '../../context/language/languageContext';
 
 const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRecipeToUpdate }) => {
+	const languageContext = useContext(LanguageContext);
+
+	const { languageDisplayed, switchLanguage } = languageContext;
+
+	const txtLang = () => {
+		if(languageDisplayed === "fr") {
+			return {
+				from: "sur",
+				review: 'avis',
+				reviews: 'avis'
+			}
+		}
+
+		return {
+			from: "from",
+			review: 'review',
+			reviews: 'reviews'
+		}
+
+	}
 
 	const averageRating = () => {
 		let total = 0;
@@ -89,15 +110,15 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 			{	isAuthenticated && recipe.user === user._id && (
 				<>
 				<div id={"btn-recipe-abstract-cont-" + recipe._id} className="btn-recipe-abstract-cont">
-					<button className="btn-mini btn-mini-edit" onClick={() => setRecipeToUpdate({...recipe})}>Editer</button>
-					<button className="btn-mini btn-mini-delete" onClick={displayConfirmDeleteCont}>Supprimer</button>
+					<button className="btn-mini btn-mini-edit" onClick={() => setRecipeToUpdate({...recipe})}>{languageDisplayed === "fr" ? "Editer" : "Edit"}</button>
+					<button className="btn-mini btn-mini-delete" onClick={displayConfirmDeleteCont}>{languageDisplayed === "fr" ? "Supprimer" : "Delete"}</button>
 
 				</div>
 				<div id={"confirm-delete-cont-" + recipe._id} className="confirm-delete-cont">
-					<span>Confirmer la suppression de: {recipe.recipeName}</span>
+					<span>{languageDisplayed === "fr" ? "Confirmer la suppression de" : "Confirm delete for"}: {recipe.recipeName}</span>
 					<div style={{textAlign: "right", margin: "5px 0"}}>
-						<button className="btn-mini btn-mini-delete" onClick={() => deleteRecipe(recipe._id)}>Supprimer</button>
-						<button className="btn-mini btn-mini-back" onClick={hideConfirmDeleteCont}>Annuler</button>
+						<button className="btn-mini btn-mini-delete" onClick={() => deleteRecipe(recipe._id)}>{languageDisplayed === "fr" ? "Supprimer" : "Delete"}</button>
+						<button className="btn-mini btn-mini-back" onClick={hideConfirmDeleteCont}>{languageDisplayed === "fr" ? "Annuler" : "Cancel"}</button>
 					</div>
 				</div>
 				</>)
@@ -111,7 +132,7 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 							return (<i key={i} className={el} />);
 						})}
 					</div>
-					<div className="recipe-abstract-rating-text">{averageRating()} / 5 sur {recipe.reviews.length === 0 ? "0 avis" : `${recipe.reviews.length} avis`} </div>
+					<div className="recipe-abstract-rating-text">{averageRating()} / 5 {txtLang().from} {recipe.reviews.length <= 1 ? `${recipe.reviews.length} ${txtLang().review}` : `${recipe.reviews.length} ${txtLang().reviews}`} </div>
 				</div>
 				<div className="recipe-abstract-ingredients">
 					<span>Ingredients: </span>

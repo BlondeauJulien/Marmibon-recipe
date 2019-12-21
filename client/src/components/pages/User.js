@@ -5,15 +5,18 @@ import Pagination from '../pagesComponents/Pagination';
 
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
+import LanguageContext from '../../context/language/languageContext';
 
 
 const User = (props) => {
 
 	const authContext = useContext(AuthContext);
-    const recipeContext = useContext(RecipeContext);
+	const recipeContext = useContext(RecipeContext);
+	const languageContext = useContext(LanguageContext);
 
 	const { user, loadUser, isAuthenticated, logout, userRecipes, displayedOnProfile, handleDisplayedOnProfile } = authContext;
     const { recipeInfo, redirect, deleteRecipe, loading, setRecipeToUpdate, recipeToUpdate, pushToEditRecipe} = recipeContext;
+	const { languageDisplayed, language } = languageContext;
 
 	const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
@@ -91,7 +94,7 @@ const User = (props) => {
 
 	if(user === null ) {
 		return (
-			<h1>Error</h1>
+			<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 		)
 	}
 
@@ -118,9 +121,9 @@ const User = (props) => {
 			<div className="user-profile-action-container">
 				<div className="cross-dont-show-menu"><i onClick={() => handleMobileUserMenu('close')} className="far fa-times-circle"></i></div>
 				<div>
-					<div onClick={() => handleDisplayChange('profileInfo')} className="btn-info">Mes infos</div>
+					<div onClick={() => handleDisplayChange('profileInfo')} className="btn-info">{languageDisplayed === 'fr' ? 'Mes infos' : 'My infos'}</div>
 				</div>
-				<button onClick={logout} className="btn-logout">Se déconnecter</button>
+				<button onClick={logout} className="btn-logout">{languageDisplayed === 'fr' ? 'Se déconnecter' : 'Log out'}</button>
 			</div>
 			<div className="user-profile-container">
 				<div className="arrow-show-menu" onClick={() => handleMobileUserMenu('show')}><i className="fas fa-angle-double-right"></i></div>
@@ -129,10 +132,10 @@ const User = (props) => {
 					<div className="btn-saved-or-created-recipe-cont">
 						<div onClick={() => handleDisplayChange('createdRecipe')} 
 						className={`btn-user-created-recipe ${displayedOnProfile === "createdRecipe" ? "btn-highlight" : "btn-no-highlight"}`}
-						>Mes recettes créées</div>
+						>{languageDisplayed === 'fr' ? 'Mes recettes créées' : 'My created recipes'}</div>
 						<div onClick={() => handleDisplayChange('savedRecipe')} 
 						className={`btn-user-saved-recipe ${displayedOnProfile === "savedRecipe" ? "btn-highlight" : "btn-no-highlight"}`}
-						>Mes recettes sauvegardées</div>
+						>{languageDisplayed === 'fr' ? 'Mes recettes sauvegardées' : 'My saved recipes'}</div>
 					</div>
 				</div>
 
@@ -141,21 +144,21 @@ const User = (props) => {
 				) : displayedOnProfile === "createdRecipe" ? (
 					<div className="recipes-abstracts-container">
 						{ currentPosts.length === 0 ? (
-							<h3>Vous n'avez pas encore créée de recette</h3>
+							<h3>{language[languageDisplayed].user.noCreatedMsg}</h3>
 						) : 
 						currentPosts.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : displayedOnProfile === "savedRecipe" ? (
 					<div className="recipes-abstracts-container">
 						{ currentPosts.length === 0 ? (
-							<h3>Vous n'avez pas encore sauvegardé de recette</h3>
+							<h3>{language[languageDisplayed].user.noSavedMsg}</h3>
 						) : 
 						currentPosts.map(recipe => <RecipeAbstractItem key={recipe._id} recipe={recipe} user={user} isAuthenticated={isAuthenticated} setRecipeToUpdate={setRecipeToUpdate} deleteRecipe={deleteRecipe}/>)}
 					</div>
 				) : (
 					<div className="user-info-cont">
 						<div className="userInfo-item">
-							<span>Nom d'utilisateur: {user.userName}</span>
+							<span>{languageDisplayed === 'fr' ? `Nom d'utilisateur` : 'Username'}: {user.userName}</span>
 						</div>
 						<div className="userInfo-item">
 							<span>Email: {user.email}</span>

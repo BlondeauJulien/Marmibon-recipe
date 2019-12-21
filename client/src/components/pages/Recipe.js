@@ -15,10 +15,12 @@ import padThaiImg from '../../css/Home/recipe9padthai.jpg'
 import defaultImg from '../../css/Home/recipeDefault.jpg'
 
 import RecipeContext from '../../context/recipe/recipeContext';
+import LanguageContext from '../../context/language/languageContext';
 
 const Recipe = (props) => {
 	const recipeContext = useContext(RecipeContext);
 	const authContext = useContext(AuthContext);
+	const languageContext = useContext(LanguageContext);
 
 	const { 
 		recipeInfo, 
@@ -34,7 +36,9 @@ const Recipe = (props) => {
 		loading 
 	} = recipeContext;
 
-    const { loadUser, user, isAuthenticated } = authContext;
+	const { loadUser, user, isAuthenticated } = authContext;
+	const { languageDisplayed, language, switchLanguage } = languageContext;
+	
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -152,17 +156,22 @@ const Recipe = (props) => {
 	}
 
 	const getMesureFrench = (qty, mesureName) => {
+		let isEng = languageDisplayed === "eng"
 		switch (mesureName) {
 			case "whole":
+				if(isEng) return `${qty} - whole`
 				return qty > 1 ? `${qty} - entiers/ères` : `${qty} - entier/ère`;
 			case "gram":
-				return qty > 1 ? `${qty} - grammes` : `${qty} - gramme`;
+				if(isEng) return qty > 1 ? `${qty} grams` : `${qty} gram`;
+				return qty > 1 ? `${qty} grammes` : `${qty} gramme`;
 			case "kilo":
-				return qty > 1 ? `${qty} - kilos` : `${qty} - kilo`;
+				return qty > 1 ? `${qty} kilos` : `${qty} kilo`;
 			case "liter":
-				return qty > 1 ? `${qty} - litres` : `${qty} - litre`;
+				if(isEng) return qty > 1 ? `${qty} liters` : `${qty} liter`;
+				return qty > 1 ? `${qty} litres` : `${qty} litre`;
 			case "centilitre":
-				return qty > 1 ? `${qty} - centilitres` : `${qty} - centilitre`;
+				if(isEng) return qty > 1 ? `${qty} centiliters` : `${qty} centiliter`;
+				return qty > 1 ? `${qty} centilitres` : `${qty} centilitre`;
 			default:
 				return "";
 		}
@@ -185,23 +194,18 @@ const Recipe = (props) => {
 			)
 		} else {
 			if(!isAuthenticated) {
-				return (
-					<div onClick={saveRecipe} className="save-btn">
-						<i className="far fa-heart heart-save" />
-						<span>Je sauvegarde</span>
-					</div>	
-					)
+				return 
 			} else if (btnSave().length === 0) {
 				return (
 					<div onClick={saveRecipe} className="save-btn">
 						<i className="far fa-heart heart-save" />
-						<span>Je sauvegarde</span>
+						<span>{languageDisplayed === "fr" ? "Je sauvegarde" : "Save it"}</span>
 					</div>	
 				)
 			} else {
 				return (
 					<div onClick={deleteRecipeFromsave} className="unsave-btn">
-						<span>Supprimer ma sauvegarde</span>
+						<span>{languageDisplayed === "fr" ? "Supprimer ma sauvegarde" : "Delete from saved"}</span>
 					</div>	
 				)
 			}
@@ -226,11 +230,19 @@ const Recipe = (props) => {
 									return (<i key={Math.random()} className={el} />);
 								})}
 							</div>
-							<a href="#review-section" className="link-to-comments">{recipeInfo.reviews.length} commentaire{recipeInfo.reviews.length > 1 && "s"}</a>
+							{languageDisplayed === "fr" ? (
+								<a href="#review-section" className="link-to-comments">{recipeInfo.reviews.length} commentaire{recipeInfo.reviews.length > 1 && "s"}</a>
+							) : (
+								<a href="#review-section" className="link-to-comments">{recipeInfo.reviews.length} review{recipeInfo.reviews.length > 1 && "s"}</a>
+							)}
 						</div>
 						<div>
 							<i className="far fa-heart heart-saved" />
-							<span>{recipeInfo.saved.length} fois sauvegardé</span>
+							{languageDisplayed === "fr" ? (
+								<span>{recipeInfo.saved.length} fois sauvegardé</span>
+							) : (
+								<span>saved {recipeInfo.saved.length} time{recipeInfo.saved.length > 1 && "s"}</span>
+							) }
 						</div>
 					</div>
 				</div>
@@ -241,7 +253,7 @@ const Recipe = (props) => {
 					</div>
 					<div className="recipe-text-info-cont">
 						<div>
-							<span className="recipe-info-name">Temps</span>
+							<span className="recipe-info-name">{languageDisplayed === "fr" ? "Temps" : "Time"}</span>
 							<span className="recipe-info-value">
 								{recipeInfo.prepTimeHours}
 							h
@@ -249,11 +261,11 @@ const Recipe = (props) => {
 							</span>
 						</div>
 						<div>
-							<span className="recipe-info-name">Personnes</span>
+							<span className="recipe-info-name">{languageDisplayed === "fr" ? "Personnes" : "Serving"}</span>
 							<span className="recipe-info-value">{recipeInfo.serving}</span>
 						</div>
 						<div>
-							<span className="recipe-info-name">Prix</span>
+							<span className="recipe-info-name">{languageDisplayed === "fr" ? "Prix" : "Price"}</span>
 							{ recipeInfo.price === "lowPrice" ?
 								(<i className="fas fa-dollar-sign recipe-info-value" />) :
 								recipeInfo.price === "midPrice" ? 
@@ -277,22 +289,22 @@ const Recipe = (props) => {
 
 				<div className="recipe-ing-inst-container">
 					<div className="recipe-ingredients">
-						<h2>Ingrédients</h2>
+						<h2>{languageDisplayed === "fr" ? "Ingrédients" : "Ingredients"}</h2>
 						{recipeInfo.ingredients.map(ing => {
 							return (<span key={ing.id} className="ingredient-item">{ing.ingredientName}: {getMesureFrench(ing.ingredientQuantity, ing.ingredientMesure)}</span>)
 						})}
 					</div>
 					<div className="recipe-instructions">
-						<h2>Préparation</h2>
-						{recipeInfo.steps.map(step => {
+						<h2>{languageDisplayed === "fr" ? "Préparation" : "Preparation"}</h2>
+						{recipeInfo.steps.map((step, i) => {
 							return (
-							<div key={step.id} className="step-container">
-							<span className="step-number">{step.stepName}:</span>
-							<p className="step-instruction">
-								{step.stepContent}
-							</p>
-						</div>
-						)
+								<div key={step.id} className="step-container">
+									<span className="step-number">{languageDisplayed === "fr" ? `Etape ${i+1}` : `Step ${i+1}`}:</span>
+									<p className="step-instruction">
+										{step.stepContent}
+									</p>
+								</div>
+							)
 						})}
 						
 					</div>

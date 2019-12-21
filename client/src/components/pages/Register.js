@@ -2,15 +2,18 @@ import React, { Fragment, useState , useContext, useEffect} from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from '../../context/auth/authContext';
 import RecipeContext from '../../context/recipe/recipeContext';
+import LanguageContext from '../../context/language/languageContext';
 import { Link } from 'react-router-dom';
 import spinner from '../layout/spinner.gif';
 
 const Register = ( props) => {
     const authContext = useContext(AuthContext);
     const recipeContext = useContext(RecipeContext);
+    const languageContext = useContext(LanguageContext);
 
     const { register, error, setAuthError, clearErrors, isAuthenticated, loadUser, authLoading } = authContext;
     const { recipeInfo, redirect} = recipeContext;
+    const { languageDisplayed, language, switchLanguage } = languageContext;
 
     const [user, setUser] = useState({
         userName: '',
@@ -76,11 +79,11 @@ const Register = ( props) => {
     return (
         <div className="auth-form-container">
             <form onSubmit={onSubmit} className="auth-form">
-                <p>Créer votre compte Marmibon:</p>
-                <input type="text" name="userName" value={userName} onChange={onChange} placeholder="Votre pseudo" minLength="4" maxLength="16" required/>
-                <input type="email" name="email" value={email} onChange={onChange} placeholder="Votre email" required/>
-                <input type="password" name="password" value={password} onChange={onChange} placeholder="Votre mot de passe" minLength="6" required/>
-                <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} placeholder="Confirmer votre mot de passe" minLength="6" required/>
+                <p>{ language[languageDisplayed].register.header }</p>
+                <input type="text" name="userName" value={userName} onChange={onChange} placeholder={ language[languageDisplayed].register.username } minLength="4" maxLength="16" required/>
+                <input type="email" name="email" value={email} onChange={onChange} placeholder={ language[languageDisplayed].register.email } required/>
+                <input type="password" name="password" value={password} onChange={onChange} placeholder={ language[languageDisplayed].register.password } minLength="6" required/>
+                <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={onChange} placeholder={ language[languageDisplayed].register.passwordConfirm } minLength="6" required/>
                 <div className="captcha-register" style={{textAlign: "center", marginBottom: "8px"}}>
                     <ReCAPTCHA
                     style={{display: "inline-block"}}
@@ -91,15 +94,15 @@ const Register = ( props) => {
                 {authLoading ? (
                     <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}} alt="spinner"/>
                 ) : (
-                    <input type="submit" value="Créer un compte" />
+                    <input type="submit" value={ language[languageDisplayed].register.register } />
                 )}
                 {error && error.map( (e,i) => (<p className="error-msg" key={'error-' + i}>{e}</p>))}
             </form>
 
             {!authLoading && (
                 <Fragment>
-                    <p className="create-account-text">Déjà inscrit?</p>
-                    <Link to="/login" className="switch-auth-component">Clickez ici pour vous connecter</Link>
+                    <p className="create-account-text">{ language[languageDisplayed].register.switchTxt }</p>
+                    <Link to="/login" className="switch-auth-component">{ language[languageDisplayed].register.switchBtnTxt }</Link>
                 </Fragment>
             )}
 

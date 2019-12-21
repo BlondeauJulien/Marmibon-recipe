@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 import spinner from '../layout/spinner.gif';
+import LanguageContext from '../../context/language/languageContext';
 
 const Contact = () => {
+    const languageContext = useContext(LanguageContext);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [mailSent, setMailSent] = useState(false)
@@ -13,6 +16,8 @@ const Contact = () => {
         senderEmail: '',
         senderMessage: ''
     })
+
+    const { languageDisplayed, language, switchLanguage } = languageContext;
 
     const handleChangeMail = e => setEmailContact({...emailContact, [e.target.name]: e.target.value});
 
@@ -67,7 +72,7 @@ const Contact = () => {
             </div>
             <form className="form-contact" onSubmit={onSubmit}>
                 <h2>Via email:</h2>
-                <label htmlFor="senderName">Nom / Name:</label>
+                <label htmlFor="senderName">{ language[languageDisplayed].contact.name }</label>
                 <input
                     type="text"
                     name="senderName"
@@ -78,7 +83,7 @@ const Contact = () => {
                     maxLength="30"
                     required
                 />
-                <label htmlFor="senderEmail">Votre / Your email:</label>
+                <label htmlFor="senderEmail">{ language[languageDisplayed].contact.email }</label>
                 <input 
                     type="email"
                     name="senderEmail"
@@ -106,21 +111,19 @@ const Contact = () => {
                 </div>
                 {error && (
                     <div className="send-fail">
-                        <p>Une erreur s'est produit, veuillez réessayer s'il vous plait.</p>
-                        <p>An error has occured, please try again.</p>
+                        <p>{ language[languageDisplayed].contact.error }</p>
                     </div>
                 )}
                 {loading ? (
                     <img src={spinner} style={{width: '75px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
                 ) : (
-                    <input type="submit" value="Envoyer / Send" />
+                    <input type="submit" value={ language[languageDisplayed].contact.send } />
                 )}
 
             </form>
             {mailSent && (
                 <div className="send-success">
-                    <p>Votre message a bien été envoyé, merci.</p>
-                    <p>Your message has been successfully submitted, thank you.</p>
+                    <p>{ language[languageDisplayed].contact.success }</p>
                 </div>
             )}
 

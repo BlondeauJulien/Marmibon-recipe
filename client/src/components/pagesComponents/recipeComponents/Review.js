@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ReviewItem from './ReviewItem';
 import uuidv4 from 'uuid/v4';
 import spinner from '../../layout/spinner.gif';
+import LanguageContext from '../../../context/language/languageContext';
 
 const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatingStarsClassName, userHasReviewed, loading }) => {
+	const languageContext = useContext(LanguageContext);
+
+	const { languageDisplayed, language, switchLanguage } = languageContext;
 
 	const [review, setReview] = useState({
 		reviewRating: 0,
@@ -79,7 +83,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		if(!isAuthenticated) {
 			let el = document.querySelector('.alert-msg-review')
 			el.style.display = 'block';
-			el.innerText = "Vous devez être connecter pour donner votre avis"
+			el.innerText =  language[languageDisplayed].review.needloginAlert 
 			setTimeout(() => {
 				el.style.display = 'none';
 			}, 5000);
@@ -92,7 +96,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		if(!isAuthenticated) {
 			let el = document.querySelector('.alert-msg-review')
 			el.style.display = 'block';
-			el.innerText = "Vous devez être connecter pour donner votre avis"
+			el.innerText = language[languageDisplayed].review.needloginAlert
 			setTimeout(() => {
 				el.style.display = 'none';
 			}, 5000);
@@ -105,7 +109,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 		if(review.reviewRating === 0 || review.reviewContent === '') {
 			let el = document.querySelector('.alert-msg-review')
 			el.style.display = 'block';
-			el.innerText = "Ajouter une note et un commentaire s'il vous plait"
+			el.innerText = language[languageDisplayed].review.addReviewAlert
 			setTimeout(() => {
 				el.style.display = 'none';
 			}, 5000);
@@ -120,19 +124,24 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 	return (
 		<div id="review-section" className="review-container">
-			<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
+			{languageDisplayed === "fr" ? (
+				<h2>{recipeInfo.reviews.length} Avis sur cette recette</h2>
+			) : (
+				<h2>{recipeInfo.reviews.length} Review{recipeInfo.reviews.length > 1 && "s"} on this recipe</h2>
+			)}
+
 			{loading.review ? (
 				<img src={spinner} style={{width: '125px', margin: 'auto', display: 'block'}} alt="spinner loading"/>
 			) : (
 				<div  onMouseEnter={displayReviewTextArea} onMouseLeave={hideReviewTextArea}  style={displayReviewRating()} className="user-review-container">
-				<h3>Qu'en avez-vous pensé ?</h3>
+				<h3>{languageDisplayed === "fr" ? `Qu'en avez-vous pensé ?` : 'What did you think about it?'}</h3>
 				<p className="alert-msg-review"></p>
 				{ userHasReviewed.userHasReviewed ? (
-					<span className="review-sent">{userHasReviewed.msg}</span>
+					<span className="review-sent">{languageDisplayed === "fr" ? userHasReviewed.msg : "Your review has been added"}</span>
 				) : (
 					<div className="grid-columns-2">
 					<div className="user-stars-rating-cont">
-						<span>Noter cette recette:</span>
+						<span>{languageDisplayed === "fr" ? 'Noter cette recette' : 'Rate this recipe'}:</span>
 						<div onMouseLeave={showStateRating} className="stars-rating-pick">
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-0" className="fas fa-star grey sr" />
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-1" className="fas fa-star grey sr" />
@@ -141,7 +150,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 								<i onMouseOver={previewRating} onClick={starsRatingPick} id="sr-4" className="fas fa-star grey sr" />
 						</div>
 						<div className="review-content-cont">
-							<span>Votre commentaire:</span>
+							<span>{languageDisplayed === "fr" ? 'Votre commentaire' : 'Your review'}</span>
 							<textarea
 								minLength="10"
 								maxLength="400"
@@ -153,7 +162,7 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 					</div>
 					<div className="btn-review">
-						<span onClick={submitReview}>Ajouter mon avis</span>
+						<span onClick={submitReview}>{languageDisplayed === "fr" ? 'Ajouter mon avis' : 'Send my review'}:</span>
 					</div>
 				</div>
 				)}
@@ -163,13 +172,17 @@ const Review = ( { user, recipeInfo, createReview, isAuthenticated, averageRatin
 
 
 			<div className="recipe-rating">
-				<span className="overall-stars-rating-text">Cette recette a reçu:</span>
+				<span className="overall-stars-rating-text">{languageDisplayed === "fr" ? 'Cette recette a reçu' : 'This recipe average'}:</span>
 				<div className="overall-stars-rating-stars-cont">
 					{averageRatingStarsClassName().map(el => {
 						return (<i key={Math.random()} className={el} />);
 					})}
 				</div>
-                <span className="nbr-review-text">Avec {recipeInfo.reviews.length} {recipeInfo.reviews.length > 1 ? "notes et avis" : "note et avis"}</span>
+				{languageDisplayed === "fr" ? (
+                	<span className="nbr-review-text">Avec {recipeInfo.reviews.length} {recipeInfo.reviews.length > 1 ? "notes et avis" : "note et avis"}</span>
+				): (
+					<span className="nbr-review-text">Via {recipeInfo.reviews.length} {recipeInfo.reviews.length > 1 ? "reviews" : "review"}</span>
+				)}
 			</div>
             <div className="reviews-container">
 				{
