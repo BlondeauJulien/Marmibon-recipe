@@ -136,9 +136,13 @@ const RecipeAbstractItem = ({recipe, user, isAuthenticated, deleteRecipe, setRec
 				</div>
 				<div className="recipe-abstract-ingredients">
 					<span>Ingredients: </span>
-					<p>{recipe.ingredients.map((ing, i) => {
+					<p>{recipe.ingredients.slice(0,10).map((ing, i) => {
 						if(i === 9 || i === recipe.ingredients.length - 1) {
-							return (ing.ingredientName)
+							if(i === 9 && i < recipe.ingredients.length){
+								return (ing.ingredientName + '...')
+							} else {
+								return (ing.ingredientName)
+							}
 						} else if (i < 10){
 							return (ing.ingredientName + ", ")
 						}
