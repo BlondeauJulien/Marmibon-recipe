@@ -64,14 +64,15 @@ const Contact = () => {
         <div className="contact-cont">
             <h1>Contact</h1>
             <div className="twitter-info-cont">
-                <h2>Via Twitter:</h2>
-                <a className="twitter-links-contact" href="https://twitter.com/BldJulien" target="_blank" rel="noopener noreferrer">
-                    <i style={{color: "#00acee", fontSize: "24px"}} className="fab fa-twitter"></i>
-                    <p>/JulienBld</p>
+                <h2>Portfolio:</h2>
+                <a className="twitter-links-contact" href="https://julienblondeau.com" target="_blank" rel="noopener noreferrer">
+                    <p>julienblondeau.com</p>
                 </a>
             </div>
             <form className="form-contact" onSubmit={onSubmit}>
                 <h2>Via email:</h2>
+                <a href="mailto:julienblondeaupro@protonmail.com">julienblondeaupro@protonmail.com</a>
+                <p>------------</p>
                 <label htmlFor="senderName">{ language[languageDisplayed].contact.name }</label>
                 <input
                     type="text"
